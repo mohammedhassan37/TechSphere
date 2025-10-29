@@ -9,7 +9,7 @@ function Header() {
             <nav>
                 <div class="logo">
                     
-                    <h1>TechSphere</h1>
+                    <Link to="/" id='title'><h1>TechSphere</h1></Link>
                 </div>
                 
                 <div class="nav-links">

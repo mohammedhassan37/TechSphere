@@ -6,6 +6,10 @@
   font-weight: 100;
 }
 
+#title{
+    text-decoration: none;
+}
+
 body {
     background-color: #ffffff;
     color: #262525;
