@@ -1,0 +1,35 @@
+.RegisterationFormContainer{
+    border: 1px solid pink;
+    border-radius: 20px;
+    margin: 10vh auto;
+    width: 35%;
+    height: 50vh;
+}
+
+.RegisterationForm{
+    width: 80%;
+    margin:3vh auto;
+    height: 40vh;
+}
+
+.RegisterationBtns{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    margin-bottom: 15px;
+}
+
+.RegisterationBtns button{
+    width: 48%;
+    height: 35px;
+}
+
+.RegisterationForm form{
+    display: flex;
+    flex-direction: column;
+}
+
+.RegisterationForm input{
+    height: 35px;
+    margin-bottom: 15px;
+}
