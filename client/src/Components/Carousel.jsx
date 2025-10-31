@@ -1,46 +1,50 @@
+import React, { useEffect } from 'react';
 import '../Styles/Carousel.css';
 
-function Carousel(){
-    return(
-        
-            <div className="slider-container">
-                <div class="slide">
-                    <img src="17pro.png" alt="Slide 1"/>
-                </div>
-                <div class="slide">
-                    <img src="17.png" alt="Slide 2"/>
-                </div>
-                <div class="slide">
-                    <img src="slide3.jpg" alt="Slide 3"/>
-                </div>
+function Carousel() {
+  useEffect(() => {
+    let slideIndex = 0;
+    let timer = null;
 
+    function showSlides() {
+      const slides = document.getElementsByClassName('slide');
 
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
 
-                <script>
-let slideIndex = 0;
-showSlides();
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
 
-function showSlides() {
-  const slides = document.getElementsByClassName("slide");
+      if (slides.length > 0) {
+        slides[slideIndex - 1].style.display = 'block';
+      }
 
+      timer = setTimeout(showSlides, 3000);
+    }
 
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
+    showSlides();
 
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, []);
 
-  slideIndex++;
-  if (slideIndex > slides.length) { slideIndex = 1 }
-
-
-  slides[slideIndex - 1].style.display = "block";
-
-
-  setTimeout(showSlides, 3000);
-}
-</script>
-        </>
-    )
+  return (
+    <div className="slider-container">
+      <div className="slide">
+        <img src="17pro.png" alt="Slide 1" />
+      </div>
+      <div className="slide">
+        <img src="17.png" alt="Slide 2" />
+      </div>
+      <div className="slide">
+        <img src="slide3.jpg" alt="Slide 3" />
+      </div>
+    </div>
+  );
 }
 
 export default Carousel;
