@@ -28,7 +28,7 @@ function Header() {
                         <input type="text" placeholder="Search..."/>
                     </div>
                     <div class="basket">
-                        <img src={basket.png} alt= "Shopping Basket"/>
+                        <img src={basket} alt= "Shopping Basket"/>
                         
                     </div>
                 </div>

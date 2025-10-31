@@ -41,10 +41,10 @@ function Carousel() {
         <img src={iphone17ProMax} alt="Iphone 17 Pro Max" />
       </div>
       <div className="slide">
-        <img src={iphone17.webp} alt="Iphone 17" />
+        <img src={iphone17} alt="Iphone 17" />
       </div>
       <div className="slide">
-        <img src={iphone17Air.webp} alt="Iphone 17 Air" />
+        <img src={iphone17Air} alt="Iphone 17 Air" />
       </div>
     </div>
   );
