@@ -35,13 +35,13 @@ function Carousel() {
   return (
     <div className="slider-container">
       <div className="slide">
-        <img src="17pro.png" alt="Slide 1" />
+        <img src="iphone17promax.webp" alt="Slide 1" />
       </div>
       <div className="slide">
-        <img src="17.png" alt="Slide 2" />
+        <img src="iphone17.webp" alt="Slide 2" />
       </div>
       <div className="slide">
-        <img src="slide3.jpg" alt="Slide 3" />
+        <img src="iphone17Air.webp" alt="Slide 3" />
       </div>
     </div>
   );
