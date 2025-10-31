@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import '../Styles/Carousel.css';
+import iphone17 from '../assets/iphone17.webp';
+import iphone17Air from '../assets/iphone17Air.webp';
+import iphone17ProMax from '../assets/iphone17promax.webp';
 
 function Carousel() {
   useEffect(() => {
@@ -35,13 +38,13 @@ function Carousel() {
   return (
     <div className="slider-container">
       <div className="slide">
-        <img src="iphone17promax.webp" alt="Slide 1" />
+        <img src={iphone17ProMax} alt="Iphone 17 Pro Max" />
       </div>
       <div className="slide">
-        <img src="iphone17.webp" alt="Slide 2" />
+        <img src={iphone17.webp} alt="Iphone 17" />
       </div>
       <div className="slide">
-        <img src="iphone17Air.webp" alt="Slide 3" />
+        <img src={iphone17Air.webp} alt="Iphone 17 Air" />
       </div>
     </div>
   );
