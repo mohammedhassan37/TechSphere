@@ -1,9 +1,9 @@
-function hello(){
+function About(){
     return(
         <>
-            <h1>fffff</h1>
+            <h1>About</h1>
         </>
     )
 }
 
-export default hello;
+export default About;
