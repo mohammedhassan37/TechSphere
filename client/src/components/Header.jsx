@@ -1,5 +1,6 @@
 import '../Styles/Header.css'
 import { Link } from "react-router-dom";
+import basket from '../assets/basket.png';
 
 function Header() {
     return (
@@ -9,7 +10,7 @@ function Header() {
             <nav>
                 <div class="logo">
                     
-                    <h1>TechSphere</h1>
+                    <Link to="/" id='title'><h1>TechSphere</h1></Link>
                 </div>
                 
                 <div class="nav-links">
@@ -27,7 +28,7 @@ function Header() {
                         <input type="text" placeholder="Search..."/>
                     </div>
                     <div class="basket">
-                        <img src="basket.png"/>
+                        <img src={basket} alt= "Shopping Basket"/>
                         
                     </div>
                 </div>
