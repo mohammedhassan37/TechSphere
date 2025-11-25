@@ -11,7 +11,7 @@ function Header() {
         <header>
             <nav>
                 <div class="logo">
-                     <img src={logo} alt="logo" style={{ height: "65px", width: "65px" }} />
+                     <img src={logo} alt="logo" style={{ height: "80px", width: "80px" }} />
                     
                 </div>
                 
