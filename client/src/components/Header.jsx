@@ -11,8 +11,8 @@ function Header() {
         <header>
             <nav>
                 <div class="logo">
-                    <img src= {logo} />
-                    <img src="logo" style="height: 50px; width: 50px">
+                     <img src={logo} alt="logo" style={{ height: "65px", width: "65px" }} />
+                    
                 </div>
                 
                 <div className ="nav-links">
