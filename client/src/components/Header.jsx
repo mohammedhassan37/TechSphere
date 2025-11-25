@@ -11,13 +11,8 @@ function Header() {
         <header>
             <nav>
                 <div class="logo">
-<<<<<<< Updated upstream
-                    
-                    <Link to="/" id='title'><h1>TechSphere</h1></Link>
-=======
                     <img src= {logo} />
                     <img src="logo" style="height: 50px; width: 50px">
->>>>>>> Stashed changes
                 </div>
                 
                 <div className ="nav-links">
