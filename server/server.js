@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import bcrypt from 'bcrypt';
 import pkg from 'pg';
 import path from "path";
 import { fileURLToPath } from "url";
@@ -113,14 +114,16 @@ app.post('/login', async (req, res) => {
 });
 
 
-// Static frontend serving
+// Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Serve React static files
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+// Catch-all route for React (must come after API routes)
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 // Start

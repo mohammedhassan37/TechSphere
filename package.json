@@ -9,10 +9,10 @@
     "build": "npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
-    "express": "^4.19.2",
     "cors": "^2.8.5",
-    "pg": "^8.11.3",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

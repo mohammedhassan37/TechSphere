@@ -18,13 +18,13 @@ function App() {
       <Header /> 
       <Routes>
         {/* Navigational Links */}
-        <Route path="/About" element={<About />} />
-        <Route path="/Headphones" element={<Headphones />} />
-        <Route path="/Phone" element={<Phone />} />
-        <Route path="/Smartwatch" element={<Smartwatch />} />
-        <Route path="/Tablets" element={<Tablets />} />
-        <Route path="/TV" element={<TV />} />
-        <Route path="/Registration" element={<Registration />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/headphones" element={<Headphones />} />
+        <Route path="/phone" element={<Phone />} />
+        <Route path="/smartwatch" element={<Smartwatch />} />
+        <Route path="/tablets" element={<Tablets />} />
+        <Route path="/tV" element={<TV />} />
+        <Route path="/registration" element={<Registration />} />
         {/* Navigational Links */}
 
         {/* Home page */}
