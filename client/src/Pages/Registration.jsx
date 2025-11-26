@@ -2,6 +2,7 @@ import '../Styles/Registration.css'
 import { useState } from "react";
 import { Navigate, useNavigate } from 'react-router-dom'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 function Registeration() {
   const [email, setEmail] = useState("");
@@ -16,7 +17,8 @@ function Registeration() {
   const handleSubmit = async (e) => {
     
     e.preventDefault();
-    const endpoint = isLogin ? "http://localhost:5000/login" : "http://localhost:5000/signup"
+    const endpoint = isLogin ? `${API_BASE_URL}/login` : `${API_BASE_URL}/signup`;
+
 
     try {
       const res = await fetch(endpoint, {
