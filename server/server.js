@@ -63,6 +63,53 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+// LOGIN
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res
+                .status(400)
+                .json({ success: false, message: "Fields cannot be empty" });
+        }
+
+        // Correct PostgreSQL query + correct table name + correct variable structure
+        const existingUser = await pool.query(
+            "SELECT * FROM customers WHERE customer_email = $1",
+            [email]
+        );
+
+        if (existingUser.rows.length === 0) {
+            return res
+                .status(400)
+                .json({ success: false, message: "User not found" });
+        }
+
+        const user = existingUser.rows[0];
+
+        // Correct password comparison
+        const isMatch = await bcrypt.compare(password, user.customer_password);
+
+        if (!isMatch) {
+            return res
+                .status(400)
+                .json({ success: false, message: "Invalid credentials" });
+        }
+
+        return res
+            .status(200)
+            .json({ success: true, message: "Login successful" });
+
+    } catch (err) {
+        console.error(err);
+        return res
+            .status(500)
+            .json({ success: false, message: "Server error" });
+    }
+});
+
+
 
 const PORT = process.env.PORT || 5000;
 

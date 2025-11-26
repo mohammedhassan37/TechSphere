@@ -27,9 +27,13 @@ function Registeration() {
 
       const data = await res.json();
       setMessage(data.message);
-      if(data.success){
-        navigate("/home")
+      if (data.success) {
+        if (isLogin) {
+          navigate("/");
+      } else {
+          setIsLogin(true);   
       }
+}
     } catch (err) {
       setMessage("Server error");
     }
@@ -41,7 +45,7 @@ function Registeration() {
     <>
       <div className="LoginFormContainer">
         <div className="LoginFormIntroduction">
-          <h1 id="FormIntroTitle">Yearnal</h1>
+          <h1 id="FormIntroTitle">TechSphere</h1>
           <p id="FormIntroText">Your journey begins here</p>
         </div>
 
@@ -85,7 +89,7 @@ function Registeration() {
                 />
 
                 {!isLogin && (
-                 <>
+                  <>
                   <label>Confirm Password</label>
                   <input
                   type="password"
@@ -95,7 +99,7 @@ function Registeration() {
                   placeholder="🔐 Confirm Password"
                   required
                 />
-                 </>
+                  </>
                 )}
 
                 <button className="submitBtn" type="submit">
