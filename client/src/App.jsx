@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header.jsx";
+
 
 import About from './Pages/About.jsx'
 import Headphones from './Pages/Headphones.jsx';
@@ -9,7 +9,8 @@ import Tablets from './Pages/Tablets.jsx';
 import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 
-import Carousel from "./components/Carousel.jsx";
+import Header from "./Components/Header.jsx";
+import Carousel from "./Components/Carousel.jsx";
 
 function App() {
   return (
