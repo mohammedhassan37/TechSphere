@@ -9,7 +9,7 @@ import Tablets from './Pages/Tablets.jsx';
 import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 
-import Carousel from "./components/Carousel.jsx";
+
 
 function App() {
   return (
