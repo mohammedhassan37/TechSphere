@@ -11,6 +11,7 @@ import Registration from "./Pages/Registration.jsx";
 
 import Carousel from './Components/Carousel.jsx'
 import Header from './Components/Header.jsx'
+import FP from './Components/featured_product.jsx'
 
 function App() {
   return (
@@ -28,7 +29,16 @@ function App() {
         {/* Navigational Links */}
 
         {/* Home page */}
-        <Route path="/" element={<Carousel />} />
+        <Route 
+  path="/" 
+  element={
+    <>
+      <Carousel />
+      <FP />
+    </>
+  }
+/>
+
         {/* Home page */}
       </Routes>
     </BrowserRouter>
