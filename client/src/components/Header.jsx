@@ -10,7 +10,7 @@ function Header() {
             <nav>
                 <div class="logo">
                     
-                    <Link to="/" id='title'><h1>TechSphere</h1></Link>
+                    <Link to="/" id='title'><h1></h1></Link>
                 </div>
                 
                 <div class="nav-links">
