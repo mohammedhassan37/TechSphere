@@ -1,8 +1,26 @@
 import '../Styles/Header.css'
 import { Link } from "react-router-dom";
 import basket from '../assets/basket.png';
+import sun from '../assets/sun.svg';
+import moon from '../assets/moon.svg';
+import { useState, useEffect } from 'react';
+
+
 
 function Header() {
+
+    const [mode, setMode] = useState("light");
+
+    const ChangeMode = () => {
+        setMode(previousMode => (previousMode === "light" ? "dark" : "light"));
+    };
+
+    useEffect(() => {
+        document.body.className = mode;
+    }, [mode]);
+
+
+
     return (
         <>
         <div class="nav-container">
@@ -13,6 +31,7 @@ function Header() {
                     <Link to="/" id='title'><h1></h1></Link>
                 </div>
                 
+
                 <div class="nav-links">
                     <Link to="/phone">Phone</Link>
                     <Link to="/Tablets">Tablets</Link>
@@ -32,7 +51,13 @@ function Header() {
                         <img src={basket} alt= "Shopping Basket"/>
                         
                     </div>
+                    
                 </div>
+
+                <div class="light-dark-mode" onClick={ChangeMode}>
+                    <img src={mode === "light" ? sun : moon} alt= "Change mode"/>
+                </div>
+
             </nav>
         </header>
     </div> 
