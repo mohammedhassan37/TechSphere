@@ -6,8 +6,8 @@ import Phone from "./Pages/Phone.jsx";
 import Smartwatch from './Pages/Smartwatch.jsx';
 import Tablets from './Pages/Tablets.jsx';
 import TV from './Pages/TV.jsx'
-
 import Carousel from "./Components/Carousel.jsx";
+
 
 function App() {
   return (
@@ -25,7 +25,10 @@ function App() {
 
         {/* Home page */}
         <Route path="/" element={<Carousel />} />
+        
         {/* Home page */}
+
+
       </Routes>
       
     </BrowserRouter>
