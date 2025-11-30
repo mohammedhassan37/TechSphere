@@ -8,9 +8,14 @@ function Header() {
         <div class="nav-container">
         <header>
             <nav>
-                <div class="logo">
-                    
-                    <Link to="/" id='title'><h1></h1></Link>
+                <div className="logo">
+                     <img src={logo}
+                        alt="logo"
+                        style={{ height: "70px", width: "70px", cursor: "pointer"}} 
+                        onClick={()=> window.location.href = "http://localhost:5173/"}
+
+                        
+                     />
                 </div>
                 
                 <div class="nav-links">
