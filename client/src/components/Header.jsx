@@ -1,7 +1,7 @@
 import '../Styles/Header.css'
 import { Link } from "react-router-dom";
 import basket from '../assets/basket.png';
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.png'
 
 
 function Header() {
@@ -10,11 +10,14 @@ function Header() {
         <div class="nav-container">
         <header>
             <nav>
-                <div class="logo">
-                     <img src={logo} alt="logo" style={{ height: "80px", width: "80px" }} />
-                    
+                <div className="logo">
+                     <img src={logo}
+                        alt="logo"
+                        style={{ height: "70px", width: "70px", cursor: "pointer"}} 
+                        onClick={()=> window.location.href = "http://localhost:5173/"}
+                     />
                 </div>
-                
+
                 <div className ="nav-links">
                     <Link to="/phone">Phone</Link>
                     <Link to="/Tablets">Tablets</Link>
