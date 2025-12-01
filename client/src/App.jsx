@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+import Header from "./Components/Header.jsx";
+>>>>>>> Stashed changes
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
