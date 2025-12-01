@@ -56,7 +56,7 @@ function Carousel() {
 </div>
     <div className="slide">
       <img src={lineup} alt = "iphone17lineup" className='lineup-image' />
-      <div className="slide-text">The iPhone 17 Range.</div>
+      <div className="slide-text">The iPhone 17 Range</div>
     </div>
       <div className="slide">
         <img src={iphone17ProMax} alt="Iphone 17 Pro Max" />
