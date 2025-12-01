@@ -1,45 +1,47 @@
+
+
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
-import About from './Pages/About.jsx'
+import About from './Pages/About.jsx';
 import Headphones from './Pages/Headphones.jsx';
 import Phone from "./Pages/Phone.jsx";
 import Smartwatch from './Pages/Smartwatch.jsx';
 import Tablets from './Pages/Tablets.jsx';
 import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
+import Contact from './Pages/Contact.jsx';
 
-import Carousel from './Components/Carousel.jsx'
-import Header from './Components/Header.jsx'
-import FP from './Components/featured_product.jsx'
+import Carousel from './Components/Carousel.jsx';
+import Header from './Components/Header.jsx';
+import FP from './Components/featured_product.jsx';
 
 function App() {
   return (
     <BrowserRouter>
-      <Header /> 
+      <Header />
+
       <Routes>
-        {/* Navigational Links */}
+        {/* Main/Home */}
+        <Route 
+          path="/" 
+          element={
+            <>
+              <Carousel />
+              <FP />
+            </>
+          }
+        />
+
+        {/* Pages */}
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/headphones" element={<Headphones />} />
         <Route path="/phone" element={<Phone />} />
         <Route path="/smartwatch" element={<Smartwatch />} />
         <Route path="/tablets" element={<Tablets />} />
-        <Route path="/tV" element={<TV />} />
+        <Route path="/tv" element={<TV />} />
         <Route path="/registration" element={<Registration />} />
-        {/* Navigational Links */}
-
-        {/* Home page */}
-        <Route 
-  path="/" 
-  element={
-    <>
-      <Carousel />
-      <FP />
-    </>
-  }
-/>
-
-        {/* Home page */}
       </Routes>
     </BrowserRouter>
   );

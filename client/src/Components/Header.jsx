@@ -1,10 +1,7 @@
 import '../Styles/Header.css'
 import { Link } from "react-router-dom";
 import basket from '../assets/basket.png';
-import sun from '../assets/sun.svg';
-import moon from '../assets/moon.svg';
-import { useState, useEffect } from 'react';
-
+import logo from '../assets/logo.png'
 
 
 function Header() {
@@ -26,9 +23,14 @@ function Header() {
         <div class="nav-container">
         <header>
             <nav>
-                <div class="logo">
-                    
-                    <Link to="/" id='title'><h1></h1></Link>
+                <div className="logo">
+                     <img src={logo}
+                        alt="logo"
+                        style={{ height: "70px", width: "70px", cursor: "pointer"}} 
+                        onClick={()=> window.location.href = "http://localhost:5173/"}
+
+                        
+                     />
                 </div>
                 
 
@@ -39,6 +41,7 @@ function Header() {
                     <Link to="/TV">TV & Home</Link>
                     <Link to="/Smartwatch">Smartwatch</Link>
                     <Link to="/About">About</Link>
+                    <Link to="/Contact">Contact</Link>
                     <Link to="/Registration">Register</Link>
                 </div>
                 
