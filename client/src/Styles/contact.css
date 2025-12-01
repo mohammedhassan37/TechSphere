@@ -1,6 +1,6 @@
  .About {
     display: flex;
-    justify-content: cen;
+    justify-content: center;
     align-items:center;
     min-height: 100vh;
     background-color: white;
@@ -10,11 +10,11 @@
 
  form {
       max-width: 100vh;
-      width: 100%;
-    background-color: #ffffff;
+      width: 100vh;
+    background-color: #000000;
     padding: 25px 25px 30px;
     border-radius: 14px;
-    color: black;
+    color: rgb(255, 255, 255);
     margin: 25px;
     transition: 
     box-shadow 0.25s ease,
@@ -37,21 +37,24 @@ form.formInput {
 
 }
 .formInput .field {
-    width: 100%;
+    width: 100vh;
+    max-width: 400px;
     height: 50px;
     background: transparent;
-    border: 2px solid;
+    border: 2px solid #999;
     outline: none;
     border-radius: 6px;
     padding: 15px;
     font-size: 16px;
     color: #000000;
-    margin-top: 8px;
     
+    
+   
 }
 .formInput .textarea.field {  
     height: 200px;
-    resize: initial;
+    resize: none;
+    overflow-y: auto;
 }
 
 form button {
@@ -60,7 +63,7 @@ form button {
     background-color: #ffffff;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 20px;
     color: #000000;
     
 }
@@ -71,4 +74,17 @@ form button {
     0px 4px 12px  #000000,
     0px 4px 12px  #000000;
     transform: translateY(2px);
+
   }
+
+.formInput .field:focus {
+  border-color: #000000;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+textarea {
+  height: 200px;
+  resize: none;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
