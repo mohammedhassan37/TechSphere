@@ -16,32 +16,35 @@ function featured_product() {
 
                 <div class="product_cards">
                     <img src={phone} alt="Phone" />
-                    <h3>IPhone 17 Pro max</h3>
-                    <p>$1199.00</p>
+                    <h3>IPhone 17 Pro Max - 512GB</h3>
+                    <p>£1,399.00</p>
+                    <p>6.9" Display | A19 Pro Chip</p>
                 </div>
 
                 <div class="product_cards">
                     <img src={tablet} alt="Tablet" />
-                    <h3>Samsung Galaxy Tab S11 Ultra</h3>
-                    <p>$999.99</p>
+                    <h3>Samsung Galaxy Tab S11 Ultra - 256GB</h3>
+                    <p>£999.99</p>
+                    <p>14.6" display - 256GB | 12GB </p>
                 </div>
 
                 <div class="product_cards">
                     <img src={headphone} alt="Headphone" />
                     <h3>JBL Tune 720BT Over-Ear Wireless Headphones</h3>
-                    <p>$39.99</p>
+                    <p>£38.99</p>
                 </div>
 
                 <div class="product_cards">
                     <img src={tv} alt="Tv & Home" />
-                    <h3>Samsung 50 Inch QLED TV</h3>
-                    <p>$399.99</p>
+                    <h3>Samsung QLED QEF1 4K Vision AI Smart TV (2025)</h3>
+                    <p>£349.99</p>
+                    <p> 50" | Q4 AI Processor | Real Quantum Dot Display </p>
                 </div>
 
                 <div class="product_cards">
                     <img src={smartwatch} alt="Smartwatch" />
                     <h3>HUAWEI Watch Fit 3 Smart Watch</h3>
-                    <p>$139.99</p>
+                    <p>£68.99</p>
                 </div>
 
             </div>

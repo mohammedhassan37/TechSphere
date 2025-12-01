@@ -12,8 +12,10 @@ function Carousel() {
     function showSlides() {
       const slides = document.getElementsByClassName('slide');
 
+
       for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = 'none';
+        slides[i].classList.remove('active');
       }
 
       slideIndex++;
@@ -23,6 +25,7 @@ function Carousel() {
 
       if (slides.length > 0) {
         slides[slideIndex - 1].style.display = 'block';
+        slides[slideIndex - 1].classList.add('active');
       }
 
       timer = setTimeout(showSlides, 3000);
@@ -39,12 +42,15 @@ function Carousel() {
     <div className="slider-container">
       <div className="slide">
         <img src={iphone17ProMax} alt="Iphone 17 Pro Max" />
+        <div className="slide-text">iPhone 17 Pro Max</div>
       </div>
       <div className="slide">
         <img src={iphone17} alt="Iphone 17" />
+        <div className='slide-text'>iPhone 17</div>
       </div>
       <div className="slide">
         <img src={iphone17Air} alt="Iphone 17 Air" />
+        <div className='slide-text'>iPhone 17 Air</div>
       </div>
     </div>
   );
