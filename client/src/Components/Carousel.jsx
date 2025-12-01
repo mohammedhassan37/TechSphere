@@ -3,6 +3,13 @@ import '../Styles/Carousel.css';
 import iphone17 from '../assets/iphone17.webp';
 import iphone17Air from '../assets/iphone17Air.webp';
 import iphone17ProMax from '../assets/iphone17promax.webp';
+import appleLogo from '../assets/apple-logo.png';
+import lineup from '../assets/17lineup.png';
+
+
+
+
+
 
 function Carousel() {
   useEffect(() => {
@@ -40,6 +47,17 @@ function Carousel() {
 
   return (
     <div className="slider-container">
+
+<img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
+
+<div className="applewelcome">
+    The next generation of iPhone.
+
+</div>
+    <div className="slide">
+      <img src={lineup} alt = "iphone17lineup" className='lineup-image' />
+      <div className="slide-text">The iPhone 17 Range.</div>
+    </div>
       <div className="slide">
         <img src={iphone17ProMax} alt="Iphone 17 Pro Max" />
         <div className="slide-text">iPhone 17 Pro Max</div>

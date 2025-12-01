@@ -7,6 +7,14 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: relative;
 }
+.carouselapplelogo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  z-index: 10;
+
+}
 
 .slide {
   display: none;
@@ -28,6 +36,7 @@
   font-size: 32px;
   color: black;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  
 
   opacity: 0;
   transform: translateY(30px);
@@ -43,3 +52,19 @@
     transform: translateY(0);
   }
 }
+
+.applewelcome {
+  position: absolute;
+  top:250px;
+  left: 25px;
+  
+  z-index: 11;
+ 
+  z-index: 10;
+
+  color: black;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
