@@ -15,6 +15,8 @@ function Header() {
                         alt="logo"
                         style={{ height: "70px", width: "70px", cursor: "pointer"}} 
                         onClick={()=> window.location.href = "http://localhost:5173/"}
+
+                        
                      />
                 </div>
 
