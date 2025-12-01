@@ -5,6 +5,19 @@ import logo from '../assets/logo.png'
 
 
 function Header() {
+
+    const [mode, setMode] = useState("light");
+
+    const ChangeMode = () => {
+        setMode(previousMode => (previousMode === "light" ? "dark" : "light"));
+    };
+
+    useEffect(() => {
+        document.body.className = mode;
+    }, [mode]);
+
+
+
     return (
         <>
         <div class="nav-container">
@@ -19,8 +32,9 @@ function Header() {
                         
                      />
                 </div>
+                
 
-                <div className ="nav-links">
+                <div class="nav-links">
                     <Link to="/phone">Phone</Link>
                     <Link to="/Tablets">Tablets</Link>
                     <Link to="/Headphones">Headphones</Link>
@@ -28,7 +42,7 @@ function Header() {
                     <Link to="/Smartwatch">Smartwatch</Link>
                     <Link to="/About">About</Link>
                     <Link to="/Contact">Contact</Link>
-                    <Link to="/Register">Register</Link>
+                    <Link to="/Registration">Register</Link>
                 </div>
                 
                 <div class="nav-search">
@@ -40,7 +54,13 @@ function Header() {
                         <img src={basket} alt= "Shopping Basket"/>
                         
                     </div>
+                    
                 </div>
+
+                <div class="light-dark-mode" onClick={ChangeMode}>
+                    <img src={mode === "light" ? sun : moon} alt= "Change mode"/>
+                </div>
+
             </nav>
         </header>
     </div> 
