@@ -30,10 +30,9 @@ function About() {
 
   return (
     <>
-      <h1>About Us</h1>
-      <p>Some Information About Us:</p>
+      
 
-<h2>Contact Us!</h2>
+    <h2>Contact Us!</h2>
       {submitted && (
         <p style={{ color: "green" }}>Message has been sent!</p>
       )}

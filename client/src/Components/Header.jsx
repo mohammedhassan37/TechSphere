@@ -20,6 +20,8 @@ function Header() {
                     <Link to="/TV">TV & Home</Link>
                     <Link to="/Smartwatch">Smartwatch</Link>
                     <Link to="/About">About</Link>
+                    <Link to="/Contact">Contact</Link>
+                    {/* Registration is temporary */}
                     <Link to="/Registration">Register</Link>
                 </div>
                 
