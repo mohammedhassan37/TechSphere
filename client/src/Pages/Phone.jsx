@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import "../Styles/Phone.css";
 
 import phone from "../assets/phone.webp";
@@ -8,6 +9,25 @@ import iphone16 from "../assets/iphone 16.webp";
 import googlePixel from "../assets/google pixel.webp";
 
 function Phone(){
+
+    const navigate = useNavigate();
+
+    const addToBasket = (product) => {
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+        const existing = basket.find(item => item.name === product.name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            basket.push(product);
+        }
+
+        localStorage.setItem("basket", JSON.stringify(basket));
+
+        navigate("/basket");
+    };
+
     return(
         <>
 
