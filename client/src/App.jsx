@@ -38,7 +38,7 @@ function App() {
         <Route path="/smartwatch" element={<Smartwatch />} />
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/tv" element={<TV />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route path="/Registration" element={<Registration />} />
       </Routes>
     </BrowserRouter>
   );
