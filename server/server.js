@@ -2,21 +2,28 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import pkg from 'pg';
+import cookieParser from 'cookie-parser';
 import path from "path";
 import { fileURLToPath } from "url";
+
 
 dotenv.config();
 const { Pool } = pkg;
 
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
+
 // Database
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } 
 });
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 const allowedOrigins = [
   'http://localhost:5173',               // local dev
@@ -24,15 +31,8 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+    origin:allowedOrigins,
+    credentials: true
 }));
 
 //SIGNUP
@@ -117,10 +117,27 @@ app.post('/login', async (req, res) => {
                 .json({ success: false, message: "Invalid credentials" });
         }
 
-        return res
-            .status(200)
-            .json({ success: true, message: "Login successful" });
 
+
+        const token = jwt.sign(
+            {customer_id: user.customer_id, email: user.customer_email},
+            process.env.JWT_SECRET,
+            {expiresIn: "7d"}
+        );
+
+        res.cookie("auth_token", token,{
+            httpOnly:true,
+            secure:true,
+            sameSite:"none",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+
+        return res.status(200).json({
+            success: true,
+            message: "Login successful",
+            user: { id: user.customer_id, email: user.customer_email }
+        });
     } catch (err) {
         console.error(err);
         return res
@@ -129,6 +146,59 @@ app.post('/login', async (req, res) => {
     }
 });
 
+function auth(req, res, next) {
+    const token = req.cookies.auth_token; // ADDED (read JWT cookie)
+
+    if (!token)
+        return res.status(401).json({ success: false, message: "Not logged in" });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET); // ADDED
+        req.user = decoded; // ADDED
+        next();
+    } catch (err) {
+        return res.status(401).json({ success: false, message: "Invalid token" });
+    }
+}
+
+//Logout 
+app.post("/logout", (req, res) => {
+    res.clearCookie("auth_token", { // ADDED
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
+
+    return res.json({ success: true, message: "Logged out" });
+});
+
+
+// Contact Form 
+
+app.post('/contact', async (req, res) => {
+    try {
+        const { name, EmailAddress, Inquiry } = req.body;
+
+        if (!name || !EmailAddress || !Inquiry) {
+            return res.status(400).json({ success: false, message: "Fields cannot be empty" });
+        }
+
+        // FIXED — previously inserted into wrong table
+        await pool.query(
+            "INSERT INTO customer_text (customer_name, customer_email, customer_text) VALUES ($1, $2, $3)",
+            [name, EmailAddress, Inquiry]
+        );
+
+        return res.status(201).json({
+            success: true,
+            message: "Message received!"
+        });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ success: false, message: "Server error" });
+    }
+});
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
