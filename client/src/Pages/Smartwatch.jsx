@@ -30,7 +30,7 @@ function Smartwatch() {
                 </div>
 
                 <div className="product_cards">
-                    <img src={reflex} alt="Reflex Active Smart Watch" />
+                    <img src={reflex_watch} alt="Reflex Active Smart Watch" />
                     <h3>Reflex Active Black Smart Watch - Black</h3>
                     <p>£35.99</p>
                     <Link
