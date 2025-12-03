@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import tablet_1 from "../assets/tablet.webp"
-import honor from "../assets/tablet.webp"
+import honour from "../assets/tablet.webp"
 import lenevo from "../assets/tablet.webp"
 import tablet_2 from "../assets/tablet_A9.webp"
 import ipad_1 from "../assets/tablet.webp"
@@ -24,7 +24,7 @@ function Tablets(){
         <Link href="#" className="add-btn"
            data-name="Samsung Galaxy Tab S11 Ultra 14.6in 256GB Wi-Fi Tablet"
            data-price="999.00"
-           data-image={tablet}>
+           data-image={tablet_1}>
            Add to Basket
         </Link>
     </div>
@@ -53,7 +53,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Lenovo Idea Tab 11 Inch 128GB Wi-Fi Tablet"
            data-price="149.99"
-           data-image="lenevo.webp">
+           data-image={lenevo}>
            Add to Basket
         </a>
     </div>
@@ -67,7 +67,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Samsung Galaxy Tab A9+ 11in 64GB Wi-Fi Tablet"
            data-price="209.99"
-           data-image={tablet}>
+           data-image={tablet_2}>
            Add to Basket
         </a>
     </div>
@@ -81,7 +81,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Apple iPad Pro 2024 11 Inch Wi-Fi 256GB"
            data-price="899.99"
-           data-image="ipad.webp">
+           data-image={ipad_1}>
            Add to Basket
         </a>
     </div>
@@ -95,7 +95,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Apple iPad Air 2025 13 Inch Wi-Fi 256GB"
            data-price="799.99"
-           data-image={ipad}>
+           data-image={ipad_2}>
            Add to Basket
         </a>
     </div>
@@ -109,7 +109,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Amazon Fire Max 11 Inch 64GB Wi-Fi Tablet"
            data-price="129.99"
-           data-image="amazon_fire.webp">
+           data-image={amazon_fire1}>
            Add to Basket
         </a>
     </div>
@@ -123,7 +123,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Amazon Fire HD 10 2024 10.1 Inch 32GB Wi-Fi Tablet"
            data-price="89.99"
-           data-image="amzon_fire2.webp">
+           data-image={amzon_fire2}>
            Add to Basket
         </a>
     </div>
