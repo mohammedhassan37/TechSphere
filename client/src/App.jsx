@@ -11,7 +11,7 @@ import Contact from './Pages/Contact.jsx';
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
-import FP from './Components/featured_product.jsx';
+import FP from './components/featured_product.jsx';
 
 function App() {
   return (
