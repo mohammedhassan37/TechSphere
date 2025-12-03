@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-import "../Styles/TV.css";
+
 import tv from "../assets/tv.webp";
 import tcl_tv from "../assets/tcl_tv.webp";
-import hisense from "../assets/hisense.webp";
-import toshiba from "../assets/toshiba.webp";
+import hisense from "../assets/hisense_tv.webp";
+import toshiba from "../assets/toshiba_tv.webp";
 
 function TV(){
 
