@@ -8,6 +8,7 @@ import Tablets from './Pages/Tablets.jsx';
 import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
+import Basket from './Pages/Basket.jsx'
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
@@ -38,6 +39,7 @@ function App() {
         <Route path="/smartwatch" element={<Smartwatch />} />
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/tv" element={<TV />} />
+         <Route path="/basket" element={<Basket />} />
         <Route path="/Registration" element={<Registration />} />
       </Routes>
     </BrowserRouter>

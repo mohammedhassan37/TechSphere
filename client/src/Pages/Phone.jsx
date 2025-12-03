@@ -10,7 +10,7 @@ import googlePixel from "../assets/google pixel.webp";
 
 function Phone(){
 
-    const navigate = useNavigate();
+const navigate = useNavigate();
 
     const addToBasket = (product) => {
         let basket = JSON.parse(localStorage.getItem("basket")) || [];
