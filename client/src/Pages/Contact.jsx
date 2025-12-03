@@ -51,8 +51,8 @@ function Contact() {
   return (
     <>
       
-
-    <h2>Contact Us!</h2>
+    <div className="ContactMainDiv">
+      <h2>Contact Us!</h2>
       {submitted && (
         <p style={{ color: "green" }}>Message has been sent!</p>
       )}
@@ -92,6 +92,8 @@ function Contact() {
 
         <button type="submit">Send Inquiry</button>
       </form>
+    </div>
+    
     </>
   );
 }
