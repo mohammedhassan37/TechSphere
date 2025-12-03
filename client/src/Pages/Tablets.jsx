@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-
+import tablet_1 from "../assets/tablet.webp"
+import honor from "../assets/tablet.webp"
+import lenevo from "../assets/tablet.webp"
+import tablet_2 from "../assets/tablet_A9.webp"
+import ipad_1 from "../assets/tablet.webp"
+import ipad_2 from "../assets/tablet.webp"
+import amazon_fire1 from "../assets/tablet.webp"
+import amazon_fire2 from "../assets/tablet.webp"
 
 
 function Tablets(){
@@ -10,7 +17,7 @@ function Tablets(){
 
 
     <div className="product_cards">
-        <img src={tablet} alt="Product 1"/>
+        <img src={tablet_1} alt="Product 1"/>
         <h3>Samsung Galaxy Tab S11 Ultra 14.6in 256GB Wi-Fi Tablet</h3>
         <p>£999.00</p>
 
@@ -53,7 +60,7 @@ function Tablets(){
 
     
     <div className="product_cards">
-        <img src={tablet} alt="Product 4"/>
+        <img src={tablet_2} alt="Product 4"/>
         <h3>Samsung Galaxy Tab A9+ 11in 64GB Wi-Fi Tablet</h3>
         <p>$209.99</p>
 
@@ -67,7 +74,7 @@ function Tablets(){
 
    
     <div className="product_cards">
-        <img src={ipad} alt="Product 5"/>
+        <img src={ipad_1} alt="Product 5"/>
         <h3>Apple iPad Pro 2024 11 Inch Wi-Fi 256GB</h3>
         <p>$899.99</p>
 
@@ -81,7 +88,7 @@ function Tablets(){
 
    
     <div className="product_cards">
-        <img src={ipad} alt="Product 5"/>
+        <img src={ipad_2} alt="Product 5"/>
         <h3>Apple iPad Air 2025 13 Inch Wi-Fi 256GB</h3>
         <p>$799.99</p>
 
