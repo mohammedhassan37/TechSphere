@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import '../Styles/contact.css'
 
 
-function About() {
+function Contact() {
   const [formInput, setFormInput] = useState({
     Name: "",
     EmailAddress: "",
@@ -16,16 +16,36 @@ function About() {
     setFormInput({ ...formInput, [name]: value });
   };
 
-  const handleSubmission = (e) => {
+  const handleSubmission = async (e) => {
     e.preventDefault();
     console.log("Enquiry Sent:", formInput);
 
-    setSubmitted(true);
-    setFormInput({
-      Name: "",
-      EmailAddress: "",
-      Inquiry: "",
-    });
+    try {
+      const response = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formInput.Name,
+          EmailAddress: formInput.EmailAddress,
+          Inquiry: formInput.Inquiry,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+        setFormInput({
+          Name: "",
+          EmailAddress: "",
+          Inquiry: "",
+        });
+      } else {
+        alert("Failed to send message: " + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error sending message");
+    }
   };
 
   return (
@@ -76,4 +96,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contact;

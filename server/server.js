@@ -12,10 +12,13 @@ import { fileURLToPath } from "url";
 dotenv.config();
 const { Pool } = pkg;
 
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
+
 // Database
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } 
 });
 
 const app = express();
