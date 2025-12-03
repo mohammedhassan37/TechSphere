@@ -19,6 +19,7 @@
 body {
     background-color: var(--background-color);
     color: var(--text-color);
+    transition: background-color 0.4s;
     padding: 18px;
 }
 
@@ -42,7 +43,8 @@ header {
     margin-bottom: 30px;
 }
 header {
-  background: rgb(255, 255, 255);
+  background: #ffffff;
+  color: #000000;
   transition: 
     box-shadow 0.25s ease,
     transform 0.25s ease;
