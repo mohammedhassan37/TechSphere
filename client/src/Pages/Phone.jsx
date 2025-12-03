@@ -1,3 +1,12 @@
+import React, { useEffect } from 'react';
+import "../Styles/Phone.css";
+
+import phone from "../assets/phone.webp";
+import samsungGalaxy from "../assets/samsung galaxy.webp";
+import motorola from "../assets/motorola.webp";
+import iphone16 from "../assets/iphone 16.webp";
+import googlePixel from "../assets/google pixel.webp";
+
 function Phone(){
     return(
         <>
