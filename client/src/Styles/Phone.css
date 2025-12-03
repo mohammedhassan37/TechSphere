@@ -1,0 +1,175 @@
+/* Product Container */
+.product_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+/* Individual Product Card */
+.product_cards {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.product_cards:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.18);
+}
+.product_cards img {
+    width: 100%;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.product_cards h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #242424;
+}
+.product_cards p {
+    font-size: 18px;
+    color: #000000;
+    text-decoration: solid;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+
+/* Basket Page Layout */
+.basket_page {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Page Title */
+.basket_page h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+/* Basket Item Container */
+.basket_products {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Each item row */
+.basket_products {
+    display: flex;
+    align-items: center;
+    background: #edeaea;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Product Image */
+.basket_products img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Product Info */
+.product_info {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.product_info h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #242424;
+    font-weight: 600;
+}
+
+.product_info p {
+    font-size: 15px;
+    margin: 3px 0 0;
+    color: #242424;
+    
+}
+
+/* Remove button */
+.remove_button {
+    background: #cd2424;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 5px 12px;
+    border-radius: 8px;
+    
+}
+
+/* Basket Total */
+.basket-total {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 600;
+    color: #171717;
+}
+
+/* Checkout button styling */
+.checkout_button {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #4e91f5;
+    color: white;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+/* Empty basket message */
+.empty_message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #666;
+    
+}
+
+.add-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #2d7df4;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #1b5fcc;
+}

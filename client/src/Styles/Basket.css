@@ -1,0 +1,131 @@
+/* Basket Page Layout */
+.basket_page {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Page Title */
+.basket_page h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+/* Basket Items Container */
+.basket_products {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Single Basket Item Row */
+.basket_item {
+    display: flex;
+    align-items: center;
+    background: #edeaea;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Product Image */
+.basket_item img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Product Info Section */
+.product_info {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.product_info h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #242424;
+    font-weight: 600;
+}
+
+.product_info p {
+    font-size: 15px;
+    margin: 3px 0 0;
+    color: #242424;
+}
+
+/* Remove Button */
+.remove_button {
+    background: #cd2424;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.remove_button:hover {
+    background: #a11b1b;
+}
+
+/* Basket Total */
+.basket-total {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 600;
+    color: #171717;
+}
+
+/* Checkout Button */
+.checkout_button {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #4e91f5;
+    color: white;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.checkout_button:hover {
+    background-color: #2d6ad9;
+}
+
+/* Empty Basket Message */
+.empty_message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #666;
+}
+
+/* Add to Basket Buttons (from product pages) */
+.add-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #2d7df4;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #1b5fcc;
+}
