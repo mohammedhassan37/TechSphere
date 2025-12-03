@@ -1,41 +1,7 @@
 function Tablets(){
     return(
         <>
-            <body>
-    <div class="nav-container">
-        <header>
-            <nav>
-                <div class="logo">
-                    
-                    <h1>TechSphere</h1>
-                </div>
-                
-                <div class="nav-links">
-                    
-
-                    <a href="Phone.html">Phone</a>
-                    <a href="Tablets.html">Tablets</a>
-                    <a href="Headphones.html">Headphones</a>
-                    <a href="Tv&Home.html">Tv & Home</a>
-                    <a href="Smartwatch.html">Smartwatch</a>
-                    <a href="About.html">About</a>
-                </div>
-                
-                <div class="nav-search">
-                <div class="search-container">
-                    <input type="text" placeholder="Search..."/>
-                </div>
-
-                
-                <div class="basket">
-                    <a href="basket.html">
-                        <img src="basket.png" alt="Basket"/>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
-</div>
+            
 <div class="product_container">
 
 
