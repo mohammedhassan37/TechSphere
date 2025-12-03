@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 
 import JBL720 from '../assets/headphone.webp'
 import sonyWH from '../assets/sony_headphones.webp'
@@ -9,6 +11,24 @@ import marshalHead from '../assets/marshall_headphones.webp'
 import shokz from '../assets/shokz_headphones.webp'
 
 function Headphones(){
+
+     const navigate = useNavigate();
+
+    const addToBasket = (product) => {
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+        const existing = basket.find(item => item.name === product.name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            basket.push(product);
+        }
+
+        localStorage.setItem("basket", JSON.stringify(basket));
+
+        navigate("/basket");
+    };
     return(
         <>
 

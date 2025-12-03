@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import smartwatch from "../assets/smartwatch.webp";
 
 import apple_watch from "../assets/apple_watch.webp";
@@ -10,6 +10,24 @@ import samsung_watch2 from "../assets/samsung_watch2.webp";
 import garmin_watch2 from "../assets/garmin_watch2.webp";
 
 function Smartwatch() {
+ const navigate = useNavigate();
+
+    const addToBasket = (product) => {
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+        const existing = basket.find(item => item.name === product.name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            basket.push(product);
+        }
+
+        localStorage.setItem("basket", JSON.stringify(basket));
+
+        navigate("/basket");
+    };
+
     return (
         <>
             <div className="product_container">
