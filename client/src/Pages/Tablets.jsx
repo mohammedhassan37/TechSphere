@@ -7,7 +7,7 @@ import ipad_1 from "../assets/tablet.webp"
 import ipad_2 from "../assets/tablet.webp"
 import amazon_fire1 from "../assets/tablet.webp"
 import amazon_fire2 from "../assets/tablet.webp"
-
+import "../Styles/Tablets.css";
 
 function Tablets(){
     return(
@@ -123,7 +123,7 @@ function Tablets(){
         <a href="#" className="add-btn"
            data-name="Amazon Fire HD 10 2024 10.1 Inch 32GB Wi-Fi Tablet"
            data-price="89.99"
-           data-image={amzon_fire2}>
+           data-image={amazon_fire2}>
            Add to Basket
         </a>
     </div>

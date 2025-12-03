@@ -5,6 +5,10 @@ import tv from "../assets/tv.webp";
 import tcl_tv from "../assets/tcl_tv.webp";
 import hisense from "../assets/hisense.webp";
 import toshiba from "../assets/toshiba.webp";
+import samsung_tv3 from "../assets/samsung_tv3.webp";
+import samsung_tv2 from "../assets/samsung_tv2.webp";
+import bush_tv from "../assets/bush_tv.webp";
+import sony_tv from "../assets/sony_tv.webp";
 
 function TV(){
 
@@ -119,17 +123,17 @@ function TV(){
 
                 {/* Product 5 */}
                 <div className="product_cards">
-                    <img src={googlePixel} alt="Google Pixel 9a" />
-                    <h3>Google Pixel 9a 5G 128GB</h3>
-                    <p>£349.99</p>
+                    <img src={samsung_tv3} alt="Samsung 43 Inch Smart 4K UHD HDR LED TV" />
+                    <h3>Samsung 43 Inch Smart 4K UHD HDR LED TV</h3>
+                    <p>£229.99</p>
 
                     <button
                         className="add-btn"
                         onClick={() =>
                             addToBasket({
-                                name: "Google Pixel 9a 5G",
-                                price: 349.99,
-                                image: googlePixel,
+                                name: "Samsung 43 Inch Smart 4K UHD HDR LED TV",
+                                price: 229.99,
+                                image: samsung_tv3,
                                 quantity: 1
                             })
                         }
@@ -138,6 +142,68 @@ function TV(){
                     </button>
                 </div>
 
+                {/* Product 6 */}
+                <div className="product_cards">
+                    <img src={samsung_tv2} alt="Samsung 43 Inch Smart 4K UHD HDR LED TV" />
+                    <h3>Samsung 24 Inch Smart Full HD HDR LED TV</h3>
+                    <p>£149.99</p>
+
+                    <button
+                        className="add-btn"
+                        onClick={() =>
+                            addToBasket({
+                                name: "Samsung 24 Inch Smart Full HD HDR LED TV",
+                                price: 149.99,
+                                image: samsung_tv2,
+                                quantity: 1
+                            })
+                        }
+                    >
+                        Add to Basket
+                    </button>
+                </div>
+
+                {/* Product 7 */}
+                <div className="product_cards">
+                    <img src={bush_tv} alt="Bush 24 Inch H236V6D HD Ready LED Freeview TV" />
+                    <h3>Bush 24 Inch H236V6D HD Ready LED Freeview TV</h3>
+                    <p>£109.99</p>
+
+                    <button
+                        className="add-btn"
+                        onClick={() =>
+                            addToBasket({
+                                name: "Bush 24 Inch H236V6D HD Ready LED Freeview TV",
+                                price: 109.99,
+                                image: bush_tv,
+                                quantity: 1
+                            })
+                        }
+                    >
+                        Add to Basket
+                    </button>
+                </div>
+
+                {/* Product 8 */}
+                <div className="product_cards">
+                    <img src={sony_tv} alt="Bush 24 Inch H236V6D HD Ready LED Freeview TV" />
+                    <h3>Sony Bravia 3 50inch LED HDR 4K Ultra HD Google TV</h3>
+                    <p>£569.99</p>
+
+                    <button
+                        className="add-btn"
+                        onClick={() =>
+                            addToBasket({
+                                name: "Sony Bravia 3 50inch LED HDR 4K Ultra HD Google TV",
+                                price: 569.99,
+                                image: sony_tv,
+                                quantity: 1
+                            })
+                        }
+                    >
+                        Add to Basket
+                    </button>
+                </div>
             </div>
 
         </>

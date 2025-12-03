@@ -8,6 +8,7 @@ import garmin_watch from "../assets/garmin_watch.webp"
 import fitbit_watch from "../assets/fitbit_watch.webp"
 import  samsung_watch2 from "../assets/samsung_watch2.webp"
 import garmin_watch2 from "../assets/garmin_watch2.webp"
+import "../Styles/Smartwatch.css";
 
 function Smartwatch(){
     return(
