@@ -1,9 +1,9 @@
 function Phone(){
     return(
         <>
-<<<<<<< Updated upstream
+
             <h1>Phone</h1>
-=======
+
             <div className="product_container">
 
                 {/* Product 1 */}
@@ -112,7 +112,7 @@ function Phone(){
                 </div>
 
             </div>
->>>>>>> Stashed changes
+
         </>
     )
 }
