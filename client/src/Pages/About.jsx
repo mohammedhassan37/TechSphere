@@ -1,3 +1,5 @@
+import '../Styles/About.css'
+
 function About(){
     return(
         <>
@@ -5,5 +7,6 @@ function About(){
         </>
     )
 }
+
 
 export default About;
