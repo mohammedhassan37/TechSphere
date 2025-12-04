@@ -1,28 +1,20 @@
-
- .ContactMainDiv{
+.ContactMainDiv{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+    margin:3vh auto;
 }
 
 .formcontact {
-  max-width: 100vh;
-  width: 100vh;
-  background-color: #ffffff;
-  padding: 25px 25px 30px;
-  border-radius: 14px;
-  color: rgb(0, 0, 0);
-  margin: 25px;
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 0 0 1px rgb(226, 226, 226); 
 }
 
-.formcontact:hover {
-  transform: translateY(2px);
-  box-shadow: 
-    0px 4px 12px #000000,
-    0px 4px 12px #000000;
-}
+
 
 .formcontact h2 {
   font-size: 30px;
@@ -32,7 +24,9 @@
 .formInput {
   margin-top: 20px;
 }
-
+.formcontact input{
+  margin-bottom: 10px;
+}
 .formInput .field {
   width: 100vh;
   max-width: 400px;
@@ -44,6 +38,7 @@
   padding: 15px;
   font-size: 16px;
   color: #000000;
+  margin-bottom: 10px;
 }
 
 .formInput .textarea.field {  
@@ -55,16 +50,13 @@
 .formcontact button {
   width: 100%;
   height: 55px;
-  background-color: #ffffff;
+  background-color: black;
   border: none;
   border-radius: 6px;
   font-size: 20px;
-  color: #000000;
+  color: white;
 }
 
 .formcontact button:hover {
-  transform: translateY(2px);
-  box-shadow: 
-    0px 4px 12px #000000,
-    0px 4px 12px #000000;
+ 
 }
