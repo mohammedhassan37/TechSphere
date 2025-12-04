@@ -36,6 +36,7 @@ body.dark {
 }
 
 header {
+    width: fit-content;
     background-color: var(--background-color);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -162,6 +163,13 @@ nav {
     cursor: pointer;
 }
 
+.zoom-options img{
+    margin-left: 20px; 
+    margin-bottom: 10px;   
+    vertical-align: middle;
+    cursor: pointer;
+}
+
 .light-dark-mode:active {
     transform: scale(120%);
 }
@@ -176,6 +184,10 @@ nav {
     transition: transform 0.25s;
 }
 
+.zoom-option:active{
+    transform: scale(110%);
+    transition: transform 0.25s;
+}
 
 
 @media (max-width: 900px) {
