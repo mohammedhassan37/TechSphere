@@ -14,6 +14,9 @@ import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
 
+import ProductDetails from "./Pages/ProductDetails";
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -41,6 +44,10 @@ function App() {
         <Route path="/tv" element={<TV />} />
          <Route path="/basket" element={<Basket />} />
         <Route path="/Registration" element={<Registration />} />
+
+        <Route path="/product/:id" element={<ProductDetails />} />
+
+
       </Routes>
     </BrowserRouter>
   );
