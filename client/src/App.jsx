@@ -13,6 +13,7 @@ import Basket from './Pages/Basket.jsx'
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
+import Footer from './Components/Footer.jsx'
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
          <Route path="/basket" element={<Basket />} />
         <Route path="/Registration" element={<Registration />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
