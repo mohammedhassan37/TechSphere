@@ -30,7 +30,7 @@ function Tablets() {
 
     return (
         <>
-            <h1>Tablets</h1>
+            <h1>Tablet</h1>
 
             <div className="product_container">
 
