@@ -36,13 +36,13 @@ function Tablets() {
 
                 <div className="product_cards">
                     <img src={tablet_1} alt="Samsung Galaxy Tab S11 Ultra" />
-                    <h3>Samsung Galaxy Tab S11 Ultra 14.6in 256GB Wi-Fi Tablet</h3>
+                    <h3>Samsung Galaxy Tab S11 Ultra 256GB Wi-Fi Tablet</h3>
                     <p>£999.00</p>
                     <button
                         className="add-btn"
                         onClick={() =>
                             addToBasket({
-                                name: "Samsung Galaxy Tab S11 Ultra 14.6in 256GB Wi-Fi Tablet",
+                                name: "Samsung Galaxy Tab S11 Ultra 256GB Wi-Fi Tablet",
                                 price: 999.00,
                                 image: tablet_1,
                                 quantity: 1

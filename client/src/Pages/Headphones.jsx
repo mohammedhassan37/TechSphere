@@ -184,14 +184,14 @@ function Headphones(){
   
     <div className="product_cards">
         <img src={shokz} alt="Product 8"/>
-        <h3>Shokz OpenSwim Pro Wireless Bluetooth Headphones</h3>
+        <h3>Shokz OpenSwim Pro Bluetooth Headphones</h3>
         <p>$135.99</p>
 
         <button
             className="add-btn"
             onClick={() =>
                 addToBasket({
-                    name: "Shokz OpenSwim Pro Wireless Bluetooth Headphones",
+                    name: "Shokz OpenSwim Pro Bluetooth Headphones",
                     price: 135.99,
                     image: shokz,
                     quantity: 1
