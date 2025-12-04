@@ -109,12 +109,8 @@ function Registeration() {
                 </button>
               </div>
             </form>
-            <div className="LoginFormDivider">
-              <hr />
-              <p>OR</p>
-              <hr />
               <p>{message}</p>
-            </div>
+
           </div>
         </div>
       </div>
