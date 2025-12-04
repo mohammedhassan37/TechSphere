@@ -4,11 +4,14 @@ import basket from '../assets/basket.png';
 import logo from '../assets/logo.png'
 import sun from '../assets/sun.svg';
 import moon from '../assets/moon.svg';
+import zoomOut from '../assets/zoom-out.svg';
+import zoomIn from '../assets/zoom-in.svg';
 import { useState, useEffect } from 'react';
 
 
 function Header() {
     const [mode, setMode] = useState("light");
+    const [zoom, setZoom] = useState(1);
 
     const ChangeMode = () => {
         setMode(prev => (prev === "light" ? "dark" : "light"));
@@ -17,6 +20,11 @@ function Header() {
     useEffect(() => {
         document.body.className = mode;
     }, [mode]);
+
+    useEffect(() => {
+        document.body.style.zoom = zoom;
+    }, [zoom]);
+
     
 return (
         <>
@@ -60,6 +68,12 @@ return (
                 <div className="light-dark-mode" onClick={ChangeMode}>
                     <img src={mode === "light" ? sun : moon} alt= "Change mode"/>
                     </div>
+
+                <div className="zoom-options">
+                    <img src={zoomOut} onClick={() => setZoom(0.1 - zoom)} alt= "Zoom out" />
+                    <img src={zoomIn} onClick={() => setZoom(0.1 + zoom)} alt= "Zoom in" />
+                </div>
+
             </nav>
         </header>
     </div> 

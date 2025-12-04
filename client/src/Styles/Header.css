@@ -162,6 +162,13 @@ nav {
     cursor: pointer;
 }
 
+.zoom-options img{
+    margin-left: 20px; 
+    margin-bottom: 10px;   
+    vertical-align: middle;
+    cursor: pointer;
+}
+
 .light-dark-mode:active {
     transform: scale(120%);
 }
