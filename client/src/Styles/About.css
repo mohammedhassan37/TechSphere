@@ -1,165 +1,52 @@
-/* About Page */
-.about-container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 0 20px;
-  line-height: 1.6;
-}
-
-.about-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.about-container h3 {
-  margin-top: 25px;
-  color: #444;
-}
-
-.about-container p {
-  margin-bottom: 15px;
-  color: #555;
-}
-
-.about-container a {
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.about-container a:hover {
-  text-decoration: underline;
-}
-
 /* Styles for About page */
-:root {
-  --primary: #0b6efd;
-  --bg: #f7f7f8;
-  --muted: #666;
-  --card: #ffffff;
+:root{
+    --primary:#0b6efd;
+    --bg:#f7f7f8;
+    --muted:#666;
+    --card:#ffffff;
 }
 
-.about-page {
-  color: #222;
+.about-page{
+    color:#222;
 }
 
-.about-hero {
-  background: linear-gradient(135deg, #0b6efd 0%, #6c63ff 100%);
-  color: #fff;
-  padding: 64px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.about-hero{
+    background:linear-gradient(135deg,#0b6efd 0%,#6c63ff 100%);
+    color:#fff;
+    padding:64px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.about-hero-inner {
-  max-width: 1100px;
-  text-align: center;
+.about-hero-inner{max-width:1100px;text-align:center}
+.about-title{font-size:2.25rem;margin:0 0 8px}
+.about-tagline{font-size:1.125rem;margin:0 0 18px;opacity:0.95}
+.about-hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.btn{display:inline-block;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:600}
+.btn.primary{background:var(--card);color:#111}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.85);color:#fff}
+.btn.large{padding:14px 22px;font-size:1.05rem}
+
+.about-content{max-width:1100px;margin:36px auto;padding:0 18px 80px}
+.about-section{margin:36px 0}
+.about-section h2{font-size:1.4rem;margin-bottom:10px}
+.about-section p{color:var(--muted);line-height:1.6}
+
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.value-card{background:var(--card);padding:18px;border-radius:8px;box-shadow:0 6px 18px rgba(20,20,40,0.06)}
+.value-card h3{margin:0 0 8px}
+
+
+
+.about-contact-cta{background:linear-gradient(180deg,#fafbff 0%,#fff 100%);padding:28px;border-radius:10px;text-align:center}
+
+@media (max-width:900px){
+    .values-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-.about-title {
-  font-size: 2.25rem;
-  margin: 0 0 8px;
-}
-
-.about-tagline {
-  font-size: 1.125rem;
-  margin: 0 0 18px;
-  opacity: 0.95;
-}
-
-.about-hero-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.btn.primary {
-  background: var(--card);
-  color: #111;
-}
-
-.btn.ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  color: #fff;
-}
-
-.btn.large {
-  padding: 14px 22px;
-  font-size: 1.05rem;
-}
-
-.about-content {
-  max-width: 1100px;
-  margin: 36px auto;
-  padding: 0 18px 80px;
-}
-
-.about-section {
-  margin: 36px 0;
-}
-
-.about-section h2 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-}
-
-.about-section p {
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-top: 18px;
-}
-
-.value-card {
-  background: var(--card);
-  padding: 18px;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(20, 20, 40, 0.06);
-}
-
-.value-card h3 {
-  margin: 0 0 8px;
-}
-
-.about-contact-cta {
-  background: linear-gradient(180deg, #fafbff 0%, #fff 100%);
-  padding: 28px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-@media (max-width: 900px) {
-  .values-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .about-title {
-    font-size: 1.6rem;
-  }
-
-  .values-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-hero {
-    padding: 40px 18px;
-  }
+@media (max-width:640px){
+    .about-title{font-size:1.6rem}
+    .values-grid,.team-grid{grid-template-columns:1fr}
+    .about-hero{padding:40px 18px}
 }
