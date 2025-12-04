@@ -200,6 +200,29 @@ app.post('/contact', async (req, res) => {
     }
 });
 
+// Product Search
+
+app.get("/search", async (req, res) => {
+    const { q } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT * FROM products 
+             WHERE LOWER(product_name) LIKE LOWER($1)`,
+            [`%${q}%`]
+        );
+
+        res.json(result.rows);
+
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+
+
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
