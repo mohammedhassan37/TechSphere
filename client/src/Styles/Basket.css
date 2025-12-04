@@ -26,6 +26,7 @@
 
 /* Single Basket Item Row */
 .basket_item {
+    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
