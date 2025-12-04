@@ -5,6 +5,10 @@ import tv from "../assets/tv.webp";
 import tcl_tv from "../assets/tcl_tv.webp";
 import hisense from "../assets/hisense_tv.webp";
 import toshiba from "../assets/toshiba_tv.webp";
+import samsung_tv2 from "../assets/samsung_tv2.webp"
+import samsung_tv3 from "../assets/samsung_tv3.webp"
+import bush_tv from "../assets/bush_tv.webp"
+import sony_tv from "../assets/sony_tv.webp"
 
 function TV(){
 

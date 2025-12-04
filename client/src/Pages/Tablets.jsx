@@ -1,13 +1,33 @@
-import tablet_1 from "../assets/tablet.webp";
-import honor from "../assets/tablet.webp";
-import lenevo from "../assets/tablet.webp";
-import tablet_2 from "../assets/tablet_A9.webp";
-import ipad_1 from "../assets/tablet.webp";
-import ipad_2 from "../assets/tablet.webp";
-import amazon_fire1 from "../assets/tablet.webp";
-import amazon_fire2 from "../assets/tablet.webp";
+import { useNavigate } from "react-router-dom";
 
-function Tablets({ addToBasket }) {
+import tablet_1 from "../assets/tablet.webp";
+import honour from "../assets/honour.webp";
+import lenevo from "../assets/lenevo.webp";
+import tablet_2 from "../assets/tablet_A9.webp";
+import ipad_1 from "../assets/ipad.webp";
+import ipad_2 from "../assets/ipad_air.webp";
+import amazon_fire1 from "../assets/amazon_fire.webp";
+import amazon_fire2 from "../assets/amazon_fire2.webp";
+
+function Tablets() {
+    const navigate = useNavigate();
+
+    const addToBasket = (product) => {
+        let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+        const existing = basket.find(item => item.name === product.name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            basket.push(product);
+        }
+
+        localStorage.setItem("basket", JSON.stringify(basket));
+
+        navigate("/basket");
+    };
+
     return (
         <>
             <h1>Tablets</h1>
@@ -34,7 +54,7 @@ function Tablets({ addToBasket }) {
                 </div>
 
                 <div className="product_cards">
-                    <img src={honor} alt="HONOR Pad X8a" />
+                    <img src={honour} alt="HONOR Pad X8a" />
                     <h3>HONOR Pad X8a 11 Inch 128GB Wi-Fi Tablet</h3>
                     <p>£109.99</p>
                     <button
@@ -43,7 +63,7 @@ function Tablets({ addToBasket }) {
                             addToBasket({
                                 name: "HONOR Pad X8a 11 Inch 128GB Wi-Fi Tablet",
                                 price: 109.99,
-                                image: honor,
+                                image: honour,
                                 quantity: 1
                             })
                         }
