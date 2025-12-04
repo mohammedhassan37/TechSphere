@@ -4,7 +4,6 @@ import phone from "../assets/phone.webp";
 import tablet from "../assets/tablet.webp";
 import headphone from "../assets/headphone.webp";
 import tv from "../assets/tv.webp";
-import smartwatch from "../assets/smartwatch.webp";
 
 function featured_product() {
     return (
@@ -32,6 +31,7 @@ function featured_product() {
                     <img src={headphone} alt="Headphone" />
                     <h3>JBL Tune 720BT Over-Ear Wireless Headphones</h3>
                     <p>£38.99</p>
+                    <p>Bluetooth | 44H Playtime | Pure Bass Sound</p>
                 </div>
 
                 <div class="product_cards">
@@ -39,12 +39,6 @@ function featured_product() {
                     <h3>Samsung QLED QEF1 4K Vision AI Smart TV (2025)</h3>
                     <p>£349.99</p>
                     <p> 50" | Q4 AI Processor | Real Quantum Dot Display </p>
-                </div>
-
-                <div class="product_cards">
-                    <img src={smartwatch} alt="Smartwatch" />
-                    <h3>HUAWEI Watch Fit 3 Smart Watch</h3>
-                    <p>£68.99</p>
                 </div>
 
             </div>
