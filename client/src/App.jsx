@@ -9,6 +9,7 @@ import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
 import Basket from './Pages/Basket.jsx'
+import SearchPage from './Pages/SearchPage.jsx';
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
@@ -20,28 +21,19 @@ function App() {
       <Header />
 
       <Routes>
-        {/* Main/Home */}
-        <Route 
-          path="/" 
-          element={
-            <>
-              <Carousel />
-              <FP />
-            </>
-          }
-        />
+  <Route path="/" element={<><Carousel /><FP /></>} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/headphones" element={<Headphones />} />
+  <Route path="/phone" element={<Phone />} />
+  <Route path="/smartwatch" element={<Smartwatch />} />
+  <Route path="/tablets" element={<Tablets />} />
+  <Route path="/tv" element={<TV />} />
+  <Route path="/basket" element={<Basket />} />
+  <Route path="/registration" element={<Registration />} />
+  <Route path="/search" element={<SearchPage />} />
+</Routes>
 
-        {/* Pages */}
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/headphones" element={<Headphones />} />
-        <Route path="/phone" element={<Phone />} />
-        <Route path="/smartwatch" element={<Smartwatch />} />
-        <Route path="/tablets" element={<Tablets />} />
-        <Route path="/tv" element={<TV />} />
-         <Route path="/basket" element={<Basket />} />
-        <Route path="/Registration" element={<Registration />} />
-      </Routes>
     </BrowserRouter>
   );
 }
