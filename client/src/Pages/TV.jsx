@@ -90,7 +90,7 @@ function TV(){
                         onClick={() =>
                             addToBasket({
                                 name: "Hisense 75 Inch Smart 4K UHD HDR LED Freely TV",
-                                price: 300.99,
+                                price: 499.99,
                                 image: hisense,
                                 quantity: 1
                             })
