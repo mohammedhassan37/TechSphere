@@ -1,6 +1,5 @@
-import  { useState } from "react";
-import '../Styles/contact.css'
-
+import { useState } from "react";
+import "../Styles/contact.css";
 
 function Contact() {
   const [formInput, setFormInput] = useState({
@@ -9,16 +8,16 @@ function Contact() {
     Inquiry: "",
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submission, setSubmission] = useState(false);
 
-  const handleChange = (e) => {
+  const hChange = (e) => {
     const { name, value } = e.target;
     setFormInput({ ...formInput, [name]: value });
   };
 
-  const handleSubmission = async (e) => {
+  const hSubmission = async (e) => {
     e.preventDefault();
-    console.log("Enquiry Sent:", formInput);
+    console.log("Inquiry Sent:", formInput);
 
     try {
       const response = await fetch("http://localhost:5000/contact", {
@@ -33,14 +32,14 @@ function Contact() {
 
       const data = await response.json();
       if (data.success) {
-        setSubmitted(true);
+        setSubmission(true);
         setFormInput({
           Name: "",
           EmailAddress: "",
           Inquiry: "",
         });
       } else {
-        alert("Failed to send message: " + data.message);
+        alert("Could not send Message: " + data.message);
       }
     } catch (err) {
       console.error(err);
@@ -48,44 +47,46 @@ function Contact() {
     }
   };
 
-  return (
-    <>
-      
-    <div className="ContactMainDiv">
-      <h2>Contact Us!</h2>
-      {submitted && (
-        <p style={{ color: "green" }}>Message has been sent!</p>
-      )}
 
-      <form onSubmit={handleSubmission}>
-        <div>
-          <label>Name:</label>
+
+  return (
+    <div className="ContactMainDiv">
+      <form className="formcontact" onSubmit={hSubmission}>
+        <h2>Contact Us!</h2>
+
+        {submission && <p style={{ color: "green" }}>Message Sent!</p>}
+
+        <div className="formInput">
           <input
+            className="field"
             type="text"
             name="Name"
+            placeholder="Your Name"
             value={formInput.Name}
-            onChange={handleChange}
+            onChange={hChange}
             required
           />
         </div>
 
-        <div>
-          <label>Email Address:</label>
+        <div className="formInput">
           <input
+            className="field"
             type="email"
             name="EmailAddress"
+            placeholder="Your Email"
             value={formInput.EmailAddress}
-            onChange={handleChange}
+            onChange={hChange}
             required
           />
         </div>
 
-        <div>
-          <label>Inquiry:</label>
+        <div className="formInput">
           <textarea
+            className="field textarea"
             name="Inquiry"
+            placeholder="Your Inquiry"
             value={formInput.Inquiry}
-            onChange={handleChange}
+            onChange={hChange}
             required
           />
         </div>
@@ -93,8 +94,8 @@ function Contact() {
         <button type="submit">Send Inquiry</button>
       </form>
     </div>
-    
-    </>
+
+
   );
 }
 
