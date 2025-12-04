@@ -23,16 +23,16 @@ return (
         <div class="nav-container">
         <header>
             <nav>
-                <Link to="/">
-                    <div className="logo">
+                <Link to="/" className="logo">
+                    <div>
                      <img src={logo}
                         alt="logo"
                         style={{ height: "70px", width: "70px", cursor: "pointer"}} 
                        
                      />
-                </div>
-
+                    </div>
                 </Link>
+
                 <div className ="nav-links">
                     <Link to="/phone" className="nav-link">Phone</Link>
                     <Link to="/Tablets" className="nav-link">Tablet</Link>
