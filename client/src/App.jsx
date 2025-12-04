@@ -9,6 +9,8 @@ import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
 import Basket from './Pages/Basket.jsx'
+import WhyChooseUs from "./Components/WhyChooseUs";
+
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
@@ -27,6 +29,7 @@ function App() {
             <>
               <Carousel />
               <FP />
+              <WhyChooseUs></WhyChooseUs>
             </>
           }
         />
