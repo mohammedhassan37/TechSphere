@@ -7,6 +7,9 @@ import samsungGalaxy from "../assets/samsung galaxy.webp";
 import motorola from "../assets/motorola.webp";
 import iphone16 from "../assets/iphone 16.webp";
 import googlePixel from "../assets/google pixel.webp";
+import xiaomi from "../assets/xiaomi.webp";
+import iphonePink from "../assets/iphonePink.webp";
+import samsungFlip from "../assets/samsungFlip.webp";
 
 function Phone(){
 
@@ -132,6 +135,69 @@ const navigate = useNavigate();
                                 name: "Google Pixel 9a 5G",
                                 price: 349.99,
                                 image: googlePixel,
+                                quantity: 1
+                            })
+                        }
+                    >
+                        Add to Basket
+                    </button>
+                </div>
+
+                {/* Product 6 */}
+                <div className="product_cards">
+                    <img src={xiaomi} alt="Xiaomi Redmi A5" />
+                    <h3>Xiaomi Redmi A5</h3>
+                    <p>£79.99</p>
+
+                    <button
+                        className="add-btn"
+                        onClick={() =>
+                            addToBasket({
+                                name: "Google Pixel 9a 5G",
+                                price: 79.99,
+                                image: xiaomi,
+                                quantity: 1
+                            })
+                        }
+                    >
+                        Add to Basket
+                    </button>
+                </div>
+
+                {/* Product 7 */}
+                <div className="product_cards">
+                    <img src={iphonePink} alt="iPhone 16 5G-Pink" />
+                    <h3>iPhone 16 5G-Pink</h3>
+                    <p>£699.99</p>
+
+                    <button
+                        className="add-btn"
+                        onClick={() =>
+                            addToBasket({
+                                name: "iPhone 16 5G-Pink",
+                                price: 699.99,
+                                image: iphonePink,
+                                quantity: 1
+                            })
+                        }
+                    >
+                        Add to Basket
+                    </button>
+                </div>
+
+                {/* Product 8 */}
+                <div className="product_cards">
+                    <img src={samsungFlip} alt="Samsung Galaxy Z Flip7" />
+                    <h3>Samsung Galaxy Z Flip7</h3>
+                    <p>£1049.99</p>
+
+                    <button
+                        className="add-btn"
+                        onClick={() =>
+                            addToBasket({
+                                name: "Samsung Galaxy Z Flip7",
+                                price: 1049.99,
+                                image: samsungFlip,
                                 quantity: 1
                             })
                         }
