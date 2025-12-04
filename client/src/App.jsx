@@ -15,8 +15,8 @@ import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
 
-import ProductDetails from "./Pages/ProductPage.jsx";
 
+import ProductDetails from "./Pages/ProductPage.jsx";
 
 function App() {
   return (
@@ -35,6 +35,7 @@ function App() {
   <Route path="/basket" element={<Basket />} />
   <Route path="/registration" element={<Registration />} />
   <Route path="/search" element={<SearchPage />} />
+  <Route path="/product/:id" element={<ProductDetails />} />
 </Routes>
 
     </BrowserRouter>

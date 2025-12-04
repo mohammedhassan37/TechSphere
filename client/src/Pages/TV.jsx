@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
-
 import tv from "../assets/tv.webp";
 import tcl_tv from "../assets/tcl_tv.webp";
 import hisense from "../assets/hisense_tv.webp";
 import toshiba from "../assets/toshiba_tv.webp";
-import samsung_tv2 from "../assets/samsung_tv2.webp"
-import samsung_tv3 from "../assets/samsung_tv3.webp"
-import bush_tv from "../assets/bush_tv.webp"
-import sony_tv from "../assets/sony_tv.webp"
+import samsung_tv2 from "../assets/samsung_tv2.webp";
+import samsung_tv3 from "../assets/samsung_tv3.webp";
+import bush_tv from "../assets/bush_tv.webp";
+import sony_tv from "../assets/sony_tv.webp";
 
-
+function TV() {
     const navigate = useNavigate();
 
     const addToBasket = (product) => {
@@ -29,9 +28,8 @@ import sony_tv from "../assets/sony_tv.webp"
         navigate("/basket");
     };
 
-    return(
+    return (
         <>
-
             <h1>TV</h1>
 
             <div className="product_container">
@@ -41,13 +39,12 @@ import sony_tv from "../assets/sony_tv.webp"
                     <img src={tv} alt="Samsung 50 Inch Smart 4k QLED TV" />
                     <h3>Samsung 50 Inch Smart 4k QLED TV</h3>
                     <p>£399.00</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
                             addToBasket({
                                 name: "Samsung 50 Inch Smart 4k QLED TV",
-                                price: 399.00,
+                                price: 399.0,
                                 image: tv,
                                 quantity: 1
                             })
@@ -62,7 +59,6 @@ import sony_tv from "../assets/sony_tv.webp"
                     <img src={tcl_tv} alt="TCL 55 Inch 55P6K Smart 4K UHD HDR DLED TV" />
                     <h3>TCL 55 Inch 55P6K Smart 4K UHD HDR DLED TV</h3>
                     <p>£259.99</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
@@ -83,7 +79,6 @@ import sony_tv from "../assets/sony_tv.webp"
                     <img src={hisense} alt="Hisense 75 Inch Smart 4K UHD HDR LED Freely TV" />
                     <h3>Hisense 75 Inch Smart 4K UHD HDR LED Freely TV</h3>
                     <p>£499.99</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
@@ -104,7 +99,6 @@ import sony_tv from "../assets/sony_tv.webp"
                     <img src={toshiba} alt="Toshiba 65Inch Smart 4K UHD HDR DLED Freely TV" />
                     <h3>Toshiba 65Inch Smart 4K UHD HDR DLED Freely TV</h3>
                     <p>£319.99</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
@@ -125,7 +119,6 @@ import sony_tv from "../assets/sony_tv.webp"
                     <img src={samsung_tv3} alt="Samsung 43 Inch Smart 4K UHD HDR LED TV" />
                     <h3>Samsung 43 Inch Smart 4K UHD HDR LED TV</h3>
                     <p>£229.99</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
@@ -143,10 +136,9 @@ import sony_tv from "../assets/sony_tv.webp"
 
                 {/* Product 6 */}
                 <div className="product_cards">
-                    <img src={samsung_tv2} alt="Samsung 43 Inch Smart 4K UHD HDR LED TV" />
+                    <img src={samsung_tv2} alt="Samsung 24 Inch Smart Full HD HDR LED TV" />
                     <h3>Samsung 24 Inch Smart Full HD HDR LED TV</h3>
                     <p>£149.99</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
@@ -167,7 +159,6 @@ import sony_tv from "../assets/sony_tv.webp"
                     <img src={bush_tv} alt="Bush 24 Inch H236V6D HD Ready LED Freeview TV" />
                     <h3>Bush 24 Inch H236V6D HD Ready LED Freeview TV</h3>
                     <p>£109.99</p>
-
                     <button
                         className="add-btn"
                         onClick={() =>
@@ -183,7 +174,9 @@ import sony_tv from "../assets/sony_tv.webp"
                     </button>
                 </div>
 
-
-
+            </div>
+        </>
+    );
+}
 
 export default TV;
