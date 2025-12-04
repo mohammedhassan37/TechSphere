@@ -171,6 +171,11 @@ nav {
     transition: transform 0.25s;
 }
 
+.basket:active{
+    transform: scale(110%);
+    transition: transform 0.25s;
+}
+
 
 
 @media (max-width: 900px) {
