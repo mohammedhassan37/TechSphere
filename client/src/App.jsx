@@ -10,6 +10,8 @@ import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
 import Basket from './Pages/Basket.jsx'
 import WhyChooseUs from "./Components/WhyChooseUs";
+import Footer from "./Components/Footer.jsx";
+
 
 
 import Carousel from './Components/Carousel.jsx';
@@ -45,6 +47,7 @@ function App() {
          <Route path="/basket" element={<Basket />} />
         <Route path="/Registration" element={<Registration />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
