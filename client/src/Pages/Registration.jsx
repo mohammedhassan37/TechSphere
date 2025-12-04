@@ -1,10 +1,9 @@
 import '../Styles/Registration.css'
 import { useState } from "react";
-import { Navigate, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
-function Registeration() {
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
+function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -35,7 +34,8 @@ function Registeration() {
       } else {
           setIsLogin(true);   
       }
-}
+    }
+  
     } catch (err) {
       setMessage("Server error");
     }
@@ -118,4 +118,4 @@ function Registeration() {
   );
 }
 
-export default Registeration;
+export default Registration;
