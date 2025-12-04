@@ -14,9 +14,8 @@
     background:linear-gradient(135deg,#0b6efd 0%,#6c63ff 100%);
     color:#fff;
     padding:64px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width: 60%;
+    margin-left: 20%;
 }
 
 .about-hero-inner{max-width:1100px;text-align:center}

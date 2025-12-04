@@ -5,6 +5,7 @@ import '../Styles/About.css'
 function About(){
     return (
         <div className="about-page">
+            {/* Main text container */}
             <header className="about-hero">
                 <div className="about-hero-inner">
                     <h1 className="about-title">TechSphere</h1>
