@@ -40,6 +40,7 @@ return (
                     <Link to="/About" className="nav-link">About</Link>
                     <Link to="/Contact" className="nav-link">Contact</Link>
                     <Link to="/Registration" className="nav-link">Registration</Link>
+                    
                 </div>
                 
                 <div class="nav-search">
@@ -47,10 +48,12 @@ return (
                         
                         <input type="text" placeholder="Search..."/>
                     </div>
+                    <Link to="/Basket">
                     <div class="basket">
                         <img src={basket} alt= "Shopping Basket"/>
                         
                     </div>
+                    </Link>
                                     
                 </div>
 
