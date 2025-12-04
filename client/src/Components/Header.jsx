@@ -70,7 +70,7 @@ return (
                     </div>
 
                 <div className="zoom-options">
-                    <img src={zoomOut} onClick={() => setZoom(0.1 - zoom)} alt= "Zoom out" />
+                    <img src={zoomOut} onClick={() => setZoom(-0.1 + zoom)} alt= "Zoom out" />
                     <img src={zoomIn} onClick={() => setZoom(0.1 + zoom)} alt= "Zoom in" />
                 </div>
 
