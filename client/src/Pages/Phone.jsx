@@ -189,7 +189,7 @@ const navigate = useNavigate();
                 <div className="product_cards">
                     <img src={samsungFlip} alt="Samsung Galaxy Z Flip7" />
                     <h3>Samsung Galaxy Z Flip7</h3>
-                    <p>£1049.99</p>
+                    <p>£1059.99</p>
 
                     <button
                         className="add-btn"
