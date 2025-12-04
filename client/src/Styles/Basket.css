@@ -45,7 +45,7 @@
     border-radius: 8px;
 }
 
-/* Product Info Section */
+/* Product Information Section */
 .product_info {
     flex: 1;
     margin-left: 15px;
@@ -66,11 +66,19 @@
     font-size: 15px;
     margin: 3px 0 0;
     color: #242424;
+    font-weight: 500;
+    text-align: center;
+}
+.quantity_buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 15px;
 }
 
 /* Remove Button */
 .remove_button {
-    background: #cd2424;
+    background: #d12b2b;
     border: none;
     color: white;
     cursor: pointer;
@@ -80,12 +88,8 @@
     font-size: 14px;
 }
 
-.remove_button:hover {
-    background: #a11b1b;
-}
-
 /* Basket Total */
-.basket-total {
+.basket_total {
     margin-top: 20px;
     text-align: right;
     font-size: 20px;
@@ -105,10 +109,6 @@
     border-radius: 50px;
     font-size: 20px;
     font-weight: 600;
-}
-
-.checkout_button:hover {
-    background-color: #2d6ad9;
 }
 
 /* Empty Basket Message */

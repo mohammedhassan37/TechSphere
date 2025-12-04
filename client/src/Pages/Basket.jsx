@@ -31,27 +31,27 @@ function Basket() {
         basket.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
     return (
-        <div className="basket-page">
-            <h2>Your Basket</h2>
+        <div className="basket_page">
+            <h2>Your Item Basket</h2>
 
             {basket.length === 0 ? (
                 <p>Your basket is empty.</p>
             ) : (
                 basket.map((item, index) => (
-                    <div key={index} className="basket-item">
+                    <div key={index} className="basket_item">
                         <img src={item.image} alt={item.name} />
 
-                        <div className="basket-details">
+                        <div className="product_info">
                             <h3>{item.name}</h3>
                             <p>£{item.price.toFixed(2)}</p>
 
-                            <div className="quantity-controls">
+                            <div className="quantity_buttons">
                                 <button onClick={() => updateQuantity(index, -1)}>-</button>
                                 <span>{item.quantity}</span>
                                 <button onClick={() => updateQuantity(index, +1)}>+</button>
                             </div>
 
-                            <button className="remove-btn" onClick={() => removeItem(index)}>
+                            <button className="remove_button" onClick={() => removeItem(index)}>
                                 Remove
                             </button>
                         </div>
@@ -60,9 +60,11 @@ function Basket() {
             )}
 
             {basket.length > 0 && (
-                <div className="basket-total">
+                <div className="basket_total">
                     <h3>Total: £{getTotal()}</h3>
+                    <button className="checkout_button">Proceed to Checkout</button>
                 </div>
+                
             )}
         </div>
     );
