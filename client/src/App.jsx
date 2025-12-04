@@ -14,7 +14,7 @@ import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
 
-import ProductDetails from "./Pages/ProductDetails";
+import ProductDetails from "./Pages/ProductPage.jsx";
 
 
 function App() {
