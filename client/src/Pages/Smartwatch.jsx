@@ -34,7 +34,7 @@ function Smartwatch() {
 
    
     <div class="product_cards">
-        <img src={smartwatch} alt="Product 1">
+        <img src={smartwatch} alt="Product 1"/>
         <h3>HUAWEI Watch Fit 3 Smart Watch-Grey</h3>
         <p>$139.00</p>
 
@@ -47,7 +47,7 @@ function Smartwatch() {
     </div>
 
     <div class="product_cards">
-        <img src={reflex} alt="Product 2">
+        <img src={reflex} alt="Product 2"/>
         <h3>Reflex Active Black Smart Watch-Black</h3>
         <p>$35.99</p>
 
@@ -61,7 +61,7 @@ function Smartwatch() {
 
     
     <div class="product_cards">
-        <img src={apple_watch} alt="Product 3">
+        <img src={apple_watch} alt="Product 3"/>
         <h3>Apple Watch Ultra 3 Black Ocean Band</h3>
         <p>$719.99</p>
 
@@ -75,7 +75,7 @@ function Smartwatch() {
 
     
     <div class="product_cards">
-        <img src={samsung_watch} alt="Product 4">
+        <img src={samsung_watch} alt="Product 4"/>
         <h3>Samsung Galaxy Watch7 40mm Smart Watch</h3>
         <p>$249.99</p>
 
@@ -89,7 +89,7 @@ function Smartwatch() {
 
    
     <div class="product_cards">
-        <img src={garmin_watch} alt="Product 5">
+        <img src={garmin_watch} alt="Product 5"/>
         <h3>Garmin Forerunner 165 GPS Running Smart Watch</h3>
         <p>$169.99</p>
 
@@ -103,7 +103,7 @@ function Smartwatch() {
 
     
     <div class="product_cards">
-        <img src={fitbit_watch} alt="Product 5">
+        <img src={fitbit_watch} alt="Product 5"/>
         <h3>Fitbit Versa 4 Smart Watch - Waterfall Blue</h3>
         <p>$129.99</p>
 
@@ -115,9 +115,9 @@ function Smartwatch() {
            </a>
     </div>
 
-    <!-- Product 7 -->
+   
     <div class="product_cards">
-        <img src={samsung_watch2} alt="Product 5">
+        <img src={samsung_watch2} alt="Product 5"/>
         <h3>Samsung Galaxy Watch8 40mm Smart Watch</h3>
         <p>$249.99</p>
 
@@ -131,7 +131,7 @@ function Smartwatch() {
 
     
     <div class="product_cards">
-        <img src={garmin_watch2} alt="Product 5">
+        <img src={garmin_watch2} alt="Product 5"/>
         <h3>Garmin Fenix 8 47mm Smart Watch - Glass Grey & Black</h3>
         <p>$599.99</p>
 
