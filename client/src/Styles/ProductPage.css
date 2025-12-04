@@ -1,0 +1,24 @@
+.details-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    display: flex;
+    gap: 40px;
+}
+
+.details-container img {
+    width: 300px;
+    object-fit: contain;
+}
+
+.details-info {
+    flex: 1;
+}
+
+.details-info ul {
+    padding: 0;
+    list-style: none;
+}
+
+.details-info li {
+    margin-bottom: 10px;
+}

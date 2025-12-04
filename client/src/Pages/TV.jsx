@@ -10,7 +10,6 @@ import samsung_tv3 from "../assets/samsung_tv3.webp"
 import bush_tv from "../assets/bush_tv.webp"
 import sony_tv from "../assets/sony_tv.webp"
 
-function TV(){
 
     const navigate = useNavigate();
 
@@ -184,30 +183,7 @@ function TV(){
                     </button>
                 </div>
 
-                {/* Product 8 */}
-                <div className="product_cards">
-                    <img src={sony_tv} alt="Bush 24 Inch H236V6D HD Ready LED Freeview TV" />
-                    <h3>Sony Bravia 3 50inch LED HDR 4K Ultra HD Google TV</h3>
-                    <p>£569.99</p>
 
-                    <button
-                        className="add-btn"
-                        onClick={() =>
-                            addToBasket({
-                                name: "Sony Bravia 3 50inch LED HDR 4K Ultra HD Google TV",
-                                price: 569.99,
-                                image: sony_tv,
-                                quantity: 1
-                            })
-                        }
-                    >
-                        Add to Basket
-                    </button>
-                </div>
-            </div>
 
-        </>
-    )
-}
 
 export default TV;
