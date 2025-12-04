@@ -23,14 +23,16 @@ return (
         <div class="nav-container">
         <header>
             <nav>
-                <div className="logo">
+                <Link to="/">
+                    <div className="logo">
                      <img src={logo}
                         alt="logo"
                         style={{ height: "70px", width: "70px", cursor: "pointer"}} 
-                        onClick={()=> window.location.href = "http://localhost:5173/"} 
+                       
                      />
                 </div>
 
+                </Link>
                 <div className ="nav-links">
                     <Link to="/phone" className="nav-link">Phone</Link>
                     <Link to="/Tablets" className="nav-link">Tablet</Link>
