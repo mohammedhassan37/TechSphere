@@ -31,6 +31,7 @@ function Headphones(){
     };
     return(
         <>
+            <h1>Headphones</h1>
 
 <div className="product_container">
 

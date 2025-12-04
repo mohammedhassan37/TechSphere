@@ -33,9 +33,9 @@ return (
 
                 <div className ="nav-links">
                     <Link to="/phone" className="nav-link">Phone</Link>
-                    <Link to="/Tablets" className="nav-link">Tablets</Link>
-                    <Link to="/Headphones" className="nav-link">Headphones</Link>
-                    <Link to="/TV" className="nav-link">TV & Home</Link>
+                    <Link to="/Tablets" className="nav-link">Tablet</Link>
+                    <Link to="/Headphones" className="nav-link">Headphone</Link>
+                    <Link to="/TV" className="nav-link">TV</Link>
                     <Link to="/Smartwatch" className="nav-link">Smartwatch</Link>
                     <Link to="/About" className="nav-link">About</Link>
                     <Link to="/Contact" className="nav-link">Contact</Link>

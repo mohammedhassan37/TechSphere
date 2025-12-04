@@ -29,6 +29,7 @@ function Smartwatch() {
 
     return (
         <>
+            <h1>Smartwatch</h1>
             <div className="product_container">
 
                 <div className="product_cards">
