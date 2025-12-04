@@ -17,6 +17,10 @@
     margin-bottom: 25px;
 }
 
+.basket_page p {
+    color: #000000;
+}
+
 /* Basket Items Container */
 .basket_products {
     display: flex;
