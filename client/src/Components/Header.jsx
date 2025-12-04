@@ -32,14 +32,14 @@ return (
                 </div>
 
                 <div className ="nav-links">
-                    <Link to="/phone">Phone</Link>
-                    <Link to="/Tablets">Tablets</Link>
-                    <Link to="/Headphones">Headphones</Link>
-                    <Link to="/TV">TV & Home</Link>
-                    <Link to="/Smartwatch">Smartwatch</Link>
-                    <Link to="/About">About</Link>
-                    <Link to="/Contact">Contact</Link>
-                    <Link to="/Registration">Registration</Link>
+                    <Link to="/phone" className="nav-link">Phone</Link>
+                    <Link to="/Tablets" className="nav-link">Tablets</Link>
+                    <Link to="/Headphones" className="nav-link">Headphones</Link>
+                    <Link to="/TV" className="nav-link">TV & Home</Link>
+                    <Link to="/Smartwatch" className="nav-link">Smartwatch</Link>
+                    <Link to="/About" className="nav-link">About</Link>
+                    <Link to="/Contact" className="nav-link">Contact</Link>
+                    <Link to="/Registration" className="nav-link">Registration</Link>
                 </div>
                 
                 <div class="nav-search">
@@ -54,7 +54,7 @@ return (
                                     
                 </div>
 
-                <div class="light-dark-mode" onClick={ChangeMode}>
+                <div className="light-dark-mode" onClick={ChangeMode}>
                     <img src={mode === "light" ? sun : moon} alt= "Change mode"/>
                     </div>
             </nav>

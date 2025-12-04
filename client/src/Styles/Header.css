@@ -158,10 +158,18 @@ nav {
 .light-dark-mode img {
     height: 15px;
     width: 15px;
-    margin-left: 15px;
+    margin-left: 5px;
     cursor: pointer;
 }
 
+.light-dark-mode:active {
+    transform: scale(120%);
+}
+
+.nav-link:active{
+    transform: scale(95%);
+    transition: transform 0.25s;
+}
 
 
 
