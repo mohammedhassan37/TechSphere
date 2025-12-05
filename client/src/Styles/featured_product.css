@@ -48,7 +48,7 @@ h1 {
 }
 .blue-name {
   color: blue;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 
