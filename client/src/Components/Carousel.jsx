@@ -51,7 +51,7 @@ function Carousel() {
 <img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
 
 <div className="applewelcome">
-    The next generation of iPhone.
+    
 
 </div>
     <div className="slide">
