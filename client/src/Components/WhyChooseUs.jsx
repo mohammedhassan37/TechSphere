@@ -1,3 +1,5 @@
+import '../Styles/WhyChooseUs.css';
+
 function WhyChooseUs() {
   return (
     <section className="why-choose-us">
