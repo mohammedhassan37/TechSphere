@@ -26,7 +26,7 @@ function App() {
       <Header />
 
       <Routes>
-  <Route path="/" element={<><Carousel /><FP /></>} />
+  <Route path="/" element={<><Carousel /><FP /> <WhyChooseUs /></>} />
   <Route path="/about" element={<About />} />
   <Route path="/contact" element={<Contact />} />
   <Route path="/headphones" element={<Headphones />} />
@@ -39,7 +39,6 @@ function App() {
   <Route path="/search" element={<SearchPage />} />
   <Route path="/product/:id" element={<ProductDetails />} />
 </Routes>
-<WhyChooseUs />
 <Footer />
     </BrowserRouter>
   );
