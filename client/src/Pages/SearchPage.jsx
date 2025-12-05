@@ -109,7 +109,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     async function load() {
-      const res = await fetch(`http://localhost:5000/search?q=${q}`);
+      const res = await fetch(`https://techsphere-8ec2.onrender.com/search?q=${q}`);
       const data = await res.json();
       setResults(data);
     }
