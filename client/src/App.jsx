@@ -11,12 +11,14 @@ import Contact from './Pages/Contact.jsx';
 import Basket from './Pages/Basket.jsx'
 import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
-
-
+import SearchPage from './Pages/SearchPage.jsx';
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
+
+
+import ProductDetails from "./Pages/ProductPage.jsx";
 
 function App() {
   return (
@@ -24,30 +26,20 @@ function App() {
       <Header />
 
       <Routes>
-        {/* Main/Home */}
-        <Route 
-          path="/" 
-          element={
-            <>
-              <Carousel />
-              <FP />
-              <WhyChooseUs></WhyChooseUs>
-            </>
-          }
-        />
+  <Route path="/" element={<><Carousel /><FP /></>} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/headphones" element={<Headphones />} />
+  <Route path="/phone" element={<Phone />} />
+  <Route path="/smartwatch" element={<Smartwatch />} />
+  <Route path="/tablets" element={<Tablets />} />
+  <Route path="/tv" element={<TV />} />
+  <Route path="/basket" element={<Basket />} />
+  <Route path="/registration" element={<Registration />} />
+  <Route path="/search" element={<SearchPage />} />
+  <Route path="/product/:id" element={<ProductDetails />} />
+</Routes>
 
-        {/* Pages */}
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/headphones" element={<Headphones />} />
-        <Route path="/phone" element={<Phone />} />
-        <Route path="/smartwatch" element={<Smartwatch />} />
-        <Route path="/tablets" element={<Tablets />} />
-        <Route path="/tv" element={<TV />} />
-         <Route path="/basket" element={<Basket />} />
-        <Route path="/Registration" element={<Registration />} />
-      </Routes>
-      <Footer/>
     </BrowserRouter>
   );
 }

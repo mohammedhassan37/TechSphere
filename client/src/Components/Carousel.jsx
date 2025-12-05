@@ -3,6 +3,13 @@ import '../Styles/Carousel.css';
 import iphone17 from '../assets/iphone17.webp';
 import iphone17Air from '../assets/iphone17Air.webp';
 import iphone17ProMax from '../assets/iphone17promax.webp';
+import appleLogo from '../assets/apple-logo.png';
+import lineup from '../assets/17lineup.png';
+
+
+
+
+
 
 function Carousel() {
   useEffect(() => {
@@ -12,8 +19,10 @@ function Carousel() {
     function showSlides() {
       const slides = document.getElementsByClassName('slide');
 
+
       for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = 'none';
+        slides[i].classList.remove('active');
       }
 
       slideIndex++;
@@ -23,6 +32,7 @@ function Carousel() {
 
       if (slides.length > 0) {
         slides[slideIndex - 1].style.display = 'block';
+        slides[slideIndex - 1].classList.add('active');
       }
 
       timer = setTimeout(showSlides, 3000);
@@ -37,14 +47,25 @@ function Carousel() {
 
   return (
     <div className="slider-container">
+
+<img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
+
+
+    <div className="slide">
+      <img src={lineup} alt = "iphone17lineup" className='lineup-image' />
+      <div className="slide-text">The iPhone 17 Range</div>
+    </div>
       <div className="slide">
         <img src={iphone17ProMax} alt="Iphone 17 Pro Max" />
+        <div className="slide-text">iPhone 17 Pro Max</div>
       </div>
       <div className="slide">
         <img src={iphone17} alt="Iphone 17" />
+        <div className='slide-text'>iPhone 17</div>
       </div>
       <div className="slide">
         <img src={iphone17Air} alt="Iphone 17 Air" />
+        <div className='slide-text'>iPhone 17 Air</div>
       </div>
     </div>
   );
