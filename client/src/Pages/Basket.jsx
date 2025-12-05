@@ -77,17 +77,46 @@ function Basket() {
                     ) : (
                         <>
                             <div className="checkout_items">
-                                {basket.map((item, index) => (
-                                    <div key={index} className="checkout_item">
-                                        <span className="item_name">
-                                            {item.name} (x{item.quantity})
-                                        </span>
-                                        <span className="item_price">
-                                            £{(item.price * item.quantity).toFixed(2)}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
+    {basket.map((item, index) => (
+        <div key={index} className="checkout_item">
+            <span className="item_name">
+                {item.name} (x{item.quantity})
+            </span>
+            <span className="item_price">
+                £{(item.price * item.quantity).toFixed(2)}
+            </span>
+        </div>
+    ))}
+</div>
+
+<div className="checkout_form">
+    <h3 className="checkout_title">Payment Details</h3>
+
+    <div className="form_group">
+        <label>Name on Card</label>
+        <input type="text" placeholder="John Doe" />
+    </div>
+
+    <div className="form_group">
+        <label>Card Number</label>
+        <input type="text" placeholder="1234 5678 9012 3456" />
+    </div>
+
+    <div className="form_row">
+        <div className="form_group">
+            <label>Expiry</label>
+            <input type="text" placeholder="09/27" />
+        </div>
+
+        <div className="form_group cvv">
+            <label>CVV</label>
+            <input type="text" placeholder="123" />
+        </div>
+    </div>
+
+    <button className="checkout_button">Complete Purchase</button>
+</div>
+
 
                             <hr />
 

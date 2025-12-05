@@ -3,29 +3,22 @@ h1 {
     font-weight: bold;
     margin-bottom: 20px;
     font-size: 35px;
-    
-}
-.product_cards {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    padding: 10px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product_cards {
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     padding: 12px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .product_cards:hover {
     transform: translateY(-6px);
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.18);
 }
+
 .product_cards img {
     width: 100%;
     height: 300px;
@@ -33,25 +26,131 @@ h1 {
     margin-bottom: 15px;
     border-radius: 8px;
 }
+
 .product_cards h3 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
     color: #57ace4;
 }
+
 .product_cards p {
     font-size: 18px;
     color: #000000;
-    text-decoration: solid;
     font-weight: bold;
     margin-bottom: 15px;
 }
+
 .blue-name {
-  color: blue;
-  text-decoration: none;
-  cursor: pointer;
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .blue-name:hover {
-  color: darkblue;
+    color: darkblue;
+}
+
+/* Checkout items */
+.checkout_items {
+    margin-bottom: 20px;
+}
+
+.checkout_item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.item_name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.item_price {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Checkout form */
+.checkout_form {
+    margin-top: 25px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.checkout_title {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Input groups */
+.form_group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form_group label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form_group input {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.2s ease;
+    width: 100%;              /* Fix width */
+    box-sizing: border-box;   /* Prevent overflow */
+}
+
+.form_group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Row layout (Expiry + CVV) */
+.form_row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.form_row .form_group {
+    flex: 1; /* Both inputs same size */
+}
+
+/* Optional: make CVV slightly smaller */
+.form_group.cvv {
+    flex: 0.6;
+}
+
+/* Button */
+.checkout_button {
+    width: 100%;
+    padding: 14px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.checkout_button:hover {
+    background: #43a047;
+}
+
+.checkout_button:active {
+    background: #388e3c;
 }
