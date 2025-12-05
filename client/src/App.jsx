@@ -39,7 +39,8 @@ function App() {
   <Route path="/search" element={<SearchPage />} />
   <Route path="/product/:id" element={<ProductDetails />} />
 </Routes>
-
+<WhyChooseUs />
+<Footer />
     </BrowserRouter>
   );
 }
