@@ -9,7 +9,7 @@ import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
 import Basket from './Pages/Basket.jsx'
-import WhyChooseUs from "./Components/WhyChooseUs";
+import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
 
 
