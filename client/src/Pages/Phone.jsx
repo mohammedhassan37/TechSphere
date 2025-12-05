@@ -15,7 +15,7 @@ const products = [
   {
     id: "iphone-17",
     name: "iPhone 17 Pro Max",
-    price: 1199,
+    price: 1199.99,
     image: phone,
     specs: {
       screen: "6.9-inch OLED",

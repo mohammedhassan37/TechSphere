@@ -46,3 +46,12 @@ h1 {
     font-weight: bold;
     margin-bottom: 15px;
 }
+.blue-name {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.blue-name:hover {
+  color: darkblue;
+}
