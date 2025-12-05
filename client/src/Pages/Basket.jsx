@@ -31,41 +31,78 @@ function Basket() {
         basket.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
     return (
-        <div className="basket_page">
-            <h2>Your Item Basket</h2>
+        <div className="basketMainPage">
+            <div className="basket_and_checkout">
 
-            {basket.length === 0 ? (
-                <p>Your basket is empty.</p>
-            ) : (
-                basket.map((item, index) => (
-                    <div key={index} className="basket_item">
-                        <img src={item.image} alt={item.name} />
+                <div className="basket_page">
+                    <h2>Your Item Basket</h2>
 
-                        <div className="product_info">
-                            <h3>{item.name}</h3>
-                            <p>£{item.price.toFixed(2)}</p>
+                    {basket.length === 0 ? (
+                        <p>Your basket is empty.</p>
+                    ) : (
+                        basket.map((item, index) => (
+                            <div key={index} className="basket_item">
+                                <img src={item.image} alt={item.name} />
 
-                            <div className="quantity_buttons">
-                                <button onClick={() => updateQuantity(index, -1)}>-</button>
-                                <span>{item.quantity}</span>
-                                <button onClick={() => updateQuantity(index, +1)}>+</button>
+                                <div className="product_info">
+                                    <h3>{item.name}</h3>
+                                    <p>£{item.price.toFixed(2)}</p>
+
+                                    <div className="quantity_buttons">
+                                        <button onClick={() => updateQuantity(index, -1)}>-</button>
+                                        <span>{item.quantity}</span>
+                                        <button onClick={() => updateQuantity(index, +1)}>+</button>
+                                    </div>
+
+                                    <button onClick={() => removeItem(index)} className="remove_button">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+
+                    {basket.length > 0 && (
+                        <div className="basket_total">
+                            <h3>Total: £{getTotal()}</h3>
+                        </div>
+                    )}
+                </div>
+
+                <div className="checkoutPage">
+                    <h2>Checkout</h2>
+
+                    {basket.length === 0 ? (
+                        <p>No items to checkout.</p>
+                    ) : (
+                        <>
+                            <div className="checkout_items">
+                                {basket.map((item, index) => (
+                                    <div key={index} className="checkout_item">
+                                        <span className="item_name">
+                                            {item.name} (x{item.quantity})
+                                        </span>
+                                        <span className="item_price">
+                                            £{(item.price * item.quantity).toFixed(2)}
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
 
-                            <button className="remove_button" onClick={() => removeItem(index)}>
-                                Remove
-                            </button>
-                        </div>
-                    </div>
-                ))
-            )}
+                            <hr />
 
-            {basket.length > 0 && (
-                <div className="basket_total">
-                    <h3>Total: £{getTotal()}</h3>
-                    <button className="checkout_button">Proceed to Checkout</button>
+                            <div className="checkout_total">
+                                <strong>Total: £{getTotal()}</strong>
+                            </div>
+
+                            <button className="checkout_button">
+                                Proceed to Payment
+                            </button>
+                        </>
+                    )}
                 </div>
-                
-            )}
+
+            </div>
         </div>
     );
 }
