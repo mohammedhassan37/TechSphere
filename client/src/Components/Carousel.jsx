@@ -50,10 +50,7 @@ function Carousel() {
 
 <img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
 
-<div className="applewelcome">
-    
 
-</div>
     <div className="slide">
       <img src={lineup} alt = "iphone17lineup" className='lineup-image' />
       <div className="slide-text">The iPhone 17 Range</div>
