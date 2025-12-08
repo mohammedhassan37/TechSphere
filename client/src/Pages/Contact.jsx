@@ -20,7 +20,7 @@ function Contact() {
     console.log("Inquiry Sent:", formInput);
 
     try {
-      const response = await fetch("http://localhost:5000/contact", {
+      const response = await fetch("https://techsphere-8ec2.onrender.com/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
