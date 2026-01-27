@@ -71,7 +71,7 @@ function Header() {
                             <input
                             type="text"
                             className="search-input"
-                            placeholder="Search..."
+                            placeholder="Search TechSphere..."
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={handleSearchKeyPress}
