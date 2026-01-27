@@ -81,9 +81,14 @@ function Header() {
                            </div>
 
 
-                            <div className="account-icon">
-                            <i className="fa-regular fa-user"></i>
-                        </div>
+                           <div className="account-dropdown">
+                              <i className="fa-regular fa-user"></i>
+
+                              <div className="account-menu">
+                              <Link to="/registration">Register</Link>
+                            </div>
+                           </div>
+
 
                             <Link to="/Basket">
                                 <div className="basket">

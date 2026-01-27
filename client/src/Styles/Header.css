@@ -272,3 +272,49 @@ nav {
         width: 140px;
     }
 }
+.account-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Show menu when hovering anywhere over icon OR menu */
+.account-dropdown:hover .account-menu {
+  display: flex;
+}
+
+.account-menu {
+  position: absolute;
+  top: 100%;              /* sits directly under icon */
+  right: 0;
+  margin-top: 10px;       /* visual gap WITHOUT breaking hover */
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* Invisible hover bridge (THIS is the magic) */
+.account-menu::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.account-menu a {
+  padding: 10px 14px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.account-menu a:hover {
+  background-color: rgba(108, 133, 245, 0.1);
+}
