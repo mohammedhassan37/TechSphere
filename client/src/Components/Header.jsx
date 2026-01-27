@@ -56,8 +56,9 @@ function Header() {
                             <Link to="/Smartwatch" className="nav-link">Smartwatch</Link>
                             <Link to="/About" className="nav-link">About</Link>
                             <Link to="/Contact" className="nav-link">Contact</Link>
-                            <Link to="/Registration" className="nav-link">Registration</Link>
                         </div>
+
+                        
 
                         <div className="nav-search">
                             <div className="search-container">
@@ -69,6 +70,10 @@ function Header() {
                                     onKeyDown={handleSearchKeyPress}
                                 />
                             </div>
+
+                            <div className="account-icon">
+                            <i className="fa-solid fa-user"></i>
+                        </div>
 
                             <Link to="/Basket">
                                 <div className="basket">
