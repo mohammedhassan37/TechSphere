@@ -1,7 +1,7 @@
 :root {
     --background-color: #ffffff;
     --text-color: #262525;
-    --nav-links-colour: #2c3e50;
+    --nav-links-color: #2c3e50;
 }
 
 *{
@@ -26,9 +26,8 @@ body {
 body.dark {
     --background-color: #1e1e1e;
     --text-color: #f1f1f1;
-    --nav-links-colour: #f1f1f1;
+    --nav-links-color: #f1f1f1;
 }
-
 
 .nav-container {
     max-width: 1500px;
@@ -44,13 +43,7 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 10px;
     margin-bottom: 30px;
-}
-header {
-  background: #ffffff;
-  color: #000000;
-  transition: 
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 header:hover {
@@ -58,7 +51,6 @@ header:hover {
     box-shadow: 
     0px 4px 30px  #000000,
     0px 4px 15px  #6c85f5;
-    transform: translateY(2px);
 }
 
 nav {
@@ -116,13 +108,39 @@ nav {
     width: 100%;
 }
 
+/* ================= SEARCH ================= */
+
 .nav-search {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     flex: 1;
+    gap: 12px;          /* 🔍 ↔ input */
+    margin-right: 18px; /* space before 👤 */
 }
 
+.search-icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.search-input {
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    width: 200px;
+    font-size: 14px;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #050f16;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    width: 220px;
+}
+
+/* Old search-container styles left untouched */
 .search-container {
     position: relative;
     margin-right: 20px;
@@ -143,6 +161,15 @@ nav {
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
     width: 220px;
 }
+
+/* ================= ACCOUNT ================= */
+
+.account-icon {
+    margin-left: 18px;
+}
+
+/* ================= BASKET ================= */
+
 .basket {
     position: relative;
     font-size: 22px;
@@ -150,14 +177,13 @@ nav {
     transition: color 0.3s;
 }
 
-
 .basket img {
     width: 50px;
     height: 50px;
     background: transparent;
     border-radius: 100%;
 }
-    
+
 .light-dark-mode img {
     height: 15px;
     width: 15px;
@@ -190,7 +216,6 @@ nav {
     transform: scale(110%);
     transition: transform 0.25s;
 }
-
 
 @media (max-width: 900px) {
     .nav-links a {

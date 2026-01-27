@@ -12,6 +12,8 @@ function Header() {
     const [mode, setMode] = useState("light");
     const [zoom, setZoom] = useState(1);
     const [query, setQuery] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -61,15 +63,23 @@ function Header() {
                         
 
                         <div className="nav-search">
-                            <div className="search-container">
-                                <input
-                                    type="text"
-                                    placeholder="Search..."
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                    onKeyDown={handleSearchKeyPress}
-                                />
-                            </div>
+                                <i className="fa-solid fa-magnifying-glass search-icon"
+                                 onClick={() => setShowSearch(prev => !prev)}
+                             ></i>
+
+                         {showSearch && (
+                            <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            onKeyDown={handleSearchKeyPress}
+                            autoFocus
+                              />
+                            )}
+                           </div>
+
 
                             <div className="account-icon">
                             <i className="fa-regular fa-user"></i>
@@ -80,7 +90,7 @@ function Header() {
                                     <img src={basket} alt="Shopping Basket" />
                                 </div>
                             </Link>
-                        </div>
+                        
 
                         <div className="light-dark-mode" onClick={ChangeMode}>
                             <img src={mode === "light" ? sun : moon} alt="Change mode" />
