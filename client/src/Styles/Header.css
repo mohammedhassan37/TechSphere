@@ -318,3 +318,43 @@ nav {
 .account-menu a:hover {
   background-color: rgba(108, 133, 245, 0.1);
 }
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Icon always visible */
+.search-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Input hidden by default */
+.search-input {
+  opacity: 0;
+  width: 0;
+  padding: 0;
+  margin-left: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+  pointer-events: none; /* prevents accidental hover loss */
+}
+
+/* Show input on hover OR focus */
+.search-wrapper:hover .search-input,
+.search-input:focus {
+  opacity: 1;
+  width: 200px;
+  padding: 8px 14px;
+  pointer-events: auto;
+}
+
+/* Optional focus styling */
+.search-input:focus {
+  border-color: #050f16;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}

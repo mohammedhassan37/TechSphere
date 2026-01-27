@@ -62,23 +62,19 @@ function Header() {
 
                         
 
-                        <div className="nav-search">
-                                <i className="fa-solid fa-magnifying-glass search-icon"
-                                 onClick={() => setShowSearch(prev => !prev)}
-                             ></i>
+                        <div className="search-wrapper">
+                         <i className="fa-solid fa-magnifying-glass search icon"></i>
 
-                         {showSearch && (
                             <input
-                            type="text"
-                            className="search-input"
-                            placeholder="Search TechSphere..."
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            onKeyDown={handleSearchKeyPress}
-                            autoFocus
-                              />
-                            )}
-                           </div>
+                                type="text"
+                                className="search-input"
+                                placeholder="Search TechSphere...."
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                onKeyDown={handleSearchKeyPress}
+                            />
+                            </div>
+
 
 
                            <div className="account-dropdown">
