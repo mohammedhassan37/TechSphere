@@ -72,7 +72,7 @@ function Header() {
                             </div>
 
                             <div className="account-icon">
-                            <i className="fa-solid fa-user"></i>
+                            <i className="fa-regular fa-user"></i>
                         </div>
 
                             <Link to="/Basket">
