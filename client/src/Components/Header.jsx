@@ -63,7 +63,7 @@ function Header() {
                         
 
                         <div className="search-wrapper">
-                         <i className="fa-solid fa-magnifying-glass search icon"></i>
+                            <i className="fa-solid fa-magnifying-glass search icon"></i>
 
                             <input
                                 type="text"
@@ -77,13 +77,13 @@ function Header() {
 
 
 
-                           <div className="account-dropdown">
-                              <i className="fa-regular fa-user"></i>
+                            <div className="account-dropdown">
+                                <i className="fa-regular fa-user"></i>
 
-                              <div className="account-menu">
-                              <Link to="/registration">Register</Link>
+                                <div className="account-menu">
+                                <Link to="/registration">Register</Link>
                             </div>
-                           </div>
+                            </div>
 
 
                             <Link to="/Basket">
