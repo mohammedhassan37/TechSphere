@@ -78,7 +78,7 @@ function Header() {
 
 
                            <div className="account-dropdown">
-                              <i className="fa-regular fa-user"></i>
+                              <i className="fa-solid fa-user"></i>
 
                               <div className="account-menu">
                               <Link to="/registration">Register</Link>
@@ -86,31 +86,35 @@ function Header() {
                            </div>
 
 
-                            <Link to="/Basket">
-                                <div className="basket">
-                                    <img src={basket} alt="Shopping Basket" />
-                                </div>
+                            <Link to="/Basket" className="basket">
+                                    <i className ="fa-solid fa-cart-shopping"></i>
                             </Link>
                         
 
-                        <div className="light-dark-mode" onClick={ChangeMode}>
-                            <img src={mode === "light" ? sun : moon} alt="Change mode" />
-                        </div>
+                                <div className="light-dark-mode" onClick={ChangeMode}>
+                                {mode === "light" ? (
+                                    <i className="fa-solid fa-sun"></i>
+                                    
+                                ) : (
+                                    <i className="fa-solid fa-moon"></i>
+                                )}
+                                </div>
 
-                        <div className="zoom-options">
-                            <img
-                                className="zoom-option"
-                                src={zoomOut}
-                                onClick={() => setZoom(zoom - 0.1)}
-                                alt="Zoom out"
-                            />
-                            <img
-                                className="zoom-option"
-                                src={zoomIn}
-                                onClick={() => setZoom(zoom + 0.1)}
-                                alt="Zoom in"
-                            />
-                        </div>
+
+                                 <div className="zoom-options">
+                                <i
+                                    className="fa-solid fa-magnifying-glass-minus zoom-option"
+                                    onClick={() => setZoom(zoom - 0.1)}
+                                    title="Zoom out"
+                                ></i>
+
+                                <i
+                                    className="fa-solid fa-magnifying-glass-plus zoom-option"
+                                    onClick={() => setZoom(zoom + 0.1)}
+                                    title="Zoom in"
+                                ></i>
+                                </div>
+
                     </nav>
                 </header>
             </div>

@@ -168,35 +168,6 @@ nav {
 }
 
 
-
-.basket {
-    position: relative;
-    font-size: 22px;
-    color: #2c3e50;
-    transition: color 0.3s;
-}
-
-.basket img {
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 100%;
-}
-
-.light-dark-mode img {
-    height: 15px;
-    width: 15px;
-    margin-left: 5px;
-    cursor: pointer;
-}
-
-.zoom-options img{
-    margin-left: 20px; 
-    margin-bottom: 10px;   
-    vertical-align: middle;
-    cursor: pointer;
-}
-
 .light-dark-mode:active {
     transform: scale(120%);
 }
@@ -279,16 +250,16 @@ nav {
   cursor: pointer;
 }
 
-/* Show menu when hovering anywhere over icon OR menu */
+
 .account-dropdown:hover .account-menu {
   display: flex;
 }
 
 .account-menu {
   position: absolute;
-  top: 100%;              /* sits directly under icon */
+  top: 100%;              
   right: 0;
-  margin-top: 10px;       /* visual gap WITHOUT breaking hover */
+  margin-top: 10px;       
   background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -298,7 +269,7 @@ nav {
   z-index: 1000;
 }
 
-/* Invisible hover bridge (THIS is the magic) */
+
 .account-menu::before {
   content: "";
   position: absolute;
@@ -324,13 +295,13 @@ nav {
   align-items: center;
 }
 
-/* Icon always visible */
+
 .search-icon {
   font-size: 20px;
   cursor: pointer;
 }
 
-/* Input hidden by default */
+
 .search-input {
   opacity: 0;
   width: 0;
@@ -341,10 +312,10 @@ nav {
   font-size: 14px;
   outline: none;
   transition: all 0.25s ease;
-  pointer-events: none; /* prevents accidental hover loss */
+  pointer-events: none; 
 }
 
-/* Show input on hover OR focus */
+
 .search-wrapper:hover .search-input,
 .search-input:focus {
   opacity: 1;
@@ -353,8 +324,39 @@ nav {
   pointer-events: auto;
 }
 
-/* Optional focus styling */
+
 .search-input:focus {
   border-color: #050f16;
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
+
+.basket i {
+  font-size: var(--nav-icon-size); 
+  color: var(--text-color);
+}
+.light-dark-mode i {
+  font-size: var(--nav-icon-size);
+  cursor: pointer;
+  color: var(--text-color);
+}
+.zoom-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.zoom-option {
+  font-size: var(--nav-icon-size);
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.nav-search,
+.account-dropdown,
+.basket,
+.light-dark-mode,
+.zoom-options {
+  margin-left: 14px; 
+}
+
+
