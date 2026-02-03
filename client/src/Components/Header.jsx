@@ -6,6 +6,7 @@ import sun from '../assets/sun.svg';
 import moon from '../assets/moon.svg';
 import zoomOut from '../assets/zoom-out.svg';
 import zoomIn from '../assets/zoom-in.svg';
+import logodarkmode from '../assets/logodarkmode.png';
 import { useState, useEffect } from 'react';
 
 function Header() {
@@ -40,15 +41,13 @@ function Header() {
             <div className="nav-container">
                 <header>
                     <nav>
-                        <Link to="/" className="logo">
-                            <div>
-                                <img
-                                    src={logo}
-                                    alt="logo"
-                                    style={{ height: "70px", width: "70px", cursor: "pointer" }}
-                                />
-                            </div>
-                        </Link>
+                            <Link to="/" className="logo" onClick={ChangeMode}>
+                            <img
+                                src={mode === "light" ? logo : logodarkmode}
+                                alt="logo"
+                                style={{ height: "40px", width: "40px", cursor: "pointer" }}
+                            />
+                            </Link>
 
                         <div className="nav-links">
                             <Link to="/phone" className="nav-link">Phones</Link>
