@@ -19,7 +19,7 @@
 }
 
 .why-card {
-  background: #ffffff;
+  background: var(--background-color);
   border-radius: 12px;
   padding: 20px 25px;
   width: 180px;

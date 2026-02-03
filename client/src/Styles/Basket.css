@@ -2,7 +2,7 @@
 .basket_page {
     max-width: 900px;
     margin: 40px auto;
-    background: #ffffff;
+    background: var(--background-color);
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
@@ -13,12 +13,16 @@
     text-align: center;
     font-size: 30px;
     font-weight: 600;
-    color: #000000;
+    /* color: #000000; */
+    color: var(--text-color);
+
     margin-bottom: 25px;
 }
 
 .basket_page p {
-    color: #000000;
+    /* color: #000000; */
+    color: var(--text-color);
+
 }
 
 /* Basket Items Container */
@@ -145,7 +149,7 @@
 
 .checkoutPage {
     width: 350px;
-    background: #ffffff;
+    background: var(--background-color);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
