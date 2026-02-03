@@ -155,7 +155,6 @@ nav {
 }
 
 
-
 .account-icon {
     margin-left: 18px;
 }
@@ -308,7 +307,6 @@ nav {
   pointer-events: none; 
 }
 
-
 .search-wrapper:hover .search-input,
 .search-input:focus {
   opacity: 1;
@@ -316,7 +314,6 @@ nav {
   padding: 8px 14px;
   pointer-events: auto;
 }
-
 
 .search-input:focus {
   border-color: #050f16;
