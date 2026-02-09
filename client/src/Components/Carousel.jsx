@@ -47,16 +47,14 @@ function Carousel() {
 
   return (
     <div className="main-container">
-    
       <div className="content-wrapper">
         <div className= "information-container">
-        <h1>Welcome to TechSphere</h1>
-        <p>Your one-stop shop for the latest in technology.</p>
+          <h1>Welcome to TechSphere</h1>
+          <p>???</p>
       </div>
       <div className="slider-container">
 
 <img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
-
 
     <div className="slide">
       <img src={lineup} alt = "iphone17lineup" className='lineup-image' />
@@ -75,8 +73,8 @@ function Carousel() {
         <div className='slide-text'>iPhone 17 Air</div>
       </div>
     </div>
-    </div>
-    </div>
+  </div>
+</div>
   );
 }
 
