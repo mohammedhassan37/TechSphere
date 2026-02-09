@@ -7,10 +7,6 @@ import appleLogo from '../assets/apple-logo.png';
 import lineup from '../assets/17lineup.png';
 
 
-
-
-
-
 function Carousel() {
   useEffect(() => {
     let slideIndex = 0;
@@ -50,7 +46,8 @@ function Carousel() {
       <div className="content-wrapper">
         <div className= "information-container">
           <h1>Welcome to TechSphere</h1>
-          <p>???</p>
+          <p>Discover the latest in Apple technology and innovation.</p>
+          
       </div>
       <div className="slider-container">
 
