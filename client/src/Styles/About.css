@@ -30,16 +30,15 @@
 
 .about-content{max-width:1100px;margin:36px auto;padding:0 18px 80px}
 .about-section{margin:36px 0}
-.about-section h2{font-size:1.4rem;margin-bottom:10px}
+.about-section h2{font-size:1.4rem;margin-bottom:10px;color: var(--text-color);}
 .about-section p{color:var(--muted);line-height:1.6}
 
 .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-.value-card{background:var(--card);padding:18px;border-radius:8px;box-shadow:0 6px 18px rgba(20,20,40,0.06)}
-.value-card h3{margin:0 0 8px}
+.value-card{background: var(--background-color);padding:18px;border-radius:8px;box-shadow:0 6px 18px rgba(20,20,40,0.06)}
+.value-card h3{margin:0 0 8px;color: var(--text-color);}
 
 
-
-.about-contact-cta{background:linear-gradient(180deg,#fafbff 0%,#fff 100%);padding:28px;border-radius:10px;text-align:center}
+.about-contact-cta{background:var(--background-color);padding:28px;border-radius:10px;text-align:center}
 
 @media (max-width:900px){
     .values-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
