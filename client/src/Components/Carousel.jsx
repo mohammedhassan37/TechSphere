@@ -46,6 +46,7 @@ function Carousel() {
   }, []);
 
   return (
+    <div className="main-container">
     <div className="slider-container">
 
 <img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
@@ -67,6 +68,7 @@ function Carousel() {
         <img src={iphone17Air} alt="Iphone 17 Air" />
         <div className='slide-text'>iPhone 17 Air</div>
       </div>
+    </div>
     </div>
   );
 }
