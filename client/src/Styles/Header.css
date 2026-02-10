@@ -2,6 +2,11 @@
     --background-color: #ffffff;
     --text-color: #262525;
     --nav-links-colour: #2c3e50;
+
+    --footer-color: #f2f2f2;
+    --footer-text-color: #444;
+
+
 }
 
 *{
@@ -27,6 +32,8 @@ body.dark {
     --background-color: #1e1e1e;
     --text-color: #f1f1f1;
     --nav-links-colour: #f1f1f1;
+    --footer-color: #262222;
+    --footer-text-color: #908e8e;
 }
 
 
