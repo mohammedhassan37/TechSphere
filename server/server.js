@@ -7,7 +7,7 @@ import pkg from 'pg';
 import cookieParser from 'cookie-parser';
 import path from "path";
 import { fileURLToPath } from "url";
-
+import nodemailer from "nodemailer";
 
 dotenv.config();
 const { Pool } = pkg;
@@ -34,6 +34,38 @@ app.use(cors({
     origin:allowedOrigins,
     credentials: true
 }));
+
+
+async function sendEmail() {
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: "@gmail.com",
+            pass: ""
+        }
+    });
+
+    await transporter.sendMail({
+        from: "@gmail.com",
+        to: "@gmail.com",
+        subject: "testing koding 101 email",
+        text: "body of the text"
+    });
+
+    return { message: "Email sent successfully." };
+}
+
+app.post('/emailtest',async (req,res) =>{
+   try{
+    const respone = await sendEmail();
+    res.send(respone.message);
+   }catch(err){
+    res.status(500).send(err.message);
+   }
+})
+
+
+
 
 //SIGNUP
 app.post('/signup', async (req, res) => {

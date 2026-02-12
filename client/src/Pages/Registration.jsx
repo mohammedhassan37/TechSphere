@@ -23,6 +23,7 @@ function Registration() {
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email, password, confirmPassword }),
       });
 
@@ -41,7 +42,24 @@ function Registration() {
     }
   };
 
+const sendEmail = async () => {
+  try {
+    
+    
+    const res = await fetch("http://localhost:5000/emailtest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include" 
+      
+    });
 
+    const data = await res.text();
+    console.log(data);
+  } catch (err) {
+    console.error("Email error:", err);
+  }
+  
+};
 
   return (
     <>
@@ -110,7 +128,9 @@ function Registration() {
               </div>
             </form>
               <p>{message}</p>
-
+                <button onClick={sendEmail}>
+  Send email
+</button>
           </div>
         </div>
       </div>
