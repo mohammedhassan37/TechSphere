@@ -46,10 +46,11 @@ function Carousel() {
       <div className="content-wrapper">
         <div className= "information-container">
           <h1>Welcome to TechSphere</h1>
-          <p>Discover the latest in Apple technology and innovation.</p>
+          <p>Discover the latest phones, tablets, headphones, TVs and smart watches. Shop with confidence with secure checkout and fast delivery.</p>
           
           <div className="button-container">
             <a className="explore-button" href="/Phone">Shop Now</a>
+            <a className="explore-button-2" href="#featured_product">View Featured Products</a>
 
           </div>
 

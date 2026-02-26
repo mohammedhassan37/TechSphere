@@ -28,7 +28,8 @@
 .information-container h1 {
   font-size: 35px;
   color: black;
-  text-decoration: underline;
+  text-align: center;
+
 }
 
 .button-container {
@@ -50,6 +51,15 @@
   background-color: #005bb5;
 }
 
+.explore-button-2 {
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  border: 2px solid #000000;
+}
 
 
 .slider-container {
