@@ -50,9 +50,13 @@ function Carousel() {
           
           <div className="button-container">
             <a className="explore-button" href="/Phone">Shop Now</a>
-            <a className="explore-button-2" href="#featured_product">View Featured Products</a>
-
+            <a className="explore-button-2" href="#featured_product">Featured Products</a>
           </div>
+          <div className="info-section">
+              <span>✔ Secure Payments</span>
+              <span>✔ Free UK Delivery</span>
+              <span>✔ Warranty Included</span>
+            </div>
 
       </div>
       <div className="slider-container">
