@@ -48,6 +48,11 @@ function Carousel() {
           <h1>Welcome to TechSphere</h1>
           <p>Discover the latest in Apple technology and innovation.</p>
           
+          <div className="button-container">
+            <a className="explore-button" href="/Phone">Shop Now</a>
+
+          </div>
+
       </div>
       <div className="slider-container">
 
