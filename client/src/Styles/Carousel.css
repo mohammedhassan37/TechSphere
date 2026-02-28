@@ -3,7 +3,7 @@
     height: 540px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #bdc6d4;
+    background-color: #c9d2e1;
 }
 
 .content-wrapper {
@@ -22,11 +22,10 @@
   overflow: hidden;
   position: relative;
   margin-right: 20px;
-  background-color: white;
+  
   padding: 40px; 
   
 }
-
 
 .information-container-elements h1 {
   border: 1px solid red;
@@ -51,7 +50,7 @@
 }
 
 .button-container {
-  margin-top: 20px;
+  margin-top: 140px;
   display: flex;
   gap: 12px;
 }
@@ -83,9 +82,9 @@
 .info-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 15px;
-  margin-top: 130px;
-  font-size: 14px;
+  gap: 9px 15px;
+  margin-top: 20px;
+  font-size: 15px;
   color: #222222;
   align-items: center;
 }
