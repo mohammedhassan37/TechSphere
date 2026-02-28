@@ -36,15 +36,18 @@
 #techsphere-welcome-parent{
   font-weight: bold;
   font-size: 32px;
-  border: 1px solid black;
-  margin-right: 20px;
-  width: fit-content;
+  margin-bottom: 13px;
 }
 
 #techSphere-welcome {
   color: #0070f3;
   font-family: 'Courier New', monospace;
   font-weight: bold;
+}
+
+#techSphere-main-informational-text{
+  font-size: 20px;
+  margin-bottom:20px;
 }
 
 .button-container {

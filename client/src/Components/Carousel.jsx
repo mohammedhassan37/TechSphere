@@ -47,7 +47,7 @@ function Carousel() {
         <div className= "information-container">
         <div className="information-container-elements">
            <p id='techsphere-welcome-parent'>Welcome to. <span id='techSphere-welcome'>TechSphere</span></p>
-          <p>Discover the latest phones, tablets, headphones, TVs and smart watches. Shop with confidence with secure checkout and fast delivery.</p>
+          <p id='techSphere-main-informational-text'>Discover the latest phones, tablets, headphones, TVs and smart watches. Shop with confidence with secure checkout and fast delivery.</p>
           
           <div className="button-container">
             <a className="explore-button" href="/Phone">Shop Now</a>
