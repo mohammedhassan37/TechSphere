@@ -45,7 +45,8 @@ function Carousel() {
     <div className="main-container">
       <div className="content-wrapper">
         <div className= "information-container">
-          <h1>Welcome to TechSphere</h1>
+        <div className="information-container-elements">
+           <p id='techsphere-welcome-parent'>Welcome to. <span id='techSphere-welcome'>TechSphere</span></p>
           <p>Discover the latest phones, tablets, headphones, TVs and smart watches. Shop with confidence with secure checkout and fast delivery.</p>
           
           <div className="button-container">
@@ -57,7 +58,7 @@ function Carousel() {
               <span>✔ Free UK Delivery</span>
               <span>✔ Warranty Included</span>
             </div>
-
+        </div>
       </div>
       <div className="slider-container">
 

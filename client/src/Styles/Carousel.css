@@ -24,12 +24,27 @@
   margin-right: 20px;
   background-color: white;
   padding: 40px; 
+  
 }
-.information-container h1 {
-  font-size: 45px;
-  color: black;
-  text-align: center;
 
+
+.information-container-elements h1 {
+  border: 1px solid red;
+  font-size: 26px;
+}
+
+#techsphere-welcome-parent{
+  font-weight: bold;
+  font-size: 32px;
+  border: 1px solid black;
+  margin-right: 20px;
+  width: fit-content;
+}
+
+#techSphere-welcome {
+  color: #0070f3;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 
 .button-container {
@@ -132,11 +147,8 @@
   position: absolute;
   top:250px;
   left: 25px;
-  
   z-index: 11;
- 
   z-index: 10;
-
   color: black;
   font-size: 28px;
   font-weight: bold;
