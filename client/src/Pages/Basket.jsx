@@ -111,7 +111,8 @@ function Basket() {
                                             onClick={() => moveToWishlist(index)}
                                             className="wishlist_button"
                                         >
-                                            Move to Wishlist
+                                            ❤️
+                                            {/* Move to Wishlist */}
                                         </button>
                                     </div>
                                 </div>
