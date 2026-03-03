@@ -12,6 +12,8 @@ import Basket from './Pages/Basket.jsx'
 import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
 import SearchPage from './Pages/SearchPage.jsx';
+import AccountDetails from './pages/AccountDetails.jsx'
+import PreviousOrders from './pages/PreviousOrders.jsx'
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
@@ -38,6 +40,8 @@ function App() {
   <Route path="/registration" element={<Registration />} />
   <Route path="/search" element={<SearchPage />} />
   <Route path="/product/:id" element={<ProductDetails />} />
+  <Route path="/accountdetails" element={<AccountDetails />} />
+  <Route path="/previousdetails" element={<PreviousOrders />} />
 </Routes>
 <Footer />
     </BrowserRouter>
