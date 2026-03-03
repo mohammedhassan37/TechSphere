@@ -6,12 +6,15 @@ import sun from '../assets/sun.svg';
 import moon from '../assets/moon.svg';
 import zoomOut from '../assets/zoom-out.svg';
 import zoomIn from '../assets/zoom-in.svg';
+import logodarkmode from '../assets/logodarkmode.png';
 import { useState, useEffect } from 'react';
 
 function Header() {
     const [mode, setMode] = useState("light");
     const [zoom, setZoom] = useState(1);
     const [query, setQuery] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -38,63 +41,79 @@ function Header() {
             <div className="nav-container">
                 <header>
                     <nav>
-                        <Link to="/" className="logo">
-                            <div>
-                                <img
-                                    src={logo}
-                                    alt="logo"
-                                    style={{ height: "70px", width: "70px", cursor: "pointer" }}
-                                />
-                            </div>
-                        </Link>
+                            <Link to="/" className="logo" onClick={ChangeMode}>
+                            <img
+                                src={mode === "light" ? logo : logodarkmode}
+                                alt="logo"
+                                style={{ height: "40px", width: "40px", cursor: "pointer" }}
+                            />
+                            </Link>
 
                         <div className="nav-links">
-                            <Link to="/phone" className="nav-link">Phone</Link>
-                            <Link to="/Tablets" className="nav-link">Tablet</Link>
+                            <Link to="/phone" className="nav-link">Phones</Link>
+                            <Link to="/Tablets" className="nav-link">Tablets</Link>
                             <Link to="/Headphones" className="nav-link">Headphones</Link>
-                            <Link to="/TV" className="nav-link">TV</Link>
-                            <Link to="/Smartwatch" className="nav-link">Smartwatch</Link>
+                            <Link to="/TV" className="nav-link">TVs</Link>
+                            <Link to="/Smartwatch" className="nav-link">Watches</Link>
                             <Link to="/About" className="nav-link">About</Link>
                             <Link to="/Contact" className="nav-link">Contact</Link>
-                            <Link to="/Registration" className="nav-link">Registration</Link>
                         </div>
 
-                        <div className="nav-search">
-                            <div className="search-container">
-                                <input
-                                    type="text"
-                                    placeholder="Search..."
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                    onKeyDown={handleSearchKeyPress}
-                                />
+                        
+
+                        <div className="search-wrapper">
+                         <i className="fa-solid fa-magnifying-glass search icon"></i>
+
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Search TechSphere...."
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                onKeyDown={handleSearchKeyPress}
+                            />
                             </div>
 
-                            <Link to="/Basket">
-                                <div className="basket">
-                                    <img src={basket} alt="Shopping Basket" />
-                                </div>
+
+
+                           <div className="account-dropdown">
+                              <i className="fa-solid fa-user"></i>
+
+                              <div className="account-menu">
+                              <Link to="/registration">Register</Link>
+                            </div>
+                           </div>
+
+
+                            <Link to="/Basket" className="basket">
+                                    <i className ="fa-solid fa-cart-shopping"></i>
                             </Link>
-                        </div>
+                        
 
-                        <div className="light-dark-mode" onClick={ChangeMode}>
-                            <img src={mode === "light" ? sun : moon} alt="Change mode" />
-                        </div>
+                                <div className="light-dark-mode" onClick={ChangeMode}>
+                                {mode === "light" ? (
+                                    <i className="fa-solid fa-sun"></i>
+                                    
+                                ) : (
+                                    <i className="fa-solid fa-moon"></i>
+                                )}
+                                </div>
 
-                        <div className="zoom-options">
-                            <img
-                                className="zoom-option"
-                                src={zoomOut}
-                                onClick={() => setZoom(zoom - 0.1)}
-                                alt="Zoom out"
-                            />
-                            <img
-                                className="zoom-option"
-                                src={zoomIn}
-                                onClick={() => setZoom(zoom + 0.1)}
-                                alt="Zoom in"
-                            />
-                        </div>
+
+                                 <div className="zoom-options">
+                                <i
+                                    className="fa-solid fa-magnifying-glass-minus zoom-option"
+                                    onClick={() => setZoom(zoom - 0.1)}
+                                    title="Zoom out"
+                                ></i>
+
+                                <i
+                                    className="fa-solid fa-magnifying-glass-plus zoom-option"
+                                    onClick={() => setZoom(zoom + 0.1)}
+                                    title="Zoom in"
+                                ></i>
+                                </div>
+
                     </nav>
                 </header>
             </div>

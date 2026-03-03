@@ -1,11 +1,102 @@
-.slider-container {
-  max-width: 1500px;
-  height: 650px;
-  margin: 0 auto 10px auto;
+.main-container {
+    max-width: 100%;
+    height: 540px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #c9d2e1;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; 
+    max-width: 100%;
+    margin: 0 auto;    
+}
+
+.information-container {
+  max-width: 500px;
+  height: 500px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: relative;
+  margin-right: 20px;
+  
+  padding: 40px; 
+  
+}
+
+.information-container-elements h1 {
+  border: 1px solid red;
+  font-size: 26px;
+}
+
+#techsphere-welcome-parent{
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 13px;
+}
+
+#techSphere-welcome {
+  color: #0070f3;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+#techSphere-main-informational-text{
+  font-size: 20px;
+  margin-bottom:20px;
+}
+
+.button-container {
+  margin-top: 140px;
+  display: flex;
+  gap: 12px;
+}
+
+.explore-button {
+  padding: 12px 24px;
+  background-color: #0070f3;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.explore-button:hover {
+  background-color: #005bb5;
+}
+
+.explore-button-2 {
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #0070f3;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  border: 2px solid #0070f3;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 15px;
+  margin-top: 20px;
+  font-size: 15px;
+  color: #222222;
+  align-items: center;
+}
+
+
+.slider-container {
+  max-width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background-color: white;
 }
 .carouselapplelogo {
   position: absolute;
@@ -58,11 +149,8 @@
   position: absolute;
   top:250px;
   left: 25px;
-  
   z-index: 11;
- 
   z-index: 10;
-
   color: black;
   font-size: 28px;
   font-weight: bold;
