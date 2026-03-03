@@ -9,6 +9,7 @@ import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
 import Basket from './Pages/Basket.jsx'
+import Checkout from "./Pages/Checkout.jsx";
 import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
 import SearchPage from './Pages/SearchPage.jsx';
@@ -37,6 +38,7 @@ function App() {
   <Route path="/tablets" element={<Tablets />} />
   <Route path="/tv" element={<TV />} />
   <Route path="/basket" element={<Basket />} />
+  <Route path="/checkout" element={<Checkout />} />
   <Route path="/registration" element={<Registration />} />
   <Route path="/search" element={<SearchPage />} />
   <Route path="/product/:id" element={<ProductDetails />} />
