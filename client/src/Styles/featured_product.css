@@ -51,7 +51,6 @@ h1 {
     color: darkblue;
 }
 
-/* Checkout items */
 .checkout_items {
     margin-bottom: 20px;
 }
@@ -73,7 +72,6 @@ h1 {
     color: #333;
 }
 
-/* Checkout form */
 .checkout_form {
     margin-top: 25px;
     padding: 20px;
@@ -89,7 +87,7 @@ h1 {
     color: #222;
 }
 
-/* Input groups */
+
 .form_group {
     display: flex;
     flex-direction: column;
@@ -107,8 +105,8 @@ h1 {
     border-radius: 8px;
     font-size: 15px;
     transition: 0.2s ease;
-    width: 100%;              /* Fix width */
-    box-sizing: border-box;   /* Prevent overflow */
+    width: 100%;
+    box-sizing: border-box; 
 }
 
 .form_group input:focus {
@@ -116,8 +114,6 @@ h1 {
     border-color: #4CAF50;
     box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
-
-/* Row layout (Expiry + CVV) */
 .form_row {
     display: flex;
     gap: 15px;
@@ -125,15 +121,13 @@ h1 {
 }
 
 .form_row .form_group {
-    flex: 1; /* Both inputs same size */
+    flex: 1;
 }
 
-/* Optional: make CVV slightly smaller */
 .form_group.cvv {
     flex: 0.6;
 }
 
-/* Button */
 .checkout_button {
     width: 100%;
     padding: 14px;
