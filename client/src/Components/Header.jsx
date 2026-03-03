@@ -41,7 +41,7 @@ function Header() {
             <div className="nav-container">
                 <header>
                     <nav>
-                            <Link to="/" className="logo" onClick={ChangeMode}>
+                            <Link to="/" className="logo">
                             <img
                                 src={mode === "light" ? logo : logodarkmode}
                                 alt="logo"
@@ -81,6 +81,8 @@ function Header() {
 
                               <div className="account-menu">
                               <Link to="/registration">Register</Link>
+                              <Link to="/">Previous Orders</Link>
+                              <Link to="/">Account Details</Link>
                             </div>
                            </div>
 
