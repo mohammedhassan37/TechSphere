@@ -41,7 +41,7 @@ function Header() {
             <div className="nav-container">
                 <header>
                     <nav>
-                            <Link to="/" className="logo" onClick={ChangeMode}>
+                            <Link to="/" className="logo">
                             <img
                                 src={mode === "light" ? logo : logodarkmode}
                                 alt="logo"
