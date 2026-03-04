@@ -1,0 +1,28 @@
+/* Checkout Item With Image */
+.checkout_item {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* spacing between image and details */
+    padding: 6px 0;
+}
+
+.checkout_item_image {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.checkout_item_details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+.checkout_item img.checkout_item_image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
