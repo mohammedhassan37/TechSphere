@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import tablet_1 from "../assets/tablet.webp";
 import honour from "../assets/honour.webp";
@@ -122,7 +123,9 @@ const tabletProducts = [
 function Tablets() {
   const navigate = useNavigate();
 
-  //Add tp basket function
+  const [sortOption, setSortOption] = useState("");
+
+  //Add to basket function
   const addToBasket = (product) => {
     let basket = JSON.parse(localStorage.getItem("basket")) || [];
 
@@ -144,14 +147,45 @@ function Tablets() {
   };
 
 
+  // THE SORT SECTION
+  const sortedTablets = [...tabletProducts].sort((a, b) => {
+  if (sortOption === "low-high") {
+    return a.price - b.price;
+  }
+  if (sortOption === "high-low") {
+    return b.price - a.price;
+  }
+  if (sortOption === "a-z") {
+    return a.name.localeCompare(b.name);
+  }
+  if (sortOption === "z-a") {
+    return b.name.localeCompare(a.name);
+  }
+  return 0;
+});
 
 
   return (
     <>
       <h1>Tablets</h1>
 
+{/* THIS IS FOR THE SORTING */}
+  <div className="sort-container">
+    <label>Sort By: </label>
+    <select
+      value={sortOption}
+      onChange={(e) => setSortOption(e.target.value)}
+    >
+      <option value="">Default</option>
+      <option value="low-high">Price: Low to High</option>
+      <option value="high-low">Price: High to Low</option>
+      <option value="a-z">Name: A to Z</option>
+      <option value="z-a">Name: Z to A</option>
+    </select>
+  </div>
+
       <div className="product_container">
-        {tabletProducts.map((product) => (
+        {sortedTablets.map((product) => (
           <div
             key={product.id}
             className="product_cards"

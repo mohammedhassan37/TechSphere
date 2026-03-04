@@ -173,6 +173,7 @@ function Phone() {
     <>
       <h1>Phones</h1>
 
+  {/* THIS IS FOR THE SORTING */}
       <div className="sort-container">
   <label>Sort By: </label>
   <select
