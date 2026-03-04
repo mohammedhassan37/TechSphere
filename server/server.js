@@ -221,7 +221,53 @@ app.get("/search", async (req, res) => {
 });
 
 
+// Previous Orders (logged-in user)
+app.get("/my-orders", auth, async (req, res) => {
+  try {
+    const customerId = req.user.customer_id;
 
+
+    const ordersRes = await pool.query(
+      `SELECT order_id, total_amount, status, created_at
+       FROM orders
+       WHERE customer_id = $1
+       ORDER BY created_at DESC`,
+      [customerId]
+    );
+
+    const orders = ordersRes.rows;
+
+    if (orders.length === 0) {
+      return res.json({ success: true, orders: [] });
+    }
+
+    const orderIds = orders.map(o => o.order_id);
+
+    const itemsRes = await pool.query(
+      `SELECT order_id, product_name, unit_price, quantity
+       FROM order_items
+       WHERE order_id = ANY($1::int[])
+       ORDER BY order_id DESC`,
+      [orderIds]
+    );
+
+    const itemsByOrder = {};
+    for (const item of itemsRes.rows) {
+      (itemsByOrder[item.order_id] ||= []).push(item);
+    }
+
+    return res.json({
+      success: true,
+      orders: orders.map(o => ({
+        ...o,
+        items: itemsByOrder[o.order_id] || []
+      }))
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
