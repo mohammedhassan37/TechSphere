@@ -15,13 +15,13 @@ import Footer from "./Components/Footer.jsx";
 import SearchPage from './Pages/SearchPage.jsx';
 import AccountDetails from './pages/AccountDetails.jsx'
 import PreviousOrders from './pages/PreviousOrders.jsx'
-
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
-
-
 import ProductDetails from "./Pages/ProductPage.jsx";
+import Admin from "./Pages/Admin.jsx";
+import AdminLogin from "./Pages/AdminLogin.jsx";
+
 
 function App() {
   return (
@@ -44,6 +44,8 @@ function App() {
   <Route path="/product/:id" element={<ProductDetails />} />
   <Route path="/accountdetails" element={<AccountDetails />} />
   <Route path="/previousdetails" element={<PreviousOrders />} />
+  <Route path="/admin" element={<Admin />} />
+  <Route path="/admin" element={<Admin />} />
 </Routes>
 <Footer />
     </BrowserRouter>
