@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import HUAWEI from "../assets/HUAWEI.webp";
 import apple_watch from "../assets/apple_watch.webp";
@@ -122,6 +123,8 @@ const smartwatchProducts = [
 function Smartwatch() {
   const navigate = useNavigate();
 
+  const [sortOption, setSortOption] = useState("default");
+
   const addToBasket = (product) => {
     let basket = JSON.parse(localStorage.getItem("basket")) || [];
     const existing = basket.find((item) => item.name === product.name);
@@ -140,11 +143,41 @@ function Smartwatch() {
     navigate(`/product/${product.id}`, { state: product });
   };
 
+  // THE SORT SECTION
+  const sortedProducts = [...smartwatchProducts].sort((a, b) => {
+    if (sortOption === "low-high") { 
+      return a.price - b.price; }
+    if (sortOption === "high-low") {
+      return b.price - a.price; }
+    if (sortOption === "a-z") { 
+      return a.name.localeCompare(b.name); }
+    if (sortOption === "z-a") {
+      return b.name.localeCompare(a.name); }
+    return 0;
+  });
+
+
   return (
     <>
       <h1>Smartwatches</h1>
+
+<div className="sort-container">
+  <label>Sort By: </label>
+
+    <select
+      value={sortOption}
+      onChange={(e) => setSortOption(e.target.value)}
+    >
+      <option value="default">Default</option>
+      <option value="low-high">Price: Low to High</option>
+      <option value="high-low">Price: High to Low</option>
+      <option value="a-z">Name: A to Z</option>
+      <option value="z-a">Name: Z to A</option>
+    </select>
+  </div>
+
       <div className="product_container">
-        {smartwatchProducts.map((product) => (
+        {sortedProducts.map((product) => (
           <div
             key={product.id}
             className="product_cards"
