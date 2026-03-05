@@ -148,7 +148,7 @@ function Tablets() {
 
 
   // THE SORT SECTION
-  const sortedTablets = [...tabletProducts].sort((a, b) => {
+  const sortedProducts = [...tabletProducts].sort((a, b) => {
   if (sortOption === "low-high") {
     return a.price - b.price;
   }
@@ -185,7 +185,7 @@ function Tablets() {
   </div>
 
       <div className="product_container">
-        {sortedTablets.map((product) => (
+        {sortedProducts.map((product) => (
           <div
             key={product.id}
             className="product_cards"
