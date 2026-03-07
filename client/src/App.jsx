@@ -45,8 +45,10 @@ function App() {
   <Route path="/accountdetails" element={<AccountDetails />} />
   <Route path="/previousdetails" element={<PreviousOrders />} />
   <Route path="/admin" element={<Admin />} />
-  <Route path="/admin" element={<Admin />} />
-  <Route path="/admin/products" element={<h1>Manage Products</h1>} />
+  <Route path="/admin/total-products" element={<h1>Total Products</h1>} />
+  <Route path="/admin/total-customers" element={<h1>Total Customers</h1>} />
+  <Route path="/admin/pending-orders" element={<h1>Pending Orders</h1>} />
+  <Route path="/admin/total-revenue" element={<h1>Total Revenue</h1>} />
 </Routes>
 <Footer />
     </BrowserRouter>

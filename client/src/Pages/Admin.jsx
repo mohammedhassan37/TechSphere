@@ -5,10 +5,10 @@ function Admin() {
     const navigate = useNavigate();
 
     const stats = [
-    { label: "Total Products", value: 67, icon: "📦", path: "/admin/products" },
-    { label: "Total Customers", value: 69, icon: "👥" },
-    { label: "Pending Orders", value: 9, icon: "🛒" },
-    { label: "Total Revenue", value: "£6769.69", icon: "📈" }
+    { label: "Total Products", value: 67, icon: "📦", path: "/admin/total-products" },
+    { label: "Total Customers", value: 69, icon: "👥", path: "/admin/total-customers" },
+    { label: "Pending Orders", value: 9, icon: "🛒", path: "/admin/pending-orders" },
+    { label: "Total Revenue", value: "£6769.69", icon: "📈", path: "/admin/total-revenue" }
   ];
 
   return (
