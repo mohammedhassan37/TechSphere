@@ -13,8 +13,12 @@ import Checkout from "./Pages/Checkout.jsx";
 import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
 import SearchPage from './Pages/SearchPage.jsx';
+<<<<<<< Updated upstream
 import AccountDetails from './pages/AccountDetails.jsx'
 import PreviousOrders from './Pages/PreviousOrders.jsx'
+=======
+import AccountDetails from './Pages/AccountDetails.jsx'
+>>>>>>> Stashed changes
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
