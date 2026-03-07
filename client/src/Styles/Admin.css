@@ -51,16 +51,17 @@
 
 .inventory-warnings {
   margin-top: 30px;
-  background: #fef9c3;
+  background: #fbf4a4;
   padding: 20px;
   border-radius: 15px;
-  border: 1px solid #facc15;
+  border: 1px solid #ffdd53;
 }
 
 .clickable-card {
   cursor: pointer;
 }
-.clickable-card:hover {
-  background: rgb(68, 146, 240, 0.9);
-  transition: background 0.3s ease;
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
