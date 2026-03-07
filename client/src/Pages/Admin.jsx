@@ -1,9 +1,11 @@
-
+import { useNavigate } from "react-router-dom";
 import "../Styles/Admin.css";
 
 function Admin() {
+    const navigate = useNavigate();
+
     const stats = [
-    { label: "Total Products", value: 67, icon: "📦" },
+    { label: "Total Products", value: 67, icon: "📦", path: "/admin/products" },
     { label: "Total Customers", value: 69, icon: "👥" },
     { label: "Pending Orders", value: 9, icon: "🛒" },
     { label: "Total Revenue", value: "£6769.69", icon: "📈" }
@@ -19,7 +21,8 @@ function Admin() {
 
       <div className="dashboard-statistics">
         {stats.map((stat) => (
-          <div className="dashboard-card" key={stat.label}>
+          <div className="dashboard-card clickable" key={stat.label}
+            onClick={() => navigate(stat.path)}>
             <div>
               <p className="card-info">{stat.label}</p>
               <h2 className="card-value">{stat.value}</h2>

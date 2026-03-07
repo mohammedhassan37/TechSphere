@@ -57,4 +57,10 @@
   border: 1px solid #facc15;
 }
 
-
+.clickable-card {
+  cursor: pointer;
+}
+.clickable-card:hover {
+  background: rgb(68, 146, 240, 0.9);
+  transition: background 0.3s ease;
+}

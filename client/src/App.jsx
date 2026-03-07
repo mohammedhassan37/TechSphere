@@ -46,6 +46,7 @@ function App() {
   <Route path="/previousdetails" element={<PreviousOrders />} />
   <Route path="/admin" element={<Admin />} />
   <Route path="/admin" element={<Admin />} />
+  <Route path="/admin/products" element={<h1>Manage Products</h1>} />
 </Routes>
 <Footer />
     </BrowserRouter>
