@@ -1,0 +1,76 @@
+.admin-products {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px;
+}
+
+.admin-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.admin-products-header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.admin-products-info {
+  color: #008cff;
+  margin-bottom: 25px;
+}
+
+.add-product {
+  background: #008cff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-product:hover {
+  background: #222;
+}
+
+.products-container {
+  background: rgb(211, 224, 228);
+  border: 1px solid rgb(211, 224, 228);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #333;
+}
+
+.products-table th {
+  background: #f5f5f5;
+  text-align: left;
+  padding: 14px;
+}
+
+.products-table td {
+  padding: 14px;
+  border-top: 1px solid #eee;
+}
+
+.edit-button,.delete-button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background: #ffffff;
+}
+
+.delete-button {
+  background: #ff0000;
+  color: #ffffff;
+}

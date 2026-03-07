@@ -20,7 +20,9 @@ import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
 import ProductDetails from "./Pages/ProductPage.jsx";
 import Admin from "./Pages/Admin.jsx";
+import AdminProducts from "./Pages/AdminProducts.jsx";
 import AdminLogin from "./Pages/AdminLogin.jsx";
+
 
 
 function App() {
@@ -45,7 +47,7 @@ function App() {
   <Route path="/accountdetails" element={<AccountDetails />} />
   <Route path="/previousdetails" element={<PreviousOrders />} />
   <Route path="/admin" element={<Admin />} />
-  <Route path="/admin/total-products" element={<h1>Total Products</h1>} />
+  <Route path="/admin/total-products" element={<AdminProducts />} />
   <Route path="/admin/total-customers" element={<h1>Total Customers</h1>} />
   <Route path="/admin/pending-orders" element={<h1>Pending Orders</h1>} />
   <Route path="/admin/total-revenue" element={<h1>Total Revenue</h1>} />
