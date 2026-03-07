@@ -5,7 +5,7 @@ function AdminProducts() {
     <div className="admin-products">
       <div className="admin-products-header">
         <h1>Manage Products</h1>
-        <button className="add-product">+ Add Product</button>
+        <button className="add-product"> + Add Product</button>
       </div>
 
       <p className="admin-products-info">
@@ -26,17 +26,48 @@ function AdminProducts() {
 
           <tbody>
             <tr>
-              <td>iPhone 15 Pro</td>
+              <td>iPhone 15 Pro Max</td>
               <td>Phone</td>
-              <td>£999</td>
-              <td>12</td>
+              <td>£1199.99</td>
+              <td>38</td>
               <td>
                 <button className="edit-button">Edit</button>
                 <button className="delete-button">Delete</button>
               </td>
             </tr>
 
-            
+            <tr>
+              <td>Samsung Galaxy S25</td>
+              <td>Phone</td>
+              <td>£999.99</td>
+              <td>35</td>
+              <td>
+                <button className="edit-button">Edit</button>
+                <button className="delete-button">Delete</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Apple AirPods Max</td>
+              <td>Headphones</td>
+              <td>£499</td>
+              <td>14</td>
+              <td>
+                <button className="edit-button">Edit</button>
+                <button className="delete-button">Delete</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>HUAWEI Watch Fit 3</td>
+              <td>Smartwatch</td>
+              <td>£139</td>
+              <td>9</td>
+              <td>
+                <button className="edit-button">Edit</button>
+                <button className="delete-button">Delete</button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
