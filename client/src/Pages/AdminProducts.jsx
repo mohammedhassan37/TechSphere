@@ -20,6 +20,7 @@ function AdminProducts() {
               <th>Category</th>
               <th>Price</th>
               <th>Stock</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -31,6 +32,7 @@ function AdminProducts() {
               <td>£1199.99</td>
               <td>38</td>
               <td>
+                <button className="edit-button">Update Stock</button>
                 <button className="edit-button">Edit</button>
                 <button className="delete-button">Delete</button>
               </td>
@@ -42,6 +44,7 @@ function AdminProducts() {
               <td>£999.99</td>
               <td>35</td>
               <td>
+                <button className="edit-button">Update Stock</button>
                 <button className="edit-button">Edit</button>
                 <button className="delete-button">Delete</button>
               </td>
@@ -53,6 +56,7 @@ function AdminProducts() {
               <td>£499</td>
               <td>14</td>
               <td>
+                <button className="edit-button">Update Stock</button>
                 <button className="edit-button">Edit</button>
                 <button className="delete-button">Delete</button>
               </td>
@@ -64,6 +68,7 @@ function AdminProducts() {
               <td>£139</td>
               <td>9</td>
               <td>
+                <button className="edit-button">Update Stock</button>
                 <button className="edit-button">Edit</button>
                 <button className="delete-button">Delete</button>
               </td>
