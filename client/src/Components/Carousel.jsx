@@ -7,10 +7,6 @@ import appleLogo from '../assets/apple-logo.png';
 import lineup from '../assets/17lineup.png';
 
 
-
-
-
-
 function Carousel() {
   useEffect(() => {
     let slideIndex = 0;
@@ -46,10 +42,27 @@ function Carousel() {
   }, []);
 
   return (
-    <div className="slider-container">
+    <div className="main-container">
+      <div className="content-wrapper">
+        <div className= "information-container">
+        <div className="information-container-elements">
+           <p id='techsphere-welcome-parent'>Welcome to. <span id='techSphere-welcome'>TechSphere</span></p>
+          <p id='techSphere-main-informational-text'>Discover the latest phones, tablets, headphones, TVs and smart watches. Shop with confidence with secure checkout and fast delivery.</p>
+          
+          <div className="button-container">
+            <a className="explore-button" href="/Phone">Shop Now</a>
+            <a className="explore-button-2" href="#featured_product">Featured Products</a>
+          </div>
+          <div className="info-section">
+              <span>✔ Secure Payments</span>
+              <span>✔ Free UK Delivery</span>
+              <span>✔ Warranty Included</span>
+            </div>
+        </div>
+      </div>
+      <div className="slider-container">
 
 <img src={appleLogo} alt="Apple Logo" className="carouselapplelogo" />
-
 
     <div className="slide">
       <img src={lineup} alt = "iphone17lineup" className='lineup-image' />
@@ -68,6 +81,8 @@ function Carousel() {
         <div className='slide-text'>iPhone 17 Air</div>
       </div>
     </div>
+  </div>
+</div>
   );
 }
 

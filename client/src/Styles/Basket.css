@@ -202,3 +202,88 @@
     cursor: pointer;
     border: none;
 }
+
+
+
+
+
+/* ------------------ WISHLIST SECTION -----------------------*/
+/* EDIT IT AS YOU SEE FIT  */
+
+.wishlist_section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #e5e5e5;
+}
+
+.wishlist_section h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Wishlist Item image */
+.wishlist_item {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #edeaea;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Buttons container under basket items */
+.basket_actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+/* Move to wishlist button */
+.wishlist_button {
+    background: #f0c040;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    transition: 0.4s;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.wishlist_button:hover {
+    background: #ddb233;
+}
+
+/* Move back to basket button */
+.move_back_button {
+    background: #4caf50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.move_back_button:hover {
+    background: #3e8e41;
+}
+
+
+/* Smaller images for wishlist items */
+/* Wishlist items were too big previously */
+.wishlist_item img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+

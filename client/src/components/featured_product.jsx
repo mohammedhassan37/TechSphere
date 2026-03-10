@@ -8,7 +8,7 @@ import tv from "../assets/tv.webp";
 function featured_product() {
     return (
         <>
-            <h1>Featured Products</h1>
+            <h1 id="featured_product">Featured Products</h1>
             <br/>
 
             <div class="product_container">
