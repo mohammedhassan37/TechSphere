@@ -21,6 +21,7 @@ import FP from './components/featured_product.jsx';
 import ProductDetails from "./Pages/ProductPage.jsx";
 import Admin from "./Pages/Admin.jsx";
 import AdminProducts from "./Pages/AdminProducts.jsx";
+import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminLogin from "./Pages/AdminLogin.jsx";
 
 
@@ -48,7 +49,7 @@ function App() {
   <Route path="/previousdetails" element={<PreviousOrders />} />
   <Route path="/admin" element={<Admin />} />
   <Route path="/admin/total-products" element={<AdminProducts />} />
-  <Route path="/admin/total-customers" element={<h1>Total Customers</h1>} />
+  <Route path="/admin/total-customers" element={<AdminCustomers />} />
   <Route path="/admin/pending-orders" element={<h1>Pending Orders</h1>} />
   <Route path="/admin/total-revenue" element={<h1>Total Revenue</h1>} />
 </Routes>
