@@ -1,23 +1,19 @@
 import "../Styles/AdminCustomers.css";
 
 function AdminCustomers() {
-
-
     return(
-    <div>
       <div className="admin-customers">
         <div className="admin-customers-header">
           <h1>Manage Customers</h1>
-          <button className="add-customer"> + Add Customer</button>
-        </div>
+          <button className="add-customer"> + Add customer</button> 
       </div>
       
       <p className="admin-customers-info">
-        View and manage all customers:
+        View and manage customers:
       </p>
 
-      <div>
-        <table className="products-table">
+      <div className="customers-container">
+        <table className="customers-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -34,11 +30,22 @@ function AdminCustomers() {
             <tr>
               <td>testName</td>
               <td>test@test.com</td>
-              <td>07794892</td>
+              <td>07794892293</td>
               <td>Birmingham</td>
               <td>5</td>
-              <td>£1000</td>
-              <td>Actions</td>
+              <td>£999.99</td>
+              <td>
+                <button className="edit-button">Edit Customer</button>
+                <button className="delete-button">Delete Customer</button>
+              </td>
+            </tr>
+            <tr>
+              <td>testName</td>
+              <td>test@test.com</td>
+              <td>07754178357</td>
+              <td>London</td>
+              <td>2</td>
+              <td>£301.98</td>
               <td>
                 <button className="edit-button">Edit Customer</button>
                 <button className="delete-button">Delete Customer</button>
@@ -47,7 +54,6 @@ function AdminCustomers() {
           </tbody>
         </table>
       </div>
-
     </div>
 
 
