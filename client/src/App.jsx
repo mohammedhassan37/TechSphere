@@ -23,6 +23,7 @@ import Admin from "./Pages/Admin.jsx";
 import AdminProducts from "./Pages/AdminProducts.jsx";
 import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminLogin from "./Pages/AdminLogin.jsx";
+import AdminOrders from "./Pages/AdminOrders.jsx";
 
 
 
