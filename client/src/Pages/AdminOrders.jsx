@@ -9,6 +9,30 @@ function AdminOrders(){
       date: "Mar 5, 2026",
       status: "pending",
     },
+    {
+      id: "ORD-001",
+      customer: "John Smith",
+      items: "3 item(s)",
+      total: "$1199.99",
+      date: "Mar 5, 2026",
+      status: "processing",
+    },
+    {
+      id: "ORD-001",
+      customer: "John Smith",
+      items: "3 item(s)",
+      total: "$1199.99",
+      date: "Mar 5, 2026",
+      status: "delivered",
+    },
+    {
+      id: "ORD-001",
+      customer: "John Smith",
+      items: "3 item(s)",
+      total: "$1199.99",
+      date: "Mar 5, 2026",
+      status: "shipped",
+    },
     ];
 
     return(
@@ -66,8 +90,6 @@ function AdminOrders(){
           </tbody>
         </table>
       </div>
-
-  );
 
         </>
     )
