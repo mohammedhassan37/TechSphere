@@ -27,6 +27,7 @@ import AdminOrders from "./Pages/AdminOrders.jsx";
 
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -51,7 +52,7 @@ function App() {
   <Route path="/admin" element={<Admin />} />
   <Route path="/admin/total-products" element={<AdminProducts />} />
   <Route path="/admin/total-customers" element={<AdminCustomers />} />
-  <Route path="/admin/pending-orders" element={<h1>Pending Orders</h1>} />
+  <Route path="/admin/pending-orders" element={<AdminOrders />} />
   <Route path="/admin/total-revenue" element={<h1>Total Revenue</h1>} />
 </Routes>
 <Footer />
