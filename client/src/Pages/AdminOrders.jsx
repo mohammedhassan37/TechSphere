@@ -45,8 +45,8 @@ function AdminOrders(){
         <div className="orders-features">
           <input
             type="text"
-            placeholder="Search by order ID or customer..." className="search"
-          />
+            placeholder="Search by order ID or customer..." className="search"/>
+            
           <select className="order-filter">
             <option>All Orders</option>
             <option>Pending</option>

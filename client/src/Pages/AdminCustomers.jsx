@@ -11,6 +11,11 @@ function AdminCustomers() {
       <p className="admin-customers-info">
         View and manage customers:
       </p>
+          <div className="orders-features">
+          <input
+            type="text"
+            placeholder="Search by Customer Name or Email..." className="search"/>
+            </div>
 
       <div className="customers-container">
         <table className="customers-table">

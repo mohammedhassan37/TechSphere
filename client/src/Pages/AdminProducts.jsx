@@ -12,6 +12,19 @@ function AdminProducts() {
         View and manage all products in your store
       </p>
 
+      <div className="orders-features">
+          <input
+            type="text"
+            placeholder="Search by Product Name or Category..." className="search"/>
+            
+          <select className="order-filter">
+            <option>All Products</option>
+            <option>In Stock</option>
+            <option>Low Stock</option>
+            <option>Out of Stock</option>
+          </select>
+        </div>
+
       <div className="products-container">
         <table className="products-table">
           <thead>

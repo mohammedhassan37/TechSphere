@@ -70,6 +70,7 @@
 .order-table {
   width: 100%;
   border-collapse: collapse;
+  background: rgb(211, 224, 228);
 }
 
 .order-table th {
@@ -77,8 +78,9 @@
   font-weight: 600;
   padding: 15px 12px;
   border-bottom: 1px solid #dbe1ed;
-  color: #0d1629;
+  color: #333;
   font-size: 18px;
+  background: #f5f5f5;
 }
 
 .order-table td {
