@@ -1,4 +1,8 @@
 import "../Styles/AdminProducts.css";
+import iphone17ProMax from '../assets/iphone17promax.webp';
+import samsungGalaxy from "../assets/samsung galaxy.webp";
+import HUAWEI from "../assets/HUAWEI.webp";
+import airMax1 from '../assets/airMax_headphones.webp'
 
 function AdminProducts() {
   return (
@@ -40,7 +44,10 @@ function AdminProducts() {
 
           <tbody>
             <tr>
-              <td>iPhone 15 Pro Max</td>
+              <td className="product-cell">
+      <img src={iphone17ProMax} alt="iPhone 17 Pro Max" />
+      iPhone 17 Pro Max
+    </td>
               <td>Phone</td>
               <td>£1199.99</td>
               <td>38</td>
@@ -52,7 +59,10 @@ function AdminProducts() {
             </tr>
 
             <tr>
-              <td>Samsung Galaxy S25</td>
+              <td className="product-cell">
+      <img src={samsungGalaxy} alt="Samsung Galaxy S25 Ultra" />
+      Samsung Galaxy S25 Ultra
+    </td>
               <td>Phone</td>
               <td>£999.99</td>
               <td>35</td>
@@ -64,7 +74,10 @@ function AdminProducts() {
             </tr>
 
             <tr>
-              <td>Apple AirPods Max</td>
+              <td className="product-cell">
+      <img src={airMax1} alt="Apple AirPods Max" />
+      Apple AirPods Max
+    </td>
               <td>Headphones</td>
               <td>£499</td>
               <td>14</td>
@@ -76,7 +89,10 @@ function AdminProducts() {
             </tr>
 
             <tr>
-              <td>HUAWEI Watch Fit 3</td>
+              <td className="product-cell">
+      <img src={HUAWEI} alt="HUAWEI Watch Fit 3" />
+      HUAWEI Watch Fit 3
+    </td>
               <td>Smartwatch</td>
               <td>£139</td>
               <td>9</td>

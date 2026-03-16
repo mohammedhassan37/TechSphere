@@ -41,6 +41,18 @@
   overflow: hidden;
 }
 
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.product-cell img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
 .products-table {
   width: 100%;
   border-collapse: collapse;
