@@ -8,7 +8,10 @@ function AccountDetails(){
                 <p>Mange your profile and preferences.</p>
             </div>
             <div className="AccountDetailsMain">
-                
+                <div className="AccountDetailsMainPic">
+                    <img src="" alt="User Profile Picture" />
+                    
+                </div>
             </div>
         </>
     )
