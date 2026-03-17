@@ -21,11 +21,11 @@ function AdminCustomers() {
         <table className="customers-table">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Full Name</th>
               <th>Email</th>
-              <th>Phone</th>
+              <th>Phone Number</th>
               <th>Location</th>
-              <th>Orders</th>
+              <th>Total Orders</th>
               <th>Total Spent</th>
               <th>Actions</th>
             </tr>
@@ -33,11 +33,11 @@ function AdminCustomers() {
 
           <tbody>
             <tr>
-              <td>testName</td>
-              <td>test@test.com</td>
+              <td>Name1</td>
+              <td>Name123@gmail.com</td>
               <td>07794892293</td>
               <td>Birmingham</td>
-              <td>5</td>
+              <td>4</td>
               <td>£999.99</td>
               <td>
                 <button className="edit-button">Edit Customer</button>
@@ -45,12 +45,60 @@ function AdminCustomers() {
               </td>
             </tr>
             <tr>
-              <td>testName</td>
-              <td>test@test.com</td>
+              <td>Name2</td>
+              <td>Name2@outlook.com</td>  
               <td>07754178357</td>
               <td>London</td>
               <td>2</td>
               <td>£301.98</td>
+              <td>
+                <button className="edit-button">Edit Customer</button>
+                <button className="delete-button">Delete Customer</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Name3</td>
+              <td>Name2@outlook.com</td>
+              <td>07355825797</td>
+              <td>Birmingham</td>
+              <td>1</td>
+              <td>£1099.99</td>
+              <td>
+                <button className="edit-button">Edit Customer</button>
+                <button className="delete-button">Delete Customer</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Name4</td>
+              <td>Name4123@gmail.com</td>
+              <td>07355825797</td>
+              <td>Manchester</td>
+              <td>2</td>
+              <td>£149.99</td>
+              <td>
+                <button className="edit-button">Edit Customer</button>
+                <button className="delete-button">Delete Customer</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Name5</td>
+              <td>Name5@outlook.com</td>
+              <td>07275921650</td>
+              <td>Glasgow</td>
+              <td>1</td>
+              <td>£229.99</td>
+              <td>
+                <button className="edit-button">Edit Customer</button>
+                <button className="delete-button">Delete Customer</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Name6</td>
+              <td>Name6@gmail.com</td>
+              <td>0748928492</td>
+              <td>Cardiff</td>
+              <td>3</td>
+              <td>£599.97</td>
               <td>
                 <button className="edit-button">Edit Customer</button>
                 <button className="delete-button">Delete Customer</button>
