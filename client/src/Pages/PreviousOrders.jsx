@@ -1,27 +1,31 @@
 
+    <div >
+      <h1>My Orders</h1>
+
+    
+        <div
+         
+         
+        >
           <div >
-            <strong>Order #{order.order_id}</strong>
-            <span>{new Date(order.created_at).toLocaleString()}</span>
+            <strong>Order </strong>
+            <span></span>
           </div>
 
           <div>
-            <span>Status: {order.status}</span>
+            <span>Status: </span>
             <span >
-              Total: £{Number(order.total_amount).toFixed(2)}
+              Total: £
             </span>
           </div>
 
           <h3>Items</h3>
           <ul>
-            {order.items.map((item, idx) => (
-              <li key={idx}>
-                {item.product_name} — £{Number(item.unit_price).toFixed(2)} × {item.quantity}
-              </li>
-            ))}
+            
+              
+            
           </ul>
         </div>
-      ))}
+      
     </div>
-  );
-}
-
+  
