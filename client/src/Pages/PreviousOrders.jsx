@@ -1,3 +1,6 @@
+import '../Styles/PreviousOrders.css'
+
+
 
     <div className="previous-orders">
       <div className="previous-orders-header">
