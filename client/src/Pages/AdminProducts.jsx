@@ -27,6 +27,15 @@ function AdminProducts() {
             <option>Low Stock</option>
             <option>Out of Stock</option>
           </select>
+
+          <select className="order-filter">
+            <option>All Categories</option>
+            <option>Phones</option>
+            <option>Headphones</option>
+            <option>Smartwatches</option>
+            <option>TVs</option>
+            <option>Tablets</option>
+          </select>
         </div>
 
       <div className="products-container">
