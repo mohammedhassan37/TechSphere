@@ -1,7 +1,6 @@
 import "../Styles/ManageRevenue.css";
 
 function ManageRevenue() {
-  
 
   return (
     <div className="manage-revenue">
@@ -32,6 +31,28 @@ function ManageRevenue() {
           <p>£709.50</p>
         </div>
       </div>
+
+      <div className="revenue-section">
+  <h2>Revenue by Product</h2>
+
+  <table className="revenue-table">
+    <thead>
+      <tr>
+        <th>Products</th>
+        <th>Total Units Sold</th>
+        <th>Total Revenue</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>iPhone 17 Pro Max</td>
+        <td>25</td>
+        <td>£29,999</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
        </div>
 
   );

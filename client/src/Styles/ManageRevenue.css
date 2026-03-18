@@ -40,3 +40,41 @@
   font-weight: 500;
   color: #000000;
 }
+
+.revenue-section {
+  background: #d3e0e4;
+  padding: 25px;
+  border-radius: 14px;
+  margin-top: 30px;
+}
+
+.revenue-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.revenue-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  color: #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.revenue-table th,
+.revenue-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.revenue-table th {
+  background: rgb(68, 146, 240);
+  color: white;
+  font-weight: 500;
+}
+
+.revenue-table tr:last-child td {
+  border-bottom: none;
+}
