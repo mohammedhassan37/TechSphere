@@ -50,6 +50,23 @@ function ManageRevenue() {
         <td>25</td>
         <td>£29,999</td>
       </tr>
+            <tr>
+        <td>Samsung Galaxy S25 Ultra</td>
+        <td>18</td>
+        <td>£17,999</td>
+      </tr>
+
+      <tr>
+        <td>Apple AirPods Max</td>
+        <td>40</td>
+        <td>£19,960</td>
+      </tr>
+
+      <tr>
+        <td>HUAWEI Watch Fit 3</td>
+        <td>22</td>
+        <td>£3,058</td>
+      </tr>
     </tbody>
   </table>
 </div>
