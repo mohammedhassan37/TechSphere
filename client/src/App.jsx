@@ -24,7 +24,7 @@ import AdminProducts from "./Pages/AdminProducts.jsx";
 import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminLogin from "./Pages/AdminLogin.jsx";
 import AdminOrders from "./Pages/AdminOrders.jsx";
-
+import ManageRevenue from "./Pages/AdminRevenue.jsx";
 
 
 
@@ -53,7 +53,7 @@ function App() {
   <Route path="/admin/total-products" element={<AdminProducts />} />
   <Route path="/admin/total-customers" element={<AdminCustomers />} />
   <Route path="/admin/pending-orders" element={<AdminOrders />} />
-  <Route path="/admin/total-revenue" element={<h1>Total Revenue</h1>} />
+  <Route path="/admin/total-revenue" element={<ManageRevenue />} />
 </Routes>
 <Footer />
     </BrowserRouter>

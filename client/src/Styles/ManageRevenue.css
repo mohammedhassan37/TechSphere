@@ -1,0 +1,42 @@
+.manage-revenue {
+  max-width: 1300px;
+  margin: auto;
+  padding: 40px;
+}
+
+.revenue-header h1 {
+  margin: 0;
+  font-size: 35px;
+}
+
+.revenue-info {
+  color: #008cff;
+  margin-bottom: 25px;
+}
+
+.revenue-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.revenue-card {
+  background: #008cff;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.revenue-card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.revenue-card p {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  color: #000000;
+}
