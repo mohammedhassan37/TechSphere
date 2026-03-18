@@ -13,7 +13,7 @@ function ManageRevenue() {
       <div className="revenue-cards">
         <div className="revenue-card">
           <h3>Total Revenue</h3>
-          <p>£90,250.00</p>
+          <p>£70,016.00</p>
         </div>
 
         <div className="revenue-card">
@@ -67,6 +67,12 @@ function ManageRevenue() {
         <td>22</td>
         <td>£3,058</td>
       </tr>
+      <tr className="total-row">
+    <td><strong>Total</strong></td>
+    <td></td>
+    <td><strong>£70,016</strong></td>
+  </tr>
+
     </tbody>
   </table>
 </div>
