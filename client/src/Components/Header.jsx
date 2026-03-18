@@ -59,8 +59,6 @@ function Header() {
                             <Link to="/Contact" className="nav-link">Contact</Link>
                         </div>
 
-                        
-
                         <div className="search-wrapper">
                          <i className="fa-solid fa-magnifying-glass search icon"></i>
 
@@ -74,8 +72,6 @@ function Header() {
                             />
                             </div>
 
-
-
                            <div className="account-dropdown">
                               <i className="fa-solid fa-user"></i>
 
@@ -87,12 +83,10 @@ function Header() {
                             </div>
                            </div>
 
-
                             <Link to="/Basket" className="basket">
                                     <i className ="fa-solid fa-cart-shopping"></i>
                             </Link>
                         
-
                                 <div className="light-dark-mode" onClick={ChangeMode}>
                                 {mode === "light" ? (
                                     <i className="fa-solid fa-sun"></i>
@@ -101,7 +95,6 @@ function Header() {
                                     <i className="fa-solid fa-moon"></i>
                                 )}
                                 </div>
-
 
                                  <div className="zoom-options">
                                 <i
