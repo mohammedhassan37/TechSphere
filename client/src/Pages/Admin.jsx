@@ -8,7 +8,7 @@ function Admin() {
     { title: "Manage Inventory",label: "Total Products", value: 67, icon: "📦", path: "/admin/total-products" },
     { title: "Manage Customers",label: "Total Customers", value: 69, icon: "👥", path: "/admin/total-customers" },
     { title: "Manage Orders",label: "Pending Orders", value: 9, icon: "🛒", path: "/admin/pending-orders" },
-    { title: "Manage Revenue",label: "Total Revenue", value: "£6769.69", icon: "📈", path: "/admin/total-revenue" }
+    { title: "Manage Revenue",label: "Total Revenue", value: "£70016.00", icon: "📈", path: "/admin/total-revenue" }
   ];
 
   return (
