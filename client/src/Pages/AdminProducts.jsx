@@ -124,8 +124,25 @@ function AdminProducts() {
               </td>
             </tr>
           </tbody>
+          
         </table>
       </div>
+      <div className="stock-history">
+  <h2>Recent Stock Transactions History</h2>
+
+  <div className="stock-list">
+
+    <div className="stock-item">
+      <div>
+        <p className="stock-product">iPhone 17 Pro Max</p>
+        <p className="stock-info">Stock Added</p>
+        <span className="stock-date">13 March 2026, 11:00 AM</span>
+      </div>
+      <div className="stock-change positive">+99</div>
+    </div>
+
+    </div>
+    </div>
     </div>
   );
 }

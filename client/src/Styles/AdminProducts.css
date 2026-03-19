@@ -123,3 +123,59 @@
   background: #ff0000;
   color: #ffffff;
 }
+
+
+.stock-history {
+  margin-top: 30px;
+}
+
+.stock-history h2 {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eff4fa;
+  padding: 15px 18px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.stock-product {
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.stock-info {
+  font-size: 16px;
+  color: #333;
+  margin: 2px 0;
+}
+
+.stock-date {
+  font-size: 12px;
+  color: #333;
+}
+
+.stock-change {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.stock-change.positive {
+  color: green;
+}
+
+.stock-change.negative {
+  color: red;
+}
