@@ -168,6 +168,7 @@ function AdminProducts() {
       </div>
       <div className="stock-history">
   <h2>Recent Stock Transactions History</h2>
+  <h3> Track incoming and outgoing Transactions</h3>
 
   <div className="stock-list">
 

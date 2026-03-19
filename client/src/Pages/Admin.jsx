@@ -38,10 +38,44 @@ function Admin() {
 
       <div className="inventory-warnings">
         <h3>⚠ Inventory Alerts</h3>
-        <p>??????????????????????????????</p>
+        <div className="alerts-info">
+
+  <div className="alert-group">
+    <p className="alert-title">Out of Stock (1)</p>
+
+    <div className="alert-item">
+      <span>HUAWEI Watch Fit 3</span>
+      <span className="alert danger">Out of Stock</span>
+    </div>
+  </div>
+
+  <div className="alert-group">
+    <p className="alert-title">Low Stock (1)</p>
+
+    <div className="alert-item">
+      <span>Apple AirPods Max</span>
+      <span className="alert warning">14 left</span>
+    </div>
+  </div>
+
+  <div className="alert-group">
+    <p className="alert-title">Low Stock (1)</p>
+
+    <div className="alert-item">
+      <span>Samsung 24 Inch Smart LED TV</span>
+      <span className="alert warning">8 left</span>
+    </div>
+  </div>
+
+  <p 
+    className="manage-link"
+    onClick={() => navigate("/admin/total-products")}>
+    Manage Inventory →
+  </p>
+
+</div>
         
       </div>
-
     </div>
   );
 }

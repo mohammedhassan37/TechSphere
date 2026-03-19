@@ -11,8 +11,8 @@
 }
 
 .dashboard-info {
-  color: #000000;
-  font-size: large;
+  color: #008cff;
+  font-size: 20px;
   margin-bottom: 35px;
 }
 
@@ -71,4 +71,68 @@
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.inventory-warnings {
+  background: #fff8e6;
+  border: 1px solid #facd78;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.inventory-warnings h3 {
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.alerts-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #333;
+}
+
+.alert-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.alert {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.alert.danger {
+  background: #fddada;
+  color: #e60000;
+  font-size: 15px;
+}
+
+.alert.warning {
+  background: #feeeb7;
+  color: #b86f02;
+  font-size: 15px;
+}
+
+.manage-link {
+  margin-top: 10px;
+  color: #ff9008;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.manage-link:hover {
+  text-decoration: underline;
 }
