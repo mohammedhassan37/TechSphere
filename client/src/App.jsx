@@ -22,10 +22,9 @@ import ProductDetails from "./Pages/ProductPage.jsx";
 import Admin from "./Pages/Admin.jsx";
 import AdminProducts from "./Pages/AdminProducts.jsx";
 import AdminCustomers from "./Pages/AdminCustomers.jsx";
-import AdminLogin from "./Pages/AdminLogin.jsx";
 import AdminOrders from "./Pages/AdminOrders.jsx";
 import ManageRevenue from "./Pages/AdminRevenue.jsx";
-
+import ShopByCategory from "./components/ShopBycategory.jsx";
 
 
 function App() {
@@ -34,7 +33,7 @@ function App() {
       <Header />
 
       <Routes>
-  <Route path="/" element={<><Carousel /><FP /> <WhyChooseUs /></>} />
+  <Route path="/" element={<><Carousel /><FP /> <ShopByCategory /> <WhyChooseUs /></>} />
   <Route path="/about" element={<About />} />
   <Route path="/contact" element={<Contact />} />
   <Route path="/headphones" element={<Headphones />} />
@@ -54,6 +53,9 @@ function App() {
   <Route path="/admin/total-customers" element={<AdminCustomers />} />
   <Route path="/admin/pending-orders" element={<AdminOrders />} />
   <Route path="/admin/total-revenue" element={<ManageRevenue />} />
+
+
+  
 </Routes>
 <Footer />
     </BrowserRouter>
