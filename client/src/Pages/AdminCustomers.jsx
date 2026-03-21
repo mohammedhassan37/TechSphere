@@ -5,12 +5,13 @@ function AdminCustomers() {
       <div className="admin-customers">
         <div className="admin-customers-header">
           <h1>Manage Customers</h1>
+          <button className="add-customer">+ Add Customer</button>
       </div>
 
       <p className="admin-customers-info">
         View and manage customers:
       </p>
-
+      
       <div className="customers-features">
         <input
           type="text"
