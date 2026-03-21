@@ -51,6 +51,17 @@ function AdminProducts() {
   const [error, setError] = useState("");
 const [showInfo, setShowInfo] = useState(true);
 
+const [showEditForm, setShowEditForm] = useState(false);
+const [editProduct, setEditProduct] = useState({
+  product_id: "",
+  product_name: "",
+  product_description: "",
+  product_price: "",
+  product_type: "",
+  product_quantity: "",
+  product_img: "",
+});
+
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
@@ -146,9 +157,12 @@ const [showInfo, setShowInfo] = useState(true);
         <h1>Manage Products</h1>
         <button
           className="add-product"
-          onClick={() =>setShowInfo(!showInfo) }
-        >
-          {showInfo ? "+ Add Product" : "← Back"}
+          onClick={() => {
+    setShowInfo(false);
+    setShowEditForm(false);
+  }}
+>
+  + Add Product
         </button>
       </div>
 
@@ -222,7 +236,22 @@ const [showInfo, setShowInfo] = useState(true);
                 </td>
                 <td>
                   <button className="edit-button">Update Stock</button>
-                  <button className="edit-button">Edit</button>
+                  <button className="edit-button"
+  onClick={() => {
+    setEditProduct({
+      product_id: product.product_id,
+      product_name: product.product_name,
+      product_description: product.product_description || "",
+      product_price: product.product_price,
+      product_type: product.product_type,
+      product_quantity: product.product_quantity,
+      product_img: product.product_img || "",
+    });
+    setShowInfo(false);
+    setShowEditForm(true);
+  }}
+>
+  Edit</button>
                   <button className="delete-button">Delete</button>
                 </td>
               </tr>
