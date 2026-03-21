@@ -107,23 +107,29 @@ function AdminCustomers() {
       
       {showForm && (
         <form className="customer-form" onSubmit={submitForm}>
-          <input type="text" name="fullName" placeholder="Full Name" 
+          <label>Full name *</label>
+          <input type="text" name="fullName" placeholder="Enter Full Name" 
           value={formData.fullName} onChange={updateField} required/>
 
-          <input type="email" name="email" placeholder="Email"
+          <label>Email *</label>
+          <input type="email" name="email" placeholder="Enter Email"
           value={formData.email} onChange={updateField} required/>
 
-          <input type="tel" name="phoneNum" placeholder="Phone Number"
+          <label>Phone Number *</label>
+          <input type="tel" name="phoneNum" placeholder="Enter Phone Number"
           value={formData.phoneNum}onChange={updateField} required/>
 
-          <input type="text" name="location" placeholder="Location"
-          value={formData.location} onChange={updateField} required/>
+          <label>Location</label>
+          <input type="text" name="location" placeholder="Enter Location"
+          value={formData.location} onChange={updateField}/>
 
-          <input type="number" name="totalOrders" placeholder="Orders"
-          value={formData.totalOrders} onChange={updateField} required/>
+          <label>Total Orders</label>
+          <input type="number" name="totalOrders" placeholder="Enter Orders"
+          value={formData.totalOrders} onChange={updateField}/>
 
-          <input type="number" name="totalSpent" placeholder="Total Spent" 
-          value={formData.totalSpent} onChange={updateField} required/>
+          <label>Total Spent</label>
+          <input type="number" name="totalSpent" placeholder="Enter Total Spent" 
+          value={formData.totalSpent} onChange={updateField}/>
 
           <button type="submit">Add Customer</button>
           <button type="button" onClick={() => setShowForm(false)}>
