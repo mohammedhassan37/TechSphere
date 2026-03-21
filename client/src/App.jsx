@@ -14,7 +14,7 @@ import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
 import SearchPage from './Pages/SearchPage.jsx';
 import AccountDetails from './pages/AccountDetails.jsx'
-import PreviousOrders from './pages/PreviousOrders.jsx'
+
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
@@ -47,15 +47,6 @@ function App() {
   <Route path="/search" element={<SearchPage />} />
   <Route path="/product/:id" element={<ProductDetails />} />
   <Route path="/accountdetails" element={<AccountDetails />} />
-  <Route path="/previousdetails" element={<PreviousOrders />} />
-  <Route path="/admin" element={<Admin />} />
-  <Route path="/admin/total-products" element={<AdminProducts />} />
-  <Route path="/admin/total-customers" element={<AdminCustomers />} />
-  <Route path="/admin/pending-orders" element={<AdminOrders />} />
-  <Route path="/admin/total-revenue" element={<ManageRevenue />} />
-
-
-  
 </Routes>
 <Footer />
     </BrowserRouter>

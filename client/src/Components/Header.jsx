@@ -77,7 +77,7 @@ function Header() {
 
                               <div className="account-menu">
                               <Link to="/registration">Register</Link>
-                              <Link to="/">Previous Orders</Link>
+                              <Link to="/orders">Previous Orders</Link>
                               <Link to="/">Account Details</Link>
                               <Link to="/admin">Admin Hub</Link>
                             </div>
