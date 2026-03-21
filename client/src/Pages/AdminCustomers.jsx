@@ -66,22 +66,33 @@ function AdminCustomers() {
 
   const [showForm, setShowForm] = useState(false);
 
+  const [editCustomerIndex, setEditCustomerIndex] = useState(null);
+
+  const editCustomer = (index) => {
+    setFormData(customers[index]);
+    setEditCustomerIndex(index);
+    setShowForm(true);
+  };
+
   const updateField  = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-
-  const submitForm = (e) => {
+    const submitForm = (e) => {
     e.preventDefault();
 
-    const newCustomer = {
-      ...formData
-    };
+    if (editCustomerIndex !== null) {
+      const updatedCustomers = [...customers];
+      updatedCustomers[editCustomerIndex] = formData;
+      setCustomers(updatedCustomers);
+    } else {
+      setCustomers([...customers, formData]);
+    }
 
-    setCustomers([...customers, newCustomer]);
     setShowForm(false);
+    setEditCustomerIndex(null);
     setFormData({
       fullName: "",
       email: "",
@@ -95,12 +106,8 @@ function AdminCustomers() {
     return(
       <div className="admin-customers">
         <div className="admin-customers-header">
-          <button
-  className="back-button"
-  onClick={() => navigate("/admin")}
->
-  ← Back
-</button>
+          <button className="back-button" onClick={() => navigate("/admin")}> ← Back
+          </button>
           <h1>Manage Customers</h1>
           <button className="add-customer" onClick={() => setShowForm(true)}>+ Add Customer</button>
       </div>
@@ -176,7 +183,7 @@ function AdminCustomers() {
                   <td>{customer.totalOrders}</td>
                   <td>{customer.totalSpent}</td>
                   <td>
-                    <button className="edit-button">Edit Row</button>
+                    <button className="edit-button" onClick={() => editCustomer(index)}>Edit Row</button>
                     <button className="delete-button">Delete Row</button>
                   </td>
                 </tr>
