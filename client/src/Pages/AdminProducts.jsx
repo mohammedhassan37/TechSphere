@@ -1,5 +1,7 @@
 import "../Styles/AdminProducts.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 import tv from "../assets/tv.webp";
 import tcl_tv from "../assets/tcl_tv.webp";
@@ -49,6 +51,7 @@ import shokz from "../assets/shokz_headphones.webp";
 function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
+const [showInfo, setShowInfo] = useState(true);
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -138,9 +141,17 @@ function AdminProducts() {
 
   return (
     <div className="admin-products">
+       <div className="add-product-form"></div>
+
+
       <div className="admin-products-header">
         <h1>Manage Products</h1>
-        <button className="add-product">+ Add Product</button>
+        <button
+          className="add-product"
+          onClick={() =>setShowInfo(!showInfo) }
+        >
+          + Add Product
+        </button>
       </div>
 
       <p className="admin-products-info">
@@ -174,7 +185,7 @@ function AdminProducts() {
         </select>
       </div>
 
-      <div className="products-container">
+      <div className="products-container" style={{ display: showInfo ? "block" : "none" }}>
         <table className="products-table">
           <thead>
             <tr>
@@ -220,7 +231,17 @@ function AdminProducts() {
           </tbody>
         </table>
       </div>
+
+<div className="add-product-form" style={{ display: showInfo ? "block" : "none" }}>
+<p>dfdfnvdjnc</p>
+<style>
+
+</style>
     </div>
+
+    </div>
+
+
   );
 }
 

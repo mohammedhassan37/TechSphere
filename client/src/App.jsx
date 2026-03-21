@@ -25,6 +25,8 @@ import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminOrders from "./Pages/AdminOrders.jsx";
 import ManageRevenue from "./Pages/AdminRevenue.jsx";
 import ShopByCategory from "./components/ShopByCategory.jsx";
+import AddProducts from "./pages/AddProducts";
+
 
 function App() {
   return (
@@ -51,6 +53,7 @@ function App() {
         <Route path="/admin/total-customers" element={<AdminCustomers />} />
         <Route path="/admin/pending-orders" element={<AdminOrders />} />
         <Route path="/admin/total-revenue" element={<ManageRevenue />} />
+        <Route path="/admin/add-product" element={<AddProducts />} />
       </Routes>
 
       <Footer />
