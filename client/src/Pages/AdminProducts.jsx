@@ -45,8 +45,10 @@ import airMax2 from "../assets/airMax_headphones2.webp";
 import jLab from "../assets/jlab_headphones.webp";
 import marshalHead from "../assets/marshall_headphones.webp";
 import shokz from "../assets/shokz_headphones.webp";
+import { useNavigate } from "react-router-dom";
 
 function AdminProducts() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
 const [showInfo, setShowInfo] = useState(true);
@@ -154,6 +156,12 @@ const [editProduct, setEditProduct] = useState({
 
 
       <div className="admin-products-header">
+        <button
+  className="back-button"
+  onClick={() => navigate("/admin")}
+>
+  ← Back
+</button>
         <h1>Manage Products</h1>
         <button
           className="add-product"

@@ -1,5 +1,7 @@
 import "../Styles/AdminOrders.css";
+import { useNavigate } from "react-router-dom";
 function AdminOrders(){
+    const navigate = useNavigate();
     const orders = [
     {
       id: "ORD-001",
@@ -10,7 +12,7 @@ function AdminOrders(){
       status: "pending",
     },
     {
-      id: "ORD-001",
+      id: "ORD-002",
       customer: "John Smith",
       items: "3 item(s)",
       total: "$1199.99",
@@ -18,7 +20,7 @@ function AdminOrders(){
       status: "processing",
     },
     {
-      id: "ORD-001",
+      id: "ORD-003",
       customer: "John Smith",
       items: "3 item(s)",
       total: "$1199.99",
@@ -26,12 +28,21 @@ function AdminOrders(){
       status: "delivered",
     },
     {
-      id: "ORD-001",
+      id: "ORD-004",
       customer: "John Smith",
       items: "3 item(s)",
       total: "$1199.99",
       date: "Mar 5, 2026",
       status: "shipped",
+    },
+
+    {
+      id: "ORD-005",
+      customer: "John Smith",
+      items: "3 item(s)",
+      total: "$1199.99",
+      date: "Mar 5, 2026",
+      status: "pending",
     },
     ];
 
@@ -39,6 +50,12 @@ function AdminOrders(){
         <>
 
       <div className="management">
+        <button
+  className="back-button"
+  onClick={() => navigate("/admin")}
+>
+  ← Back
+</button>
         <h2>Order Management</h2>
         <p className="management-info">View and process customer orders</p>
 
