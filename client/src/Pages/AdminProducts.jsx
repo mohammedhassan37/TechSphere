@@ -1,18 +1,131 @@
 import "../Styles/AdminProducts.css";
-import iphone17ProMax from '../assets/iphone17promax.webp';
-import samsungGalaxy from "../assets/samsung galaxy.webp";
-import HUAWEI from "../assets/HUAWEI.webp";
-import airMax1 from '../assets/airMax_headphones.webp'
-import samsung_tv2 from "../assets/samsung_tv2.webp"
-import lenovo from "../assets/lenevo.webp";
+import { useEffect, useState } from "react";
 
+import tv from "../assets/tv.webp";
+import tcl_tv from "../assets/tcl_tv.webp";
+import hisense_tv from "../assets/hisense_tv.webp";
+import toshiba_tv from "../assets/toshiba_tv.webp";
+import samsung_tv3 from "../assets/samsung_tv3.webp";
+import samsung_tv2 from "../assets/samsung_tv2.webp";
+import bush_tv from "../assets/bush_tv.webp";
+import sony_tv from "../assets/sony_tv.webp";
+
+import tablet from "../assets/tablet.webp";
+import honour from "../assets/honour.webp";
+import lenevo from "../assets/lenevo.webp";
+import tablet_A9 from "../assets/tablet_A9.webp";
+import ipad from "../assets/ipad.webp";
+import ipad_air from "../assets/ipad_air.webp";
+import amazon_fire from "../assets/amazon_fire.webp";
+import amazon_fire2 from "../assets/amazon_fire2.webp";
+
+import HUAWEI from "../assets/HUAWEI.webp";
+import reflex_watch from "../assets/reflex_watch.webp";
+import apple_watch from "../assets/apple_watch.webp";
+import samsung_watch from "../assets/samsung_watch.webp";
+import garmin_watch from "../assets/garmin_watch.webp";
+import fitbit_watch from "../assets/fitbit_watch.webp";
+import samsung_watch2 from "../assets/samsung_watch2.webp";
+import garmin_watch2 from "../assets/garmin_watch2.webp";
+
+import phone from "../assets/phone.webp";
+import samsungGalaxy from "../assets/samsung galaxy.webp";
+import motorola from "../assets/motorola.webp";
+import iphone16 from "../assets/iphone 16.webp";
+import googlePixel from "../assets/google pixel.webp";
+import xiaomi from "../assets/xiaomi.webp";
+import iphonePink from "../assets/iphonePink.webp";
+import samsungFlip from "../assets/samsungFlip.webp";
+
+import headphone from "../assets/headphone.webp";
+import sonyWH from "../assets/sony_headphones.webp";
+import beatsPro from "../assets/beats_headphones.webp";
+import airMax1 from "../assets/airMax_headphones.webp";
+import airMax2 from "../assets/airMax_headphones2.webp";
+import jLab from "../assets/jlab_headphones.webp";
+import marshalHead from "../assets/marshall_headphones.webp";
+import shokz from "../assets/shokz_headphones.webp";
 
 function AdminProducts() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/products", {
+        credentials: "include",
+      });
+
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const imageMap = {
+    tv: tv,
+    tcl_tv: tcl_tv,
+    hisense_tv: hisense_tv,
+    toshiba_tv: toshiba_tv,
+    samsung_tv3: samsung_tv3,
+    samsung_tv2: samsung_tv2,
+    bush_tv: bush_tv,
+    sony_tv: sony_tv,
+
+    tablet_1: tablet,
+    honour: honour,
+    lenevo: lenevo,
+    tablet_2: tablet_A9,
+    ipad_1: ipad,
+    ipad_2: ipad_air,
+    amazon_fire1: amazon_fire,
+    amazon_fire2: amazon_fire2,
+
+    HUAWEI: HUAWEI,
+    reflex_watch: reflex_watch,
+    apple_watch: apple_watch,
+    samsung_watch: samsung_watch,
+    garmin_watch: garmin_watch,
+    fitbit_watch: fitbit_watch,
+    samsung_watch2: samsung_watch2,
+    garmin_watch2: garmin_watch2,
+
+    phone: phone,
+    samsungGalaxy: samsungGalaxy,
+    motorola: motorola,
+    iphone16: iphone16,
+    googlePixel: googlePixel,
+    xiaomi: xiaomi,
+    iphonePink: iphonePink,
+    samsungFlip: samsungFlip,
+
+    JBL720: headphone,
+    sonyWH: sonyWH,
+    beatsPro: beatsPro,
+    airMax1: airMax1,
+    airMax2: airMax2,
+    jLab: jLab,
+    marshalHead: marshalHead,
+    shokz: shokz,
+  };
+
+  const getStatusClass = (status) => {
+    if (status === "In Stock") return "in-stock";
+    if (status === "Low Stock") return "low-stock";
+    if (status === "Running Out") return "running-out";
+    if (status === "Out of Stock") return "out-of-stock";
+    return "";
+  };
+
   return (
     <div className="admin-products">
       <div className="admin-products-header">
         <h1>Manage Products</h1>
-        <button className="add-product"> + Add Product</button>
+        <button className="add-product">+ Add Product</button>
       </div>
 
       <p className="admin-products-info">
@@ -20,26 +133,29 @@ function AdminProducts() {
       </p>
 
       <div className="orders-features">
-          <input
-            type="text"
-            placeholder="Search by Product Name or Category..." className="search"/>
-            
-          <select className="order-filter">
-            <option>All Products</option>
-            <option>In Stock</option>
-            <option>Low Stock</option>
-            <option>Out of Stock</option>
-          </select>
+        <input
+          type="text"
+          placeholder="Search by Product Name or Category..."
+          className="search"
+        />
 
-          <select className="order-filter">
-            <option>All Categories</option>
-            <option>Phones</option>
-            <option>Headphones</option>
-            <option>Smartwatches</option>
-            <option>TVs</option>
-            <option>Tablets</option>
-          </select>
-        </div>
+        <select className="order-filter">
+          <option>All Products</option>
+          <option>In Stock</option>
+          <option>Low Stock</option>
+          <option>Running Out</option>
+          <option>Out of Stock</option>
+        </select>
+
+        <select className="order-filter">
+          <option>All Categories</option>
+          <option>Phones</option>
+          <option>Headphones</option>
+          <option>Smartwatches</option>
+          <option>TVs</option>
+          <option>Tablets</option>
+        </select>
+      </div>
 
       <div className="products-container">
         <table className="products-table">
@@ -55,178 +171,33 @@ function AdminProducts() {
           </thead>
 
           <tbody>
-            <tr>
-              <td className="product-cell">
-      <img src={iphone17ProMax} alt="iPhone 17 Pro Max" />
-      iPhone 17 Pro Max
-    </td>
-              <td>Phone</td>
-              <td>£1199.99</td>
-              <td>38</td>
-              <td>
-  <span className="status in-stock">In Stock</span>
-</td>
-              <td>
-                <button className="edit-button">Update Stock</button>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="product-cell">
-      <img src={samsungGalaxy} alt="Samsung Galaxy S25 Ultra" />
-      Samsung Galaxy S25 Ultra
-    </td>
-              <td>Phone</td>
-              <td>£999.99</td>
-              <td>35</td>
-              <td>
-  <span className="status in-stock">In Stock</span>
-</td>
-              <td>
-                <button className="edit-button">Update Stock</button>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="product-cell">
-      <img src={airMax1} alt="Apple AirPods Max" />
-      Apple AirPods Max
-    </td>
-              <td>Headphones</td>
-              <td>£499</td>
-              <td>14</td>
-              <td>
-  <span className="status low-stock">Low Stock</span>
-</td>
-              <td>
-                <button className="edit-button">Update Stock</button>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="product-cell">
-      <img src={HUAWEI} alt="HUAWEI Watch Fit 3" />
-      HUAWEI Watch Fit 3
-    </td>
-              <td>Smartwatch</td>
-              <td>£139</td>
-              <td>0</td>
-              <td>
-  <span className="status out-of-stock">Out of Stock</span>
-</td>
-              <td>
-                <button className="edit-button">Update Stock</button>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
-              </td>
-            </tr>
-
-<tr>
-              <td className="product-cell">
-      <img src={samsung_tv2} alt="Samsung 24 Inch Smart Full HD HDR LED TV" />
-      Samsung 24 Inch Smart LED TV
-    </td>
-              <td>TV</td>
-              <td>£149.99</td>
-              <td>8</td>
-              <td>
-  <span className="status low-stock">Low Stock</span>
-</td>
-              <td>
-                <button className="edit-button">Update Stock</button>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="product-cell">
-      <img src={lenovo} alt="Lenovo Idea Tab 11 Inch" />
-      Lenovo Idea Tab 11 Inch
-    </td>
-              <td>Tablet</td>
-              <td>£149.99</td>
-              <td>21</td>
-              <td>
-  <span className="status in-stock">In Stock</span>
-</td>
-              <td>
-                <button className="edit-button">Update Stock</button>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
-              </td>
-            </tr>
+            {products.map((product) => (
+              <tr key={product.product_id}>
+                <td className="product-cell">
+                  <img
+                    src={imageMap[product.product_img]}
+                    alt={product.product_name}
+                  />
+                  {product.product_name}
+                </td>
+                <td>{product.product_type}</td>
+                <td>£{product.product_price}</td>
+                <td>{product.product_quantity}</td>
+                <td>
+                  <span className={`status ${getStatusClass(product.stock_status)}`}>
+                    {product.stock_status}
+                  </span>
+                </td>
+                <td>
+                  <button className="edit-button">Update Stock</button>
+                  <button className="edit-button">Edit</button>
+                  <button className="delete-button">Delete</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
-          
         </table>
       </div>
-      <div className="stock-history">
-  <h2>Recent Stock Transactions History</h2>
-  <h3> Track incoming and outgoing Transactions</h3>
-
-  <div className="stock-list">
-
-    <div className="stock-item">
-      <div>
-        <p className="stock-product">iPhone 17 Pro Max</p>
-        <p className="stock-info">Stock Added</p>
-        <span className="stock-date">13 March 2026, 11:00 AM</span>
-      </div>
-      <div className="stock-change positive">+49</div>
-    </div>
-
-    <div className="stock-item">
-      <div>
-        <p className="stock-product">Samsung Galaxy S25 Ultra</p>
-        <p className="stock-info">Order Placed</p>
-        <span className="stock-date">12 March 2026, 02:50 PM</span>
-      </div>
-      <div className="stock-change negative">-1</div>
-    </div>
-
-    <div className="stock-item">
-      <div>
-        <p className="stock-product">Apple AirPods Max</p>
-        <p className="stock-info">Restocked</p>
-        <span className="stock-date">15 March 2026, 07:30 AM</span>
-      </div>
-      <div className="stock-change positive">+28</div>
-    </div>
-
-    <div className="stock-item">
-      <div>
-        <p className="stock-product">HUAWEI Watch Fit 3</p>
-        <p className="stock-info">Order Placed</p>
-        <span className="stock-date">18 March 2026, 11:50 PM</span>
-      </div>
-      <div className="stock-change negative">-1</div>
-    </div>
-
-    <div className="stock-item">
-      <div>
-        <p className="stock-product">Samsung 24 Inch Smart Full HD HDR LED TV</p>
-        <p className="stock-info">Restocked</p>
-        <span className="stock-date">15 March 2026, 07:30 AM</span>
-      </div>
-      <div className="stock-change positive">+15</div>
-    </div>
-    <div className="stock-item">
-      <div>
-        <p className="stock-product">Reflex Active Black Smart Watch</p>
-        <p className="stock-info">Stock Added</p>
-        <span className="stock-date">15 March 2026, 08:30 AM</span>
-      </div>
-      <div className="stock-change positive">+20</div>
-    </div>
-
-    </div>
-    </div>
     </div>
   );
 }
