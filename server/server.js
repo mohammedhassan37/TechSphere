@@ -221,18 +221,28 @@ app.get("/search", async (req, res) => {
 });
 
 
+app.get("/products", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM products ORDER BY product_id ASC");
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve React static files
-app.use(express.static(path.join(__dirname, "../client/dist")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// Catch-all route for React (must come after API routes)
-app.use((req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
+  });
+}
 
 // Start
 const PORT = process.env.PORT || 5000;

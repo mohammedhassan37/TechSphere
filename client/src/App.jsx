@@ -18,9 +18,14 @@ import AccountDetails from './pages/AccountDetails.jsx'
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
-
-
 import ProductDetails from "./Pages/ProductPage.jsx";
+import Admin from "./Pages/Admin.jsx";
+import AdminProducts from "./Pages/AdminProducts.jsx";
+import AdminCustomers from "./Pages/AdminCustomers.jsx";
+import AdminOrders from "./Pages/AdminOrders.jsx";
+import ManageRevenue from "./Pages/AdminRevenue.jsx";
+import ShopByCategory from "./components/ShopBycategory.jsx";
+
 
 function App() {
   return (
@@ -28,7 +33,7 @@ function App() {
       <Header />
 
       <Routes>
-  <Route path="/" element={<><Carousel /><FP /> <WhyChooseUs /></>} />
+  <Route path="/" element={<><Carousel /><FP /> <ShopByCategory /> <WhyChooseUs /></>} />
   <Route path="/about" element={<About />} />
   <Route path="/contact" element={<Contact />} />
   <Route path="/headphones" element={<Headphones />} />
