@@ -243,8 +243,33 @@ const [showInfo, setShowInfo] = useState(true);
         <label>Description</label>
         <textarea rows="4" placeholder="Enter description"></textarea>
       </div>
+       <div className="form-row">
+        <div className="form-group">
+          <label>Price (£)</label>
+          <input type="number" />
+        </div>
+
+        <div className="form-group">
+          <label>Category</label>
+          <select>
+            <option>Phones</option>
+            <option>Headphones</option>
+            <option>Smartwatches</option>
+            <option>TVs</option>
+            <option>Tablets</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="form-row">
+        <div className="form-group">
+          <label>Stock</label>
+          <input type="number" />
+        </div>
     </div>
   </div>
+  </div>
+
 
 )}
 
