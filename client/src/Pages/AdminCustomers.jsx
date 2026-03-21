@@ -1,7 +1,9 @@
 import "../Styles/AdminCustomers.css";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function AdminCustomers() {
+  const navigate = useNavigate();
   const [customers, setCustomers] = useState([
     {
       fullName: "Alice Smith",
@@ -93,6 +95,12 @@ function AdminCustomers() {
     return(
       <div className="admin-customers">
         <div className="admin-customers-header">
+          <button
+  className="back-button"
+  onClick={() => navigate("/admin")}
+>
+  ← Back
+</button>
           <h1>Manage Customers</h1>
           <button className="add-customer" onClick={() => setShowForm(true)}>+ Add Customer</button>
       </div>
