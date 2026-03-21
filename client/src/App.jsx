@@ -24,7 +24,7 @@ import AdminProducts from "./Pages/AdminProducts.jsx";
 import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminOrders from "./Pages/AdminOrders.jsx";
 import ManageRevenue from "./Pages/AdminRevenue.jsx";
-import ShopByCategory from "./Components/ShopByCategory.jsx";
+import ShopByCategory from "./components/ShopByCategory.jsx";
 
 function App() {
   return (
