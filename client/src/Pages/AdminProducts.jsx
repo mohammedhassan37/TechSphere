@@ -49,15 +49,21 @@ import shokz from "../assets/shokz_headphones.webp";
 function AdminProducts() {
   const [products, setProducts] = useState([]);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/products", {
+      const response = await fetch(`${API_URL}/products`, {
         credentials: "include",
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
 
       const data = await response.json();
       setProducts(data);
