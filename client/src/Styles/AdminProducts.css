@@ -107,6 +107,11 @@
   color: #ffffff;
 }
 
+.running-out {
+  background-color:#cd0909;
+  color: #ffffff;
+}
+
 .edit-button,.delete-button {
   padding: 8px 12px;
   margin-right: 8px;
