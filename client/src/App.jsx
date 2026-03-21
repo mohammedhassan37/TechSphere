@@ -8,20 +8,23 @@ import Tablets from './Pages/Tablets.jsx';
 import TV from './Pages/TV.jsx';
 import Registration from "./Pages/Registration.jsx";
 import Contact from './Pages/Contact.jsx';
-import Basket from './Pages/Basket.jsx'
+import Basket from './Pages/Basket.jsx';
 import Checkout from "./Pages/Checkout.jsx";
 import WhyChooseUs from "./Components/WhyChooseUs.jsx";
 import Footer from "./Components/Footer.jsx";
 import SearchPage from './Pages/SearchPage.jsx';
-import AccountDetails from './pages/AccountDetails.jsx'
+import AccountDetails from './Pages/AccountDetails.jsx';
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
-import PreviousOrders from './Pages/PreviousOrders.jsx'
-
-
 import ProductDetails from "./Pages/ProductPage.jsx";
+import Admin from "./Pages/Admin.jsx";
+import AdminProducts from "./Pages/AdminProducts.jsx";
+import AdminCustomers from "./Pages/AdminCustomers.jsx";
+import AdminOrders from "./Pages/AdminOrders.jsx";
+import ManageRevenue from "./Pages/AdminRevenue.jsx";
+import ShopByCategory from "./components/ShopByCategory.jsx";
 
 function App() {
   return (
@@ -29,23 +32,28 @@ function App() {
       <Header />
 
       <Routes>
-  <Route path="/" element={<><Carousel /><FP /> <WhyChooseUs /></>} />
-  <Route path="/about" element={<About />} />
-  <Route path="/contact" element={<Contact />} />
-  <Route path="/headphones" element={<Headphones />} />
-  <Route path="/phone" element={<Phone />} />
-  <Route path="/smartwatch" element={<Smartwatch />} />
-  <Route path="/tablets" element={<Tablets />} />
-  <Route path="/tv" element={<TV />} />
-  <Route path="/basket" element={<Basket />} />
-  <Route path="/checkout" element={<Checkout />} />
-  <Route path="/registration" element={<Registration />} />
-  <Route path="/search" element={<SearchPage />} />
-  <Route path="/product/:id" element={<ProductDetails />} />
-  <Route path="/accountdetails" element={<AccountDetails />} />
-  <Route path="/orders" element={<PreviousOrders />} />
-</Routes>
-<Footer />
+        <Route path="/" element={<><Carousel /><FP /><ShopByCategory /><WhyChooseUs /></>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/headphones" element={<Headphones />} />
+        <Route path="/phone" element={<Phone />} />
+        <Route path="/smartwatch" element={<Smartwatch />} />
+        <Route path="/tablets" element={<Tablets />} />
+        <Route path="/tv" element={<TV />} />
+        <Route path="/basket" element={<Basket />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/accountdetails" element={<AccountDetails />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/total-products" element={<AdminProducts />} />
+        <Route path="/admin/total-customers" element={<AdminCustomers />} />
+        <Route path="/admin/pending-orders" element={<AdminOrders />} />
+        <Route path="/admin/total-revenue" element={<ManageRevenue />} />
+      </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }

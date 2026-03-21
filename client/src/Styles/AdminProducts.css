@@ -1,0 +1,191 @@
+.admin-products {
+  max-width: 1300px;
+  margin: auto;
+  padding: 35px;
+}
+
+.admin-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.admin-products-header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.admin-products-info {
+  color: #008cff;
+  margin-bottom: 25px;
+}
+
+.add-product {
+  background: #008cff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-product:hover {
+  background: #222;
+}
+
+.products-container {
+  background: rgb(211, 224, 228);
+  border: 1px solid rgb(211, 224, 228);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+.product-cell img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #333;
+}
+.products-table th {
+  background: rgb(68, 146, 240);
+  color: white;
+  font-weight: 500;
+}
+.products-table th:nth-child(2),
+.products-table td:nth-child(2) {
+  width: 120px;
+}
+
+.products-table th:nth-child(3),
+.products-table td:nth-child(3) {
+  width: 120px;
+}
+
+.products-table th:nth-child(4),
+.products-table td:nth-child(4) {
+  width: 110px;
+}
+
+.products-table th,
+.products-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.in-stock {
+  background-color: #01a64e;
+  color: #ffffff;
+}
+
+.low-stock {
+  background-color: #f59e0b;
+  color: #ffffff;
+}
+
+.out-of-stock {
+  background-color:#cd0909;
+  color: #ffffff;
+}
+
+.running-out {
+  background-color:#cd0909;
+  color: #ffffff;
+}
+
+.edit-button,.delete-button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background: #ffffff;
+}
+
+.delete-button {
+  background: #ff0000;
+  color: #ffffff;
+}
+
+
+.stock-history {
+  margin-top: 30px;
+}
+
+.stock-history h2 {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.stock-history h3 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #008cff;
+}
+
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eff4fa;
+  padding: 15px 18px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.stock-product {
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.stock-info {
+  font-size: 16px;
+  color: #333;
+  margin: 2px 0;
+}
+
+.stock-date {
+  font-size: 12px;
+  color: #333;
+}
+
+.stock-change {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.stock-change.positive {
+  color: green;
+}
+
+.stock-change.negative {
+  color: red;
+}

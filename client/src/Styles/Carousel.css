@@ -3,7 +3,7 @@
     height: 540px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #c9d2e1;
+    background-color: #eef4fb;
 }
 
 .content-wrapper {
@@ -36,6 +36,7 @@
   font-weight: bold;
   font-size: 32px;
   margin-bottom: 13px;
+  color: #333;
 }
 
 #techSphere-welcome {
@@ -47,6 +48,7 @@
 #techSphere-main-informational-text{
   font-size: 20px;
   margin-bottom:20px;
+  color: #333;
 }
 
 .button-container {

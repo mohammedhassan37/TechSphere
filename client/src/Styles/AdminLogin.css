@@ -1,0 +1,111 @@
+
+.LoginFormContainer {
+    margin: 5vh auto;
+    width: 100%;
+    max-width: 380px;
+    padding: 0 15px;
+}
+
+.LoginFormIntroduction{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    padding:15px
+}
+
+
+.FormContainerLogin{
+    display:flex;
+    flex-direction:column;
+}
+
+#FormIntroTitle{
+    font-size:32px;
+}
+
+#FormIntroText{
+    color:grey;
+    font-size:20px;
+}
+
+.FormContainerMain{
+    margin:3vh auto;
+    width:100%;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 0 0 1px rgb(226, 226, 226);
+}
+
+.FormContainerElements{
+    width: 100%;
+}
+
+.FormContainerBtns{
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    background: rgb(243, 243, 243);
+    height: 45px;
+}
+
+.FormContainerBtns button{
+    border-radius: 16px;
+    width: 50%;
+    height: 85%;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.FormContainerLogin{
+    margin-top: 25px;
+}
+
+.FormContainerLogin input{
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 45px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.submitBtn{
+    margin-top: 1vh;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #2d7df4;
+    border: none;
+    color: white;
+    font-size: 22px;
+    width: 100%;
+}
+
+.LoginFormDivider {
+    display: flex;                 
+    justify-content: space-evenly;
+    align-items: center;  
+    color: grey;    
+    font-size: 20px;     
+}
+
+.LoginFormDivider hr {
+    width: 35%;
+    border-top: 1px solid rgb(230, 230, 230);  
+}
+
+.FormContainerBtns button.active{
+    background-color: #2d7df4;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    #FormIntroTitle { font-size: 28px; }
+    #FormIntroText { font-size: 18px; }
+
+    .FormContainerBtns button { font-size: 16px; }
+    .FormContainerLogin input { font-size: 18px; }
+    .submitBtn { font-size: 20px; }
+}
