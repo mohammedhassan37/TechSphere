@@ -148,7 +148,7 @@ const [showInfo, setShowInfo] = useState(true);
           className="add-product"
           onClick={() =>setShowInfo(!showInfo) }
         >
-          + Add Product
+          {showInfo ? "+ Add Product" : "← Back"}
         </button>
       </div>
 
@@ -234,22 +234,22 @@ const [showInfo, setShowInfo] = useState(true);
   <div className="add-product-form">
     <div className="add-product-card">
 
-      <div className="form-group full-width">
+      <div className="form full-width">
         <label>Product Name *</label>
-        <input type="text" placeholder="Enter product name" />
+        <input type="text" placeholder="Enter a product name" />
       </div>
 
-      <div className="form-group full-width">
+      <div className="form full-width">
         <label>Description</label>
-        <textarea rows="4" placeholder="Enter description"></textarea>
+        <textarea rows="4" placeholder="Enter product description"></textarea>
       </div>
        <div className="form-row">
-        <div className="form-group">
+        <div className="form">
           <label>Price (£)</label>
-          <input type="number" />
+          <input type="number" placeholder="Enter product price" />
         </div>
 
-        <div className="form-group">
+        <div className="form">
           <label>Category</label>
           <select>
             <option>Phones</option>
@@ -262,19 +262,29 @@ const [showInfo, setShowInfo] = useState(true);
       </div>
 
       <div className="form-row">
-        <div className="form-group">
+        <div className="form">
           <label>Stock</label>
-          <input type="number" />
+          <input type="number" placeholder="Enter stock quantity" />
         </div>
     </div>
-  </div>
-  </div>
+    <div className="form">
+          <label>Image Key</label>
+          <input type="text" placeholder="e.g. samsungGalaxy" />
+        </div>
+      </div>
 
-
+      <div className="add-product-actions">
+        <button onClick={() => setShowInfo(true)} className="cancel-product-button">
+          Cancel
+        </button>
+        <button className="save-product-button">
+          Add Product
+        </button>
+      </div>
+  </div>
 )}
 
     </div>
-
 
   );
 }
