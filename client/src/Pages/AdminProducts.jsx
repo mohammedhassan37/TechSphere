@@ -245,7 +245,7 @@ const [editProduct, setEditProduct] = useState({
                   </span>
                 </td>
                 <td>
-                  <button className="edit-button">Update Stock</button>
+                  
                   <button className="edit-button"
   onClick={() => {
     setEditProduct({
