@@ -5,6 +5,8 @@ function ProductDetails() {
   const { state: product } = useLocation();
   const navigate = useNavigate();
 
+
+
   if (!product) {
     return <h2>Product not found</h2>;
   }
@@ -33,7 +35,7 @@ function ProductDetails() {
       <div className="details-info">
         <h1>{product.name}</h1>
         <h2>£{product.price}</h2>
-
+      
 
           {/* CHANGES THE PRODUCT PAGE SPECIFICATIONS */}
         {/* PREVIOUS COMMMITS ONLY ACCOUNTS FOR PHONES/TABLETS SPECS*/}

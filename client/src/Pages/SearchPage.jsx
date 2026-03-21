@@ -1,5 +1,74 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../Styles/SearchPage.css";
+
+
+export default function SearchPage() {
+  const [results, setResults] = useState([]);
+  const { search } = useLocation();
+  const navigate = useNavigate();
+
+  const q = new URLSearchParams(search).get("q");
+
+  useEffect(() => {
+    async function load() {
+      const res = await fetch(`https://techsphere-8ec2.onrender.com/search?q=${q}`);
+      const data = await res.json();
+      setResults(data);
+    }
+    load();
+  }, [q]);
+
+  return (
+    <div className="search-page">
+      <h2 className="search-title">Searching for: "{q}"</h2>
+
+
+
+      {results.length === 0 ? (
+        <p className="no-results">Products not found: </p>
+      ) : (
+        <div className="results-grid">
+          {results.map((p) => (
+            <div
+              key={p.product_id}
+              className="product-card"
+              onClick={() => navigate(`/product/${p.product_id}`)}
+            >
+              <div className="image-wrapper">
+                <img
+                  src={imageMap[p.product_img]}
+                  alt={p.product_name}
+                />
+              </div>
+
+
+
+              <div className="card-info">
+                <h3>{p.product_name}</h3>
+                <p className="price">£{p.product_price}</p>
+
+
+
+
+                <button
+                  className="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/product/${p.product_id}`);
+                  }}
+                >
+                  View Product
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 
 import phone from "../assets/phone.webp";
@@ -102,54 +171,3 @@ export const imageMap = {
 };
 
 
-export default function SearchPage() {
-  const [results, setResults] = useState([]);
-  const { search } = useLocation();
-  const q = new URLSearchParams(search).get("q");
-
-  useEffect(() => {
-    async function load() {
-      const res = await fetch(`https://techsphere-8ec2.onrender.com/search?q=${q}`);
-      const data = await res.json();
-      setResults(data);
-    }
-    load();
-  }, [q]);
-
-  return (
-    <div style={{ padding: "20px" }}>
-      <h2>Search results for: "{q}"</h2>
-
-      {results.length === 0 && <p>No products found.</p>}
-
-      {results.map((p) => {
-        const slug = p.product_type.toLowerCase().replace(/\s+/g, "-");
-
-        return (
-          <div
-            key={p.product_id}
-            style={{
-              padding: "10px",
-              border: "1px solid #ddd",
-              marginBottom: "10px",
-              borderRadius: "8px",
-            }}
-          >
-            <h3>{p.product_name}</h3>
-            <p>£{p.product_price}</p>
-
-            <img
-              src={imageMap[p.product_img]}
-              alt={p.product_name}
-              style={{ width: "150px" }}
-            />
-
-            <Link to={`/${slug}`}>
-              <button>{p.product_type}</button>
-            </Link>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
