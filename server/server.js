@@ -204,11 +204,10 @@ app.post('/contact', async (req, res) => {
 
 app.get("/search", async (req, res) => {
     const { q } = req.query;
-
     try {
         const result = await pool.query(
             `SELECT * FROM products 
-             WHERE LOWER(product_name) LIKE LOWER($1)`,
+            WHERE LOWER(product_name) LIKE LOWER($1)`,
             [`%${q}%`]
         );
 
