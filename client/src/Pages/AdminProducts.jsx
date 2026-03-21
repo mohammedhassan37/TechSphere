@@ -183,7 +183,8 @@ const [showInfo, setShowInfo] = useState(true);
         </select>
       </div>
 
-      <div className="products-container" style={{ display: showInfo ? "block" : "none" }}>
+      {showInfo && (
+  <div className="products-container">
         <table className="products-table">
           <thead>
             <tr>
@@ -229,9 +230,12 @@ const [showInfo, setShowInfo] = useState(true);
           </tbody>
         </table>
       </div>
-
-{showInfo && (
-  <div className="add-product-form">
+      )}
+{!showInfo && (
+  <div
+  className="add-product-form"
+  style={{ display: showInfo ? "none" : "block" }}
+>
     <div className="add-product-card">
 
       <div className="form full-width">
@@ -269,7 +273,7 @@ const [showInfo, setShowInfo] = useState(true);
     </div>
     <div className="form">
           <label>Image Key</label>
-          <input type="text" placeholder="e.g. samsungGalaxy" />
+          <input type="text" placeholder="e.g. iphone16" />
         </div>
       </div>
 
@@ -283,9 +287,7 @@ const [showInfo, setShowInfo] = useState(true);
       </div>
   </div>
 )}
-
     </div>
-
   );
 }
 
