@@ -158,16 +158,26 @@ const [editProduct, setEditProduct] = useState({
         <button
           className="add-product"
           onClick={() => {
-    setShowInfo(false);
-    setShowEditForm(false);
+    if (showEditForm) {
+      setShowEditForm(false);
+      setShowInfo(true);
+    } else if (!showInfo) {
+      setShowInfo(true);
+    } else {
+      setShowInfo(false);
+    }
   }}
 >
-  + Add Product
+  {showEditForm ? "← Back" : showInfo ? "+ Add Product" : "← Back"}
         </button>
       </div>
 
       <p className="admin-products-info">
-        View and manage all products in your store
+        {showEditForm
+    ? "Update product details below"
+    : !showInfo
+    ? "Enter the new product details below"
+    : "View and manage all products in your store"}
       </p>
 
       {error && <p>{error}</p>}
@@ -197,7 +207,7 @@ const [editProduct, setEditProduct] = useState({
         </select>
       </div>
 
-      {showInfo && (
+      {showInfo && !showEditForm && (
   <div className="products-container">
         <table className="products-table">
           <thead>
@@ -260,7 +270,7 @@ const [editProduct, setEditProduct] = useState({
         </table>
       </div>
       )}
-{!showInfo && (
+{!showInfo && !showEditForm && (
   <div
   className="add-product-form"
   style={{ display: showInfo ? "none" : "block" }}
@@ -269,22 +279,59 @@ const [editProduct, setEditProduct] = useState({
 
       <div className="form full-width">
         <label>Product Name *</label>
-        <input type="text" placeholder="Enter a product name" />
+        <input type="text" 
+        value={editProduct.product_name}
+          placeholder="Enter a product name"
+          onChange={(e) =>
+            setEditProduct({
+              ...editProduct,
+              product_name: e.target.value,
+            })
+          }
+        />
       </div>
 
       <div className="form full-width">
         <label>Description</label>
-        <textarea rows="4" placeholder="Enter product description"></textarea>
+        <textarea 
+          rows="4" 
+          placeholder="Enter product description"
+          value={editProduct.product_description}
+          onChange={(e) =>
+            setEditProduct({
+              ...editProduct,
+              product_description: e.target.value,
+            })
+          }
+        ></textarea>
       </div>
        <div className="form-row">
         <div className="form">
           <label>Price (£)</label>
-          <input type="number" placeholder="Enter product price" />
+          <input type="number" 
+          value={editProduct.product_price}
+            placeholder="Enter product price"
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                product_price: e.target.value,
+              })
+            }
+          />
+
         </div>
 
         <div className="form">
           <label>Category</label>
           <select>
+            value={editProduct.product_type}
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                product_type: e.target.value,
+              })
+            }
+          
             <option>Phones</option>
             <option>Headphones</option>
             <option>Smartwatches</option>
@@ -297,17 +344,41 @@ const [editProduct, setEditProduct] = useState({
       <div className="form-row">
         <div className="form">
           <label>Stock</label>
-          <input type="number" placeholder="Enter stock quantity" />
+          <input type="number" value={editProduct.product_quantity}
+            placeholder="Enter stock quantity"
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                product_quantity: e.target.value,
+              })
+            }
+          />
         </div>
     </div>
     <div className="form">
           <label>Image Key</label>
-          <input type="text" placeholder="e.g. iphone16" />
+          <input type="text" 
+          value={editProduct.product_img}
+            placeholder="e.g. iphone16"
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                product_img: e.target.value,
+              })
+            }
+          />
         </div>
       </div>
 
       <div className="add-product-actions">
-        <button onClick={() => setShowInfo(true)} className="cancel-product-button">
+         <button
+          type="button"
+          className="cancel-product-button"
+          onClick={() => {
+            setShowEditForm(false);
+            setShowInfo(true);
+          }}
+        >
           Cancel
         </button>
         <button className="save-product-button">
