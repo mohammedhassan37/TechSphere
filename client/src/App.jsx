@@ -25,6 +25,7 @@ import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminOrders from "./Pages/AdminOrders.jsx";
 import ManageRevenue from "./Pages/AdminRevenue.jsx";
 import ShopByCategory from "./components/ShopByCategory.jsx";
+import ChatBot from "./components/ChatBot.jsx";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<><Carousel /><FP /><ShopByCategory /><WhyChooseUs /></>} />
+        <Route path="/" element={<><Carousel /><FP /><ShopByCategory /> <ChatBot /> <WhyChooseUs /></>} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/headphones" element={<Headphones />} />
