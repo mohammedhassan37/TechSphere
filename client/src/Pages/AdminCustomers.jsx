@@ -143,38 +143,40 @@ function AdminCustomers() {
 
       )}
 
-      <div className="customers-container">
-        <table className="customers-table">
-          <thead>
-            <tr>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Location</th>
-              <th>Total Orders</th>
-              <th>Total Spent</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {customers.map((customer, index) => (
-              <tr key={index}>
-                <td>{customer.fullName}</td>
-                <td>{customer.email}</td>
-                <td>{customer.phoneNum}</td>
-                <td>{customer.location}</td>
-                <td>{customer.totalOrders}</td>
-                <td>{customer.totalSpent}</td>
-                <td>
-                  <button className="edit-button">Edit Row</button>
-                  <button className="delete-button">Delete Row</button>
-                </td>
+      {!showForm && (
+        <div className="customers-container">
+          <table className="customers-table">
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Location</th>
+                <th>Total Orders</th>
+                <th>Total Spent</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+
+            <tbody>
+              {customers.map((customer, index) => (
+                <tr key={index}>
+                  <td>{customer.fullName}</td>
+                  <td>{customer.email}</td>
+                  <td>{customer.phoneNum}</td>
+                  <td>{customer.location}</td>
+                  <td>{customer.totalOrders}</td>
+                  <td>{customer.totalSpent}</td>
+                  <td>
+                    <button className="edit-button">Edit Row</button>
+                    <button className="delete-button">Delete Row</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
     );
 }
