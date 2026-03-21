@@ -1,7 +1,5 @@
 import "../Styles/AdminProducts.css";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 
 import tv from "../assets/tv.webp";
 import tcl_tv from "../assets/tcl_tv.webp";
@@ -160,7 +158,7 @@ const [showInfo, setShowInfo] = useState(true);
 
       {error && <p>{error}</p>}
 
-      <div className="orders-features">
+      <div className="orders-features" >
         <input
           type="text"
           placeholder="Search by Product Name or Category..."
@@ -232,12 +230,23 @@ const [showInfo, setShowInfo] = useState(true);
         </table>
       </div>
 
-<div className="add-product-form" style={{ display: showInfo ? "block" : "none" }}>
-<p>dfdfnvdjnc</p>
-<style>
+{showInfo && (
+  <div className="add-product-form">
+    <div className="add-product-card">
 
-</style>
+      <div className="form-group full-width">
+        <label>Product Name *</label>
+        <input type="text" placeholder="Enter product name" />
+      </div>
+
+      <div className="form-group full-width">
+        <label>Description</label>
+        <textarea rows="4" placeholder="Enter description"></textarea>
+      </div>
     </div>
+  </div>
+
+)}
 
     </div>
 
