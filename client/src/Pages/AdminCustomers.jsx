@@ -1,6 +1,59 @@
 import "../Styles/AdminCustomers.css";
+import { useState, useEffect } from "react";
 
 function AdminCustomers() {
+  const [customers, setCustomers] = useState([
+    {
+      fullName: "Alice Smith",
+      email: "alice123@gmail.com",
+      phoneNum: "07794892293",
+      location: "Birmingham",
+      totalOrders: 4,
+      totalSpent: "£999.99"
+    },
+    {
+      fullName: "Bob Jones",
+      email: "bob2@outlook.com",
+      phoneNum: "07754178357",
+      location: "London",
+      totalOrders: 2,
+      totalSpent: "£301.98"
+    },
+    {
+      fullName: "Charlie Davies",
+      email: "charlieD@outlook.com",
+      phoneNum: "07355825797",
+      location: "Birmingham",
+      totalOrders: 1,
+      totalSpent: "£1099.99"
+    },
+    {
+      fullName: "John Williams",
+      email: "johnW@gmail.com",
+      phoneNum: "07355825797",
+      location: "Belfast",
+      totalOrders: 2,
+      totalSpent: "£149.99"
+    },
+    {
+      fullName: "Jane Williams",
+      email: "jane87@outlook.com",
+      phoneNum: "07275921650",
+      location: "Glasgow",
+      totalOrders: 1,
+      totalSpent: "£229.99"
+    },
+    {
+      fullName: "Henry Brown",
+      email: "henry6@yahoo.com",
+      phoneNum: "0748928492",
+      location: "Manchester",
+      totalOrders: 3,
+      totalSpent: "£599.97"
+    }
+  ]);
+
+
     return(
       <div className="admin-customers">
         <div className="admin-customers-header">
@@ -33,78 +86,20 @@ function AdminCustomers() {
           </thead>
 
           <tbody>
-            <tr>
-              <td>Alice Smith</td>
-              <td>alice123@gmail.com</td>
-              <td>07794892293</td>
-              <td>Birmingham</td>
-              <td>4</td>
-              <td>£999.99</td>
-              <td>
-                <button className="edit-button">Edit Row</button>
-                <button className="delete-button">Delete Row</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Bob Jones</td>
-              <td>bob2@outlook.com</td>  
-              <td>07754178357</td>
-              <td>London</td>
-              <td>2</td>
-              <td>£301.98</td>
-              <td>
-                <button className="edit-button">Edit Row</button>
-                <button className="delete-button">Delete Row</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Charlie Davies </td>
-              <td>charlieD@outlook.com</td>
-              <td>07355825797</td>
-              <td>Birmingham</td>
-              <td>1</td>
-              <td>£1099.99</td>
-              <td>
-                <button className="edit-button">Edit Row</button>
-                <button className="delete-button">Delete Row</button>
-              </td>
-            </tr>
-            <tr>
-              <td>John Williams</td>
-              <td>johnW@gmail.com</td>
-              <td>07355825797</td>
-              <td>Belfast</td>
-              <td>2</td>
-              <td>£149.99</td>
-              <td>
-                <button className="edit-button">Edit Row</button>
-                <button className="delete-button">Delete Row</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Jane Williams</td>
-              <td>jane87@outlook.com</td>
-              <td>07275921650</td>
-              <td>Glasgow</td>
-              <td>1</td>
-              <td>£229.99</td>
-              <td>
-                <button className="edit-button">Edit Row</button>
-                <button className="delete-button">Delete Row</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Henry Brown</td>
-              <td>henry6@yahoo.com</td>
-              <td>0748928492</td>
-              <td>Manchester</td>
-              <td>3</td>
-              <td>£599.97</td>
-              <td>
-                <button className="edit-button">Edit Row</button>
-                <button className="delete-button">Delete Row</button>
-              </td>
-            </tr>
+            {customers.map((customer, index) => (
+              <tr key={index}>
+                <td>{customer.fullName}</td>
+                <td>{customer.email}</td>
+                <td>{customer.phoneNum}</td>
+                <td>{customer.location}</td>
+                <td>{customer.totalOrders}</td>
+                <td>{customer.totalSpent}</td>
+                <td>
+                  <button className="edit-button">Edit Row</button>
+                  <button className="delete-button">Delete Row</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
