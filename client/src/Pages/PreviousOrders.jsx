@@ -2,7 +2,10 @@ import '../Styles/PreviousOrders.css'
 
 
 
-    <div className="previous-orders">
+    function PreviousOrders(){
+      return(
+        <>
+          <div className="previous-orders">
       <div className="previous-orders-header">
         <h1>Previous Orders</h1>
       </div>
@@ -88,3 +91,10 @@ import '../Styles/PreviousOrders.css'
         </table>
       </div>
     </div>
+
+        </>
+      )
+    }
+
+
+    export default PreviousOrders;

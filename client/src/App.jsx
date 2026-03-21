@@ -18,6 +18,7 @@ import AccountDetails from './pages/AccountDetails.jsx'
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
 import FP from './components/featured_product.jsx';
+import PreviousOrders from './Pages/PreviousOrders.jsx'
 
 
 import ProductDetails from "./Pages/ProductPage.jsx";
@@ -42,6 +43,7 @@ function App() {
   <Route path="/search" element={<SearchPage />} />
   <Route path="/product/:id" element={<ProductDetails />} />
   <Route path="/accountdetails" element={<AccountDetails />} />
+  <Route path="/orders" element={<PreviousOrders />} />
 </Routes>
 <Footer />
     </BrowserRouter>
