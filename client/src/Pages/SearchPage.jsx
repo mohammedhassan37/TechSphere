@@ -169,9 +169,4 @@ export const imageMap = {
     marshalHead,
     shokz,
 };
-
-
-<Link to={`/${slug}`}>
-              <button>{p.product_type}</button>
-            </Link>
             
