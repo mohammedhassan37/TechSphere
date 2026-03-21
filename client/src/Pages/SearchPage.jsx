@@ -171,3 +171,7 @@ export const imageMap = {
 };
 
 
+<Link to={`/${slug}`}>
+              <button>{p.product_type}</button>
+            </Link>
+            
