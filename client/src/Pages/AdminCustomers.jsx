@@ -1,5 +1,5 @@
 import "../Styles/AdminCustomers.css";
-import { useState, useEffect } from "react";
+import {useState} from "react";
 
 function AdminCustomers() {
   const [customers, setCustomers] = useState([
@@ -53,12 +53,48 @@ function AdminCustomers() {
     }
   ]);
 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNum: "",
+    location: "",
+    totalOrders: "",
+    totalSpent: ""
+  });
+
+  const [showForm, setShowForm] = useState(false);
+
+  const updateField  = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    const newCustomer = {
+      ...formData
+    };
+
+    setCustomers([...customers, newCustomer]);
+    setShowForm(false);
+    setFormData({
+      fullName: "",
+      email: "",
+      phoneNum: "",
+      location: "",
+      totalOrders: "",
+      totalSpent: ""
+    });
+  };
 
     return(
       <div className="admin-customers">
         <div className="admin-customers-header">
           <h1>Manage Customers</h1>
-          <button className="add-customer">+ Add Customer</button>
+          <button className="add-customer" onClick={() => setShowForm(true)}>+ Add Customer</button>
       </div>
 
       <p className="admin-customers-info">
@@ -66,10 +102,35 @@ function AdminCustomers() {
       </p>
       
       <div className="customers-features">
-        <input
-          type="text"
-          placeholder="Search by Customer Name or Email.." className="search"/>
+        <input type="text" placeholder="Search by Customer Name or Email.." className="search"/>
       </div>
+      
+      {showForm && (
+        <form className="customer-form" onSubmit={submitForm}>
+          <input type="text" name="fullName" placeholder="Full Name" 
+          value={formData.fullName} onChange={updateField} required/>
+
+          <input type="email" name="email" placeholder="Email"
+          value={formData.email} onChange={updateField} required/>
+
+          <input type="tel" name="phoneNum" placeholder="Phone Number"
+          value={formData.phoneNum}onChange={updateField} required/>
+
+          <input type="text" name="location" placeholder="Location"
+          value={formData.location} onChange={updateField} required/>
+
+          <input type="number" name="totalOrders" placeholder="Orders"
+          value={formData.totalOrders} onChange={updateField} required/>
+
+          <input type="number" name="totalSpent" placeholder="Total Spent" 
+          value={formData.totalSpent} onChange={updateField} required/>
+
+          <button type="submit">Add Customer</button>
+          <button type="button" onClick={() => setShowForm(false)}>
+            Cancel
+          </button>
+        </form>
+      )}
 
       <div className="customers-container">
         <table className="customers-table">
@@ -104,8 +165,6 @@ function AdminCustomers() {
         </table>
       </div>
     </div>
-
-
     );
 }
 
