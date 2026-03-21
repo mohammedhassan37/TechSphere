@@ -17,7 +17,7 @@ import AccountDetails from './Pages/AccountDetails.jsx';
 
 import Carousel from './Components/Carousel.jsx';
 import Header from './Components/Header.jsx';
-import FP from './Components/featured_product.jsx';
+import FP from "./Components/FeaturedProduct.jsx";
 import ProductDetails from "./Pages/ProductPage.jsx";
 import Admin from "./Pages/Admin.jsx";
 import AdminProducts from "./Pages/AdminProducts.jsx";
