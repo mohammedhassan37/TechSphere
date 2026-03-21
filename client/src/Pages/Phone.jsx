@@ -130,6 +130,7 @@ function Phone() {
   const navigate = useNavigate();
 
   const [sortOption, setSortOption] = useState("");
+  const [maxPrice, setMaxPrice] = useState(1200);
 
   const addToBasket = (product) => {
     let basket = JSON.parse(localStorage.getItem("basket")) || [];
@@ -151,20 +152,16 @@ function Phone() {
     navigate(`/product/${product.id}`, { state: product });
   };
 
-  // The sort seciton 
-  const sortedProducts = [...products].sort((a, b) => {
-  if (sortOption === "low-high") {
-    return a.price - b.price;
-  }
-  if (sortOption === "high-low") {
-    return b.price - a.price;
-  }
-  if (sortOption === "a-z") {
-    return a.name.localeCompare(b.name);
-  }
-  if (sortOption === "z-a") {
-    return b.name.localeCompare(a.name);
-  }
+  // The price filter
+ let filteredProducts = products.filter(
+  (product) => product.price <= maxPrice
+);
+
+filteredProducts.sort((a, b) => {
+  if (sortOption === "low-high") return a.price - b.price;
+  if (sortOption === "high-low") return b.price - a.price;
+  if (sortOption === "a-z") return a.name.localeCompare(b.name);
+  if (sortOption === "z-a") return b.name.localeCompare(a.name);
   return 0;
 });
 
@@ -178,8 +175,7 @@ function Phone() {
   <label>Sort By: </label>
   <select
     value={sortOption}
-    onChange={(e) => setSortOption(e.target.value)}
-  >
+    onChange={(e) => setSortOption(e.target.value)}  > 
     <option value="">Default</option>
     <option value="low-high">Price: Low to High</option>
     <option value="high-low">Price: High to Low</option>
@@ -188,8 +184,21 @@ function Phone() {
   </select>
 </div>
 
+{/* FILTER */}
+<div className="filter-container">
+  <label>Max Price: £{maxPrice}</label>
+  <input
+    type="range"
+    min="0"
+    max="1200"
+    value={maxPrice}
+    onChange={(e) => setMaxPrice(e.target.value)}
+  />
+</div>
+
+
       <div className="product_container">
-        {sortedProducts.map(product => (
+        {filteredProducts.map(product => (
           <div
             key={product.id}
             className="product_cards"
