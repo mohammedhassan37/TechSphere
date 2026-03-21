@@ -48,6 +48,7 @@ import shokz from "../assets/shokz_headphones.webp";
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -57,66 +58,70 @@ function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
+      setError("");
+
       const response = await fetch(`${API_URL}/products`, {
         credentials: "include",
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch products");
+        throw new Error(`Failed to fetch products: ${response.status}`);
       }
 
       const data = await response.json();
       setProducts(data);
+      console.log("Products:", data);
     } catch (error) {
       console.error("Error fetching products:", error);
+      setError("Could not load products.");
     }
   };
 
   const imageMap = {
-    tv: tv,
-    tcl_tv: tcl_tv,
-    hisense_tv: hisense_tv,
-    toshiba_tv: toshiba_tv,
-    samsung_tv3: samsung_tv3,
-    samsung_tv2: samsung_tv2,
-    bush_tv: bush_tv,
-    sony_tv: sony_tv,
+    tv,
+    tcl_tv,
+    hisense_tv,
+    toshiba_tv,
+    samsung_tv3,
+    samsung_tv2,
+    bush_tv,
+    sony_tv,
 
     tablet_1: tablet,
-    honour: honour,
-    lenevo: lenevo,
+    honour,
+    lenevo,
     tablet_2: tablet_A9,
     ipad_1: ipad,
     ipad_2: ipad_air,
     amazon_fire1: amazon_fire,
-    amazon_fire2: amazon_fire2,
+    amazon_fire2,
 
-    HUAWEI: HUAWEI,
-    reflex_watch: reflex_watch,
-    apple_watch: apple_watch,
-    samsung_watch: samsung_watch,
-    garmin_watch: garmin_watch,
-    fitbit_watch: fitbit_watch,
-    samsung_watch2: samsung_watch2,
-    garmin_watch2: garmin_watch2,
+    HUAWEI,
+    reflex_watch,
+    apple_watch,
+    samsung_watch,
+    garmin_watch,
+    fitbit_watch,
+    samsung_watch2,
+    garmin_watch2,
 
-    phone: phone,
-    samsungGalaxy: samsungGalaxy,
-    motorola: motorola,
-    iphone16: iphone16,
-    googlePixel: googlePixel,
-    xiaomi: xiaomi,
-    iphonePink: iphonePink,
-    samsungFlip: samsungFlip,
+    phone,
+    samsungGalaxy,
+    motorola,
+    iphone16,
+    googlePixel,
+    xiaomi,
+    iphonePink,
+    samsungFlip,
 
     JBL720: headphone,
-    sonyWH: sonyWH,
-    beatsPro: beatsPro,
-    airMax1: airMax1,
-    airMax2: airMax2,
-    jLab: jLab,
-    marshalHead: marshalHead,
-    shokz: shokz,
+    sonyWH,
+    beatsPro,
+    airMax1,
+    airMax2,
+    jLab,
+    marshalHead,
+    shokz,
   };
 
   const getStatusClass = (status) => {
@@ -125,6 +130,10 @@ function AdminProducts() {
     if (status === "Running Out") return "running-out";
     if (status === "Out of Stock") return "out-of-stock";
     return "";
+  };
+
+  const getProductImage = (productImg) => {
+    return imageMap[productImg] || phone;
   };
 
   return (
@@ -137,6 +146,8 @@ function AdminProducts() {
       <p className="admin-products-info">
         View and manage all products in your store
       </p>
+
+      {error && <p>{error}</p>}
 
       <div className="orders-features">
         <input
@@ -181,8 +192,11 @@ function AdminProducts() {
               <tr key={product.product_id}>
                 <td className="product-cell">
                   <img
-                    src={imageMap[product.product_img]}
+                    src={getProductImage(product.product_img)}
                     alt={product.product_name}
+                    onError={(e) => {
+                      e.target.src = phone;
+                    }}
                   />
                   {product.product_name}
                 </td>
