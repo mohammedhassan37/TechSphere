@@ -6,6 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000
 
 function Registration() {
   const [email, setEmail] = useState("");
+  const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
@@ -13,12 +14,27 @@ function Registration() {
   const [message, setMessage] = useState("");
   const [isLogin, setIsLogin] = useState(true);
 
+  const [fullnameError, setFullnameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [locationError, setLocationError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const navigate = useNavigate();
+
+  const validateFullname = (value) => {
+    const nameRegex = /^[A-Za-z\s]{2,}$/;
+
+    if (!value) {
+      setFullnameError("");
+    } else if (!nameRegex.test(value)) {
+      setFullnameError(
+        "Full name must contain only letters and be at least 2 characters"
+      );
+    } else {
+      setFullnameError("");
+    }
+  };
 
   const validatePhone = (value) => {
     const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
@@ -73,21 +89,49 @@ function Registration() {
     setMessage("");
 
     if (!isLogin) {
-      validatePhone(phonenumber);
-      validateLocation(location);
-      validatePassword(password);
-      validateConfirmPassword(confirmPassword, password);
-
+      const nameRegex = /^[A-Za-z\s]{2,}$/;
       const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
       const locationRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
 
-      if (
-        !ukPhoneRegex.test(phonenumber) ||
-        !locationRegex.test(location) ||
-        password.length < 8 ||
-        password !== confirmPassword
-      ) {
+      if (!nameRegex.test(fullname)) {
+        setFullnameError(
+          "Full name must contain only letters and be at least 2 characters"
+        );
         return;
+      } else {
+        setFullnameError("");
+      }
+
+      if (!ukPhoneRegex.test(phonenumber)) {
+        setPhoneError(
+          "Phone number must be a valid UK mobile number, e.g. 07123456789 or +447123456789"
+        );
+        return;
+      } else {
+        setPhoneError("");
+      }
+
+      if (!locationRegex.test(location)) {
+        setLocationError(
+          "Location must be in the format Country, City e.g. Germany, Berlin"
+        );
+        return;
+      } else {
+        setLocationError("");
+      }
+
+      if (password.length < 8) {
+        setPasswordError("Password must be at least 8 characters long");
+        return;
+      } else {
+        setPasswordError("");
+      }
+
+      if (password !== confirmPassword) {
+        setConfirmPasswordError("Passwords do not match");
+        return;
+      } else {
+        setConfirmPasswordError("");
       }
     }
 
@@ -102,6 +146,7 @@ function Registration() {
         credentials: "include",
         body: JSON.stringify({
           email,
+          fullname,
           phonenumber,
           location,
           password,
@@ -118,10 +163,12 @@ function Registration() {
         } else {
           setIsLogin(true);
           setEmail("");
+          setFullname("");
           setPassword("");
           setConfirmPassword("");
           setPhonenumber("");
           setLocation("");
+          setFullnameError("");
           setPhoneError("");
           setLocationError("");
           setPasswordError("");
@@ -151,6 +198,11 @@ function Registration() {
               onClick={() => {
                 setIsLogin(true);
                 setMessage("");
+                setFullnameError("");
+                setPhoneError("");
+                setLocationError("");
+                setPasswordError("");
+                setConfirmPasswordError("");
               }}
             >
               Login
@@ -162,6 +214,11 @@ function Registration() {
               onClick={() => {
                 setIsLogin(false);
                 setMessage("");
+                setFullnameError("");
+                setPhoneError("");
+                setLocationError("");
+                setPasswordError("");
+                setConfirmPasswordError("");
               }}
             >
               Sign up
@@ -183,6 +240,21 @@ function Registration() {
                 <>
                   <input
                     type="text"
+                    name="fullname"
+                    value={fullname}
+                    onChange={(e) => {
+                      setFullname(e.target.value);
+                      validateFullname(e.target.value);
+                    }}
+                    placeholder="Enter Your Full Name"
+                    required
+                  />
+                  {fullnameError && (
+                    <small className="field-error">{fullnameError}</small>
+                  )}
+
+                  <input
+                    type="text"
                     name="phonenumber"
                     value={phonenumber}
                     onChange={(e) => {
@@ -192,7 +264,9 @@ function Registration() {
                     placeholder="07123456789"
                     required
                   />
-                  {phoneError && <small className="field-error">{phoneError}</small>}
+                  {phoneError && (
+                    <small className="field-error">{phoneError}</small>
+                  )}
 
                   <input
                     type="text"
@@ -202,7 +276,7 @@ function Registration() {
                       setLocation(e.target.value);
                       validateLocation(e.target.value);
                     }}
-                    placeholder="England, Birmingham"
+                    placeholder="Germany, Berlin"
                     required
                   />
                   {locationError && (
@@ -243,7 +317,9 @@ function Registration() {
                     required
                   />
                   {confirmPasswordError && (
-                    <small className="field-error">{confirmPasswordError}</small>
+                    <small className="field-error">
+                      {confirmPasswordError}
+                    </small>
                   )}
                 </>
               )}
