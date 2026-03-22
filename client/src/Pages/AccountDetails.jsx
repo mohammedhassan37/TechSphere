@@ -23,10 +23,10 @@ function AccountDetails(){
                     <p>Personal Info</p>
                 </div>
                 <div className="AccountDetailsReviews">
-                    <p>Personal Info</p>
+                    <p>My Reviews</p>
                 </div>
                 <div className="AccountDetailsSettings">
-                    <p>Personal Info</p>
+                    <p>Settings</p>
                 </div>
             </div>
         </>
