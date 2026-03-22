@@ -78,7 +78,7 @@ function AdminCustomers() {
   const updatedCustomers = customers.filter((_, index) => index != deleteRow);
   setCustomers(updatedCustomers);
   };
-  
+
   const updateField  = (e) => {
     setFormData({
       ...formData,
@@ -154,8 +154,8 @@ function AdminCustomers() {
             value={formData.totalSpent} onChange={updateField}/>
 
             <div className="form-button">
-              <button type="submit" className="edit-button"> {editCustomerIndex == null ? "Add Customer" : "Confirm Edit"}</button>
-              <button type="button" className="edit-button" onClick={() => setShowForm(false)}>
+              <button type="submit" className="form-confirm-button"> {editCustomerIndex == null ? "Add Customer" : "Confirm Edit"}</button>
+              <button type="button" className="form-cancel-button" onClick={() => setShowForm(false)}>
                 Cancel
               </button>
             </div>
