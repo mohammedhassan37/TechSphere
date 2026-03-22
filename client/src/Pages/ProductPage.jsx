@@ -35,25 +35,30 @@ function ProductDetails() {
       <div className="details-info">
         <h1>{product.name}</h1>
         <h2>£{product.price}</h2>
+<<<<<<< Updated upstream
       
 
           {/* CHANGES THE PRODUCT PAGE SPECIFICATIONS */}
+=======
+
+        {/* CHANGES THE PRODUCT PAGE SPECIFICATIONS */}
+>>>>>>> Stashed changes
         {/* PREVIOUS COMMMITS ONLY ACCOUNTS FOR PHONES/TABLETS SPECS*/}
         <h3>Specifications</h3>
-      <ul>
-        {Object.entries(product.specs).map(([key, value]) => {
+        <ul>
+          {Object.entries(product.specs || {}).map(([key, value]) => {
+            const formattedKey = key
+              .replace(/([A-Z])/g, " $1")
+              .replace(/^./, str => str.toUpperCase());
+            //This is used JUST for adding a before each capital letter (except the first)
 
-          const formattedKey = key.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
-          //This is used JUST for adding a before each capital letter (except the first)
-
-          return (
-            <li key={key}>
-              {formattedKey}: {value}
-            </li>
-          );
-        })}
-      </ul>
-
+            return (
+              <li key={key}>
+                {formattedKey}: {value}
+              </li>
+            );
+          })}
+        </ul>
 
         <button onClick={addToBasket} className="add-btn">
           Add to Basket
