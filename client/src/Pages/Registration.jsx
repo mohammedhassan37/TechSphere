@@ -170,19 +170,17 @@ function Registration() {
 
           <form onSubmit={handleSubmit}>
             <div className="FormContainerLogin">
-              <label>Email</label>
               <input
                 type="email"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="✉️ Enter Your Email"
+                placeholder="Enter Your Email"
                 required
               />
 
               {!isLogin && (
                 <>
-                  <label>Phone number</label>
                   <input
                     type="text"
                     name="phonenumber"
@@ -191,12 +189,11 @@ function Registration() {
                       setPhonenumber(e.target.value);
                       validatePhone(e.target.value);
                     }}
-                    placeholder="📞 07123456789"
+                    placeholder="07123456789"
                     required
                   />
                   {phoneError && <small className="field-error">{phoneError}</small>}
 
-                  <label>Location</label>
                   <input
                     type="text"
                     name="location"
@@ -205,7 +202,7 @@ function Registration() {
                       setLocation(e.target.value);
                       validateLocation(e.target.value);
                     }}
-                    placeholder="📍 Germany, Berlin"
+                    placeholder="England, Birmingham"
                     required
                   />
                   {locationError && (
@@ -214,7 +211,6 @@ function Registration() {
                 </>
               )}
 
-              <label>Password</label>
               <input
                 type="password"
                 name="password"
@@ -226,7 +222,7 @@ function Registration() {
                     validateConfirmPassword(confirmPassword, e.target.value);
                   }
                 }}
-                placeholder="🔐 Enter Your Password"
+                placeholder="Enter Your Password"
                 required
               />
               {!isLogin && passwordError && (
@@ -235,7 +231,6 @@ function Registration() {
 
               {!isLogin && (
                 <>
-                  <label>Confirm Password</label>
                   <input
                     type="password"
                     name="confirmPassword"
@@ -244,7 +239,7 @@ function Registration() {
                       setConfirmPassword(e.target.value);
                       validateConfirmPassword(e.target.value, password);
                     }}
-                    placeholder="🔐 Confirm Password"
+                    placeholder="Confirm Password"
                     required
                   />
                   {confirmPasswordError && (
