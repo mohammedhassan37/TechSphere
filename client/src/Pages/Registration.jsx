@@ -13,32 +13,80 @@ function Registration() {
   const [message, setMessage] = useState("");
   const [isLogin, setIsLogin] = useState(true);
 
+  const [phoneError, setPhoneError] = useState("");
+  const [locationError, setLocationError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
   const navigate = useNavigate();
+
+  const validatePhone = (value) => {
+    const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
+
+    if (!value) {
+      setPhoneError("");
+    } else if (!ukPhoneRegex.test(value)) {
+      setPhoneError(
+        "Phone number must be a valid UK mobile number, e.g. 07123456789 or +447123456789"
+      );
+    } else {
+      setPhoneError("");
+    }
+  };
+
+  const validateLocation = (value) => {
+    const locationRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+    if (!value) {
+      setLocationError("");
+    } else if (!locationRegex.test(value)) {
+      setLocationError(
+        "Location must be in the format Country, City e.g. Germany, Berlin"
+      );
+    } else {
+      setLocationError("");
+    }
+  };
+
+  const validatePassword = (value) => {
+    if (!value) {
+      setPasswordError("");
+    } else if (value.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const validateConfirmPassword = (value, currentPassword) => {
+    if (!value) {
+      setConfirmPasswordError("");
+    } else if (value !== currentPassword) {
+      setConfirmPasswordError("Passwords do not match");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
 
     if (!isLogin) {
+      validatePhone(phonenumber);
+      validateLocation(location);
+      validatePassword(password);
+      validateConfirmPassword(confirmPassword, password);
+
       const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
       const locationRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
 
-      if (!ukPhoneRegex.test(phonenumber)) {
-        setMessage("Phone number must be a valid UK mobile number, e.g. 07123456789 or +447123456789");
-        return;
-      }
-
-      if (!locationRegex.test(location)) {
-        setMessage("Location must be in the format Country, City e.g. Germany, Berlin");
-        return;
-      }
-
-      if (password.length < 8) {
-        setMessage("Password must be at least 8 characters long");
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        setMessage("Passwords do not match");
+      if (
+        !ukPhoneRegex.test(phonenumber) ||
+        !locationRegex.test(location) ||
+        password.length < 8 ||
+        password !== confirmPassword
+      ) {
         return;
       }
     }
@@ -74,6 +122,10 @@ function Registration() {
           setConfirmPassword("");
           setPhonenumber("");
           setLocation("");
+          setPhoneError("");
+          setLocationError("");
+          setPasswordError("");
+          setConfirmPasswordError("");
           setMessage("Account created successfully. Please log in.");
         }
       }
@@ -96,7 +148,10 @@ function Registration() {
             <button
               type="button"
               className={isLogin ? "active" : ""}
-              onClick={() => setIsLogin(true)}
+              onClick={() => {
+                setIsLogin(true);
+                setMessage("");
+              }}
             >
               Login
             </button>
@@ -104,7 +159,10 @@ function Registration() {
             <button
               type="button"
               className={!isLogin ? "active" : ""}
-              onClick={() => setIsLogin(false)}
+              onClick={() => {
+                setIsLogin(false);
+                setMessage("");
+              }}
             >
               Sign up
             </button>
@@ -129,24 +187,30 @@ function Registration() {
                     type="text"
                     name="phonenumber"
                     value={phonenumber}
-                    onChange={(e) => setPhonenumber(e.target.value)}
-                    placeholder="📞 Enter a UK number e.g. 07123456789"
-                    pattern="^(?:\+44|0)7\d{9}$"
-                    title="Enter a valid UK mobile number, e.g. 07123456789 or +447123456789"
+                    onChange={(e) => {
+                      setPhonenumber(e.target.value);
+                      validatePhone(e.target.value);
+                    }}
+                    placeholder="📞 07123456789"
                     required
                   />
+                  {phoneError && <small className="field-error">{phoneError}</small>}
 
                   <label>Location</label>
                   <input
                     type="text"
                     name="location"
                     value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder="📍 Enter location as Country, City e.g. Germany, Berlin"
-                    pattern="^[A-Za-z\s]+,\s[A-Za-z\s]+$"
-                    title="Enter location in the format Country, City e.g. Germany, Berlin"
+                    onChange={(e) => {
+                      setLocation(e.target.value);
+                      validateLocation(e.target.value);
+                    }}
+                    placeholder="📍 Germany, Berlin"
                     required
                   />
+                  {locationError && (
+                    <small className="field-error">{locationError}</small>
+                  )}
                 </>
               )}
 
@@ -155,12 +219,19 @@ function Registration() {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (!isLogin) {
+                    validatePassword(e.target.value);
+                    validateConfirmPassword(confirmPassword, e.target.value);
+                  }
+                }}
                 placeholder="🔐 Enter Your Password"
-                minLength="8"
-                title="Password must be at least 8 characters long"
                 required
               />
+              {!isLogin && passwordError && (
+                <small className="field-error">{passwordError}</small>
+              )}
 
               {!isLogin && (
                 <>
@@ -169,20 +240,16 @@ function Registration() {
                     type="password"
                     name="confirmPassword"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      validateConfirmPassword(e.target.value, password);
+                    }}
                     placeholder="🔐 Confirm Password"
-                    minLength="8"
                     required
                   />
-                </>
-              )}
-
-              {!isLogin && (
-                <>
-                  <small>Please enter location as: Country, City</small>
-                  <small>Example: Germany, Berlin</small>
-                  <small>Please enter a valid UK mobile number only</small>
-                  <small>Password must be at least 8 characters long</small>
+                  {confirmPasswordError && (
+                    <small className="field-error">{confirmPasswordError}</small>
+                  )}
                 </>
               )}
 
