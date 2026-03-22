@@ -60,7 +60,7 @@ function Header() {
                         </div>
 
                         <div className="search-wrapper">
-                         <i className="fa-solid fa-magnifying-glass search icon"></i>
+                         <i className="fa-solid fa-magnifying-glass search-icon"></i>
 
                             <input
                                 type="text"
