@@ -1,8 +1,9 @@
-import '../Styles/Registration.css'
+import "../Styles/Registration.css";
 import { useState } from "react";
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5173";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,38 +11,40 @@ function Registration() {
   const [message, setMessage] = useState("");
   const [isLogin, setIsLogin] = useState(true);
 
-  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
-    const endpoint = isLogin ? `${API_BASE_URL}/login` : `${API_BASE_URL}/signup`;
 
+    const endpoint = isLogin
+      ? `${API_BASE_URL}/login`
+      : `${API_BASE_URL}/signup`;
 
     try {
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email, password, confirmPassword }),
       });
 
       const data = await res.json();
       setMessage(data.message);
+
       if (data.success) {
         if (isLogin) {
           navigate("/");
-      } else {
-          setIsLogin(true);   
+        } else {
+          setIsLogin(true);
+          setConfirmPassword("");
+          setPassword("");
+        }
       }
-    }
-  
     } catch (err) {
+      console.error(err);
       setMessage("Server error");
     }
   };
-
-
 
   return (
     <>
@@ -54,18 +57,21 @@ function Registration() {
         <div className="FormContainerMain">
           <div className="FormContainerElements">
             <div className="FormContainerBtns">
-              <button 
-              type="button" 
-              className={isLogin ? "active" : ""}
-              onClick={() => setIsLogin(true)}>
+              <button
+                type="button"
+                className={isLogin ? "active" : ""}
+                onClick={() => setIsLogin(true)}
+              >
                 Login
               </button>
-              <button 
-              type="button"
-              className={!isLogin ? "active" : ""}
-              onClick={() => setIsLogin(false)}>
+
+              <button
+                type="button"
+                className={!isLogin ? "active" : ""}
+                onClick={() => setIsLogin(false)}
+              >
                 Sign up
-                </button>
+              </button>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -92,15 +98,15 @@ function Registration() {
 
                 {!isLogin && (
                   <>
-                  <label>Confirm Password</label>
-                  <input
-                  type="password"
-                  name="confirmPassword"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="🔐 Confirm Password"
-                  required
-                />
+                    <label>Confirm Password</label>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="🔐 Confirm Password"
+                      required
+                    />
                   </>
                 )}
 
@@ -109,8 +115,8 @@ function Registration() {
                 </button>
               </div>
             </form>
-              <p>{message}</p>
 
+            <p>{message}</p>
           </div>
         </div>
       </div>
