@@ -19,16 +19,32 @@ function AccountDetails(){
             </div>
 
             <div className="AccountDetailsSelections" >
-                <div className="AccountDetailsPersonal">
-                    <p>Personal Info</p>
-                </div>
                 <div className="AccountDetailsReviews">
-                    <p>My Reviews</p>
+                <p>Settings</p>
                 </div>
                 <div className="AccountDetailsSettings">
-                    <p>Settings</p>
+                <p>My Reviews</p>
                 </div>
             </div>
+
+            <div className="AccountDetailsEmail">
+                <p>✉️</p>
+                <p>Email Address</p>
+                <p>Email</p>
+            </div>
+
+            <div className="AccountDetailsPassword">
+                <p>🔑</p>
+                <p>title</p>
+                <button>Change password</button>
+            </div>
+
+            <div className="AccountDetailsDeleteAccount">
+                <p>Danger Zone</p>
+                <p>Permanently delete your account.</p>
+                <button>Change password</button>
+            </div>
+           
         </>
     )
 }
