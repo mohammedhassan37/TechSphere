@@ -119,11 +119,8 @@ const tabletProducts = [
 
 
 
-
 function Tablets() {
   const navigate = useNavigate();
-
-  const [sortOption, setSortOption] = useState("");
 
   //Add to basket function
   const addToBasket = (product) => {
@@ -147,20 +144,20 @@ function Tablets() {
   };
 
 
-  // THE SORT SECTION
-  const sortedProducts = [...tabletProducts].sort((a, b) => {
-  if (sortOption === "low-high") {
-    return a.price - b.price;
-  }
-  if (sortOption === "high-low") {
-    return b.price - a.price;
-  }
-  if (sortOption === "a-z") {
-    return a.name.localeCompare(b.name);
-  }
-  if (sortOption === "z-a") {
-    return b.name.localeCompare(a.name);
-  }
+
+  const [sortOption, setSortOption] = useState("");
+  const [maxPrice, setMaxPrice] = useState(1200);
+
+  // The price filter
+let filteredProducts = tabletProducts.filter(
+  (product) => product.price <= maxPrice
+
+);// The sort
+filteredProducts.sort((a, b) => {
+  if (sortOption === "low-high") return a.price - b.price;
+  if (sortOption === "high-low") return b.price - a.price;
+  if (sortOption === "a-z") return a.name.localeCompare(b.name);
+  if (sortOption === "z-a") return b.name.localeCompare(a.name);
   return 0;
 });
 
@@ -184,8 +181,21 @@ function Tablets() {
     </select>
   </div>
 
+
+    {/* FILTER */}
+    <div className="filter-container">
+      <label>Max Price: £{maxPrice}</label>
+      <input
+        type="range"
+        min="0"
+        max="1200"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+      />
+    </div>
+
       <div className="product_container">
-        {sortedProducts.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="product_cards"
