@@ -35,14 +35,9 @@ function ProductDetails() {
       <div className="details-info">
         <h1>{product.name}</h1>
         <h2>£{product.price}</h2>
-<<<<<<< Updated upstream
       
 
           {/* CHANGES THE PRODUCT PAGE SPECIFICATIONS */}
-=======
-
-        {/* CHANGES THE PRODUCT PAGE SPECIFICATIONS */}
->>>>>>> Stashed changes
         {/* PREVIOUS COMMMITS ONLY ACCOUNTS FOR PHONES/TABLETS SPECS*/}
         <h3>Specifications</h3>
         <ul>
