@@ -118,11 +118,8 @@ const smartwatchProducts = [
   }
 ];
 
-
-
 function Smartwatch() {
   const navigate = useNavigate();
-
 
   const addToBasket = (product) => {
     let basket = JSON.parse(localStorage.getItem("basket")) || [];
@@ -142,63 +139,73 @@ function Smartwatch() {
     navigate(`/product/${product.id}`, { state: product });
   };
 
-    const [sortOption, setSortOption] = useState("");
-    const [maxPrice, setMaxPrice] = useState(1200);
-     
-       // The price filter
-     let filteredProducts = smartwatchProducts.filter(
-       (product) => product.price <= maxPrice
-     
-     );// The sort
-     filteredProducts.sort((a, b) => {
-       if (sortOption === "low-high") return a.price - b.price;
-       if (sortOption === "high-low") return b.price - a.price;
-       if (sortOption === "a-z") return a.name.localeCompare(b.name);
-       if (sortOption === "z-a") return b.name.localeCompare(a.name);
-       return 0;
-     });
-  
-  
+  const [sortOption, setSortOption] = useState("");
+  const [maxPrice, setMaxPrice] = useState(1200);
 
+  // The price filter
+  let filteredProducts = smartwatchProducts.filter(
+    (product) => product.price <= maxPrice
+  );
+
+  // The sort
+  filteredProducts.sort((a, b) => {
+    if (sortOption === "low-high") return a.price - b.price;
+    if (sortOption === "high-low") return b.price - a.price;
+    if (sortOption === "a-z") return a.name.localeCompare(b.name);
+    if (sortOption === "z-a") return b.name.localeCompare(a.name);
+    return 0;
+  });
 
   return (
     <>
       <h1>Smartwatches</h1>
 
-<div className="sort-container">
-  <label>Sort By: </label>
+      {/* SINGLE HOVER DROPDOWN FOR SORT & FILTER */}
+      <div className="filter-dropdown">
+        <button className="filter-toggle">
+          Filter
+        </button>
 
-    <select
-      value={sortOption}
-      onChange={(e) => setSortOption(e.target.value)}
-    >
-      <option value="default">Default</option>
-      <option value="low-high">Price: Low to High</option>
-      <option value="high-low">Price: High to Low</option>
-      <option value="a-z">Name: A to Z</option>
-      <option value="z-a">Name: Z to A</option>
-    </select>
-  </div>
+        <div className="filter-panel">
 
-      {/* FILTER */}
-          <div className="filter-container">
+          <h2>Filter & Sort</h2>
+
+          {/* SORT */}
+          <div className="filter-section">
+            <label>Sort By: </label>
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="">Default</option>
+              <option value="low-high">Price: Low to High</option>
+              <option value="high-low">Price: High to Low</option>
+              <option value="a-z">Name: A to Z</option>
+              <option value="z-a">Name: Z to A</option>
+            </select>
+          </div>
+
+          {/* FILTER */}
+          <div className="filter-section">
             <label>Max Price: £{maxPrice}</label>
             <input
               type="range"
               min="0"
               max="1200"
               value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
             />
           </div>
 
+        </div>
+      </div>
 
       <div className="product_container">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="product_cards"
-            onClick={() => openProduct(product)}
+            onClick={() => openProduct(product)} // CLICKING LEADS TO PRODUCT PAGE
           >
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
@@ -218,8 +225,5 @@ function Smartwatch() {
     </>
   );
 }
-
-
-
 
 export default Smartwatch;
