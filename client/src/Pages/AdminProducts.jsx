@@ -216,68 +216,134 @@ const [editProduct, setEditProduct] = useState({
       </div>
 
       {showInfo && !showEditForm && (
-  <div className="products-container">
-        <table className="products-table">
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+  <>
+    <div className="products-container">
+      <table className="products-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            {products.map((product) => (
-              <tr key={product.product_id}>
-                <td className="product-cell">
-                  <img
-                    src={getProductImage(product.product_img)}
-                    alt={product.product_name}
-                    onError={(e) => {
-                      e.target.src = phone;
-                    }}
-                  />
-                  {product.product_name}
-                </td>
-                <td>{product.product_type}</td>
-                <td>£{product.product_price}</td>
-                <td>{product.product_quantity}</td>
-                <td>
-                  <span
-                    className={`status ${getStatusClass(product.stock_status)}`}
-                  >
-                    {product.stock_status}
-                  </span>
-                </td>
-                <td>
-                  
-                  <button className="edit-button"
-  onClick={() => {
-    setEditProduct({
-      product_id: product.product_id,
-      product_name: product.product_name,
-      product_description: product.product_description || "",
-      product_price: product.product_price,
-      product_type: product.product_type,
-      product_quantity: product.product_quantity,
-      product_img: product.product_img || "",
-    });
-    setShowInfo(false);
-    setShowEditForm(true);
-  }}
->
-  Edit</button>
-                  <button className="delete-button">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.product_id}>
+              <td className="product-cell">
+                <img
+                  src={getProductImage(product.product_img)}
+                  alt={product.product_name}
+                  onError={(e) => {
+                    e.target.src = phone;
+                  }}
+                />
+                {product.product_name}
+              </td>
+              <td>{product.product_type}</td>
+              <td>£{product.product_price}</td>
+              <td>{product.product_quantity}</td>
+              <td>
+                <span
+                  className={`status ${getStatusClass(product.stock_status)}`}
+                >
+                  {product.stock_status}
+                </span>
+              </td>
+              <td>
+                <button
+                  className="edit-button"
+                  onClick={() => {
+                    setEditProduct({
+                      product_id: product.product_id,
+                      product_name: product.product_name,
+                      product_description: product.product_description || "",
+                      product_price: product.product_price,
+                      product_type: product.product_type,
+                      product_quantity: product.product_quantity,
+                      product_img: product.product_img || "",
+                    });
+                    setShowInfo(false);
+                    setShowEditForm(true);
+                  }}
+                >
+                  Edit
+                </button>
+                <button className="delete-button">Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div className="stock-history">
+      <h2>Recent Stock Transactions History</h2>
+      <h3>Track incoming and outgoing Transactions</h3>
+
+      <div className="stock-list">
+        <div className="stock-item">
+          <div>
+            <p className="stock-product">iPhone 17 Pro Max</p>
+            <p className="stock-info">Stock Added</p>
+            <span className="stock-date">13 March 2026, 11:00 AM</span>
+          </div>
+          <div className="stock-change positive">+49</div>
+        </div>
+
+        <div className="stock-item">
+          <div>
+            <p className="stock-product">Samsung Galaxy S25 Ultra</p>
+            <p className="stock-info">Order Placed</p>
+            <span className="stock-date">12 March 2026, 02:50 PM</span>
+          </div>
+          <div className="stock-change negative">-1</div>
+        </div>
+
+        <div className="stock-item">
+          <div>
+            <p className="stock-product">Apple AirPods Max</p>
+            <p className="stock-info">Restocked</p>
+            <span className="stock-date">15 March 2026, 07:30 AM</span>
+          </div>
+          <div className="stock-change positive">+28</div>
+        </div>
+
+        <div className="stock-item">
+          <div>
+            <p className="stock-product">HUAWEI Watch Fit 3</p>
+            <p className="stock-info">Order Placed</p>
+            <span className="stock-date">18 March 2026, 11:50 PM</span>
+          </div>
+          <div className="stock-change negative">-1</div>
+        </div>
+
+        <div className="stock-item">
+          <div>
+            <p className="stock-product">
+              Samsung 24 Inch Smart Full HD HDR LED TV
+            </p>
+            <p className="stock-info">Restocked</p>
+            <span className="stock-date">15 March 2026, 07:30 AM</span>
+          </div>
+          <div className="stock-change positive">+15</div>
+        </div>
+
+        <div className="stock-item">
+          <div>
+            <p className="stock-product">Reflex Active Black Smart Watch</p>
+            <p className="stock-info">Stock Added</p>
+            <span className="stock-date">15 March 2026, 08:30 AM</span>
+          </div>
+          <div className="stock-change positive">+20</div>
+        </div>
       </div>
-      )}
+    </div>
+  </>
+)}
 {!showInfo && !showEditForm && (
   <div
   className="add-product-form"
