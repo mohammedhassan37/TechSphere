@@ -23,6 +23,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:5174",
   "https://techsphere-8ec2.onrender.com",
 ];
 
