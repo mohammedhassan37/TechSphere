@@ -123,7 +123,6 @@ const smartwatchProducts = [
 function Smartwatch() {
   const navigate = useNavigate();
 
-  const [sortOption, setSortOption] = useState("default");
 
   const addToBasket = (product) => {
     let basket = JSON.parse(localStorage.getItem("basket")) || [];
@@ -143,18 +142,23 @@ function Smartwatch() {
     navigate(`/product/${product.id}`, { state: product });
   };
 
-  // THE SORT SECTION
-  const sortedProducts = [...smartwatchProducts].sort((a, b) => {
-    if (sortOption === "low-high") { 
-      return a.price - b.price; }
-    if (sortOption === "high-low") {
-      return b.price - a.price; }
-    if (sortOption === "a-z") { 
-      return a.name.localeCompare(b.name); }
-    if (sortOption === "z-a") {
-      return b.name.localeCompare(a.name); }
-    return 0;
-  });
+    const [sortOption, setSortOption] = useState("");
+    const [maxPrice, setMaxPrice] = useState(1200);
+     
+       // The price filter
+     let filteredProducts = smartwatchProducts.filter(
+       (product) => product.price <= maxPrice
+     
+     );// The sort
+     filteredProducts.sort((a, b) => {
+       if (sortOption === "low-high") return a.price - b.price;
+       if (sortOption === "high-low") return b.price - a.price;
+       if (sortOption === "a-z") return a.name.localeCompare(b.name);
+       if (sortOption === "z-a") return b.name.localeCompare(a.name);
+       return 0;
+     });
+  
+  
 
 
   return (
@@ -176,8 +180,21 @@ function Smartwatch() {
     </select>
   </div>
 
+      {/* FILTER */}
+          <div className="filter-container">
+            <label>Max Price: £{maxPrice}</label>
+            <input
+              type="range"
+              min="0"
+              max="1200"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+          </div>
+
+
       <div className="product_container">
-        {sortedProducts.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="product_cards"
