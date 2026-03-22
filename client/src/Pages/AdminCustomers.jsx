@@ -123,6 +123,7 @@ function AdminCustomers() {
       {showForm && (
         <div className="add-customer-card">
           <form className="customer-form" onSubmit={submitForm}>
+            <label className ="customer-form-heading">{editCustomerIndex == null ? "Add a customer:" : "Edit Row"}</label>
             <label>Full name *</label>
             <input type="text" name="fullName" placeholder="Enter Full Name" 
             value={formData.fullName} onChange={updateField} required/>
@@ -148,7 +149,7 @@ function AdminCustomers() {
             value={formData.totalSpent} onChange={updateField}/>
 
             <div className="form-button">
-              <button type="submit">Add Customer</button>
+              <button type="submit"> {editCustomerIndex == null ? "Add Customer" : "Confirm row edit"}</button>
               <button type="button" onClick={() => setShowForm(false)}>
                 Cancel
               </button>

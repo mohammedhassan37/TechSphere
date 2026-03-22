@@ -135,3 +135,7 @@
   border: 1px solid #eaeaea;
   max-width: 900px;
 }
+
+.customer-form-heading {
+  font-size: 30px;
+}
