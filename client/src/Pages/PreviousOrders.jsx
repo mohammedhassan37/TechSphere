@@ -1,5 +1,0 @@
-function PreviousOrders() {
-  return (
-   <></>
-  );
-}
