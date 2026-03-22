@@ -21,12 +21,8 @@ function ChatBot() {
             <h3>TechSpere Support</h3>
             <p>How can we assist you?</p>
           </div>
-          <div className="chatbot-messages" id="chatMessages">
-          <div className="message bot">
-            Hi 👋 Welcome to TechSpere Support. How can I help you today?
-          </div>
-        </div>
-        <div className="chatbot-input-area">
+          
+        <div className="chatbot-input-section">
           <input
             type="text"
             id="userInput"

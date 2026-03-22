@@ -35,3 +35,37 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+.chatbot-input-section {
+  display: flex;
+  gap: 2px;
+  padding: 10px;
+  background: none;
+}
+
+.chatbot-input-section input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  outline: none;
+  font-size: 12px;
+}
+
+.chatbot-input-section input:focus {
+  border-color: whitesmoke;
+}
+
+.chatbot-input-section button {
+  border: none;
+  background: #41a9ff;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chatbot-input-section button:hover {
+  background: #0079ea;
+}
