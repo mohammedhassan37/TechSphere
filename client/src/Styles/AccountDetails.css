@@ -244,3 +244,24 @@ margin-left: 10%;
 .delete-button:hover {
   background: #be123c;
 }
+
+
+.reviews-section {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.write-review {
+  background: #0f172a;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}

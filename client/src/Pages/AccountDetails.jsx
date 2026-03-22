@@ -3,6 +3,7 @@ import '../styles/AccountDetails.css'
 
 function AccountDetails(){
     const [email, setEmail] = useState("john.doe@example.com");
+    const [activeTab, setActiveTab] = useState("settings");
     return(
         <>
             <div className="AccountDetailsIntro">
@@ -32,14 +33,24 @@ function AccountDetails(){
             </div>
 
             <div className="AccountDetailsSelections" >
-                <div className="AccountDetailsReviews">
-                <p>Settings</p>
-                </div>
-                <div className="AccountDetailsSettings">
-                <p>My Reviews</p>
-                </div>
+                <div
+    className={`tab ${activeTab === "settings" ? "active" : ""}`}
+    onClick={() => setActiveTab("settings")}
+  >
+    Settings
+  </div>
+
+  <div
+    className={`tab ${activeTab === "reviews" ? "active" : ""}`}
+    onClick={() => setActiveTab("reviews")}
+  >
+    My Reviews
+  </div>
             </div>
 
+
+            {activeTab === "settings" && (
+                <>
             <div className="AccountDetailsEmail">
                 <p>✉️</p>
                 <p>Email Address</p>
@@ -67,8 +78,23 @@ function AccountDetails(){
                 </div>
                 <button className="delete-button">Delete Account</button>
             </div>
-           
+            </>
+            )}
+
+            {activeTab === "reviews" && (
+  <div className="reviews-section">
+
+    <div className="reviews-header">
+      <div>
+        <h2>My Reviews</h2>
+        <p>View and manage your product and service reviews</p>
+      </div>
+        <button className="write-review">Write a Review</button>
+    </div>
+    </div>
+           )}
         </>
+           
     )
 }
 
