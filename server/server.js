@@ -234,7 +234,13 @@ app.get("/products", async (req, res) => {
 // Get previous orders
 app.get("/my-orders", auth, async (req, res) => {
   try {
+    console.log("Decoded user:", req.user);
+
     const userId = req.user.customer_id;
+
+    if (!userId) {
+      return res.status(400).json({ message: "Customer ID missing from token" });
+    }
 
     const result = await pool.query(
       `SELECT order_id, order_date, total_amount, status
@@ -247,7 +253,7 @@ app.get("/my-orders", auth, async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching user orders:", error);
-    res.status(500).json({ message: "Failed to fetch orders" });
+    res.status(500).json({ message: error.message });
   }
 });
 

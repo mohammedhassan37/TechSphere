@@ -22,11 +22,12 @@ function PreviousOrders() {
         credentials: "include",
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error(`Failed to fetch orders: ${response.status}`);
+        throw new Error(data.message || `Failed to fetch orders: ${response.status}`);
       }
 
-      const data = await response.json();
       setOrders(data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -59,7 +60,7 @@ function PreviousOrders() {
         statusFilter === "All Orders" || order.status === statusFilter;
 
       let matchesTime = true;
-      const orderDate = new Date(order.created_at);
+      const orderDate = new Date(order.order_date);
       const now = new Date();
 
       if (timeFilter === "Today") {
@@ -139,7 +140,7 @@ function PreviousOrders() {
               filteredOrders.map((order) => (
                 <tr key={order.order_id}>
                   <td>#{order.order_id}</td>
-                  <td>{formatDate(order.created_at)}</td>
+                  <td>{formatDate(order.order_date)}</td>
                   <td>£{Number(order.total_amount).toFixed(2)}</td>
                   <td>
                     <span className={`status ${getStatusClass(order.status)}`}>
