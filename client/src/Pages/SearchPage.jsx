@@ -269,7 +269,6 @@ const products = [
      category: "tablets",
      price: 89.99,
      image: amazon_fire2,
-     category: "tablets",
      specs: {
        screen: "10.1-inch LCD",
        storage: "32GB",
