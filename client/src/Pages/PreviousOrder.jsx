@@ -95,7 +95,7 @@ function PreviousOrders() {
         <input
           type="text"
           placeholder="Search by Order ID..."
-          className="search"
+          className="searchh"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
