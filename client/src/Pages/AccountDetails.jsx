@@ -23,7 +23,7 @@ function AccountDetails(){
 
       <div className="profile-meta">
         <span>📍 San Francisco, CA</span>
-        <span>📅 Joined March 2024</span>
+        <span>📅 Joined March 2026</span>
       </div>
     </div>
                 </div>
@@ -87,9 +87,29 @@ function AccountDetails(){
     <div className="reviews-header">
       <div>
         <h2>My Reviews</h2>
-        <p>View and manage your product and service reviews</p>
+        <p>View and manage your product reviews</p>
       </div>
         <button className="write-review">Write a Review</button>
+    </div>
+
+    <div className="review-card">
+      <div className="review-top">
+        <div>
+          <h4>Premium Wireless Headphones <span className="tag">Product</span></h4>
+          <p className="stars">⭐⭐⭐⭐⭐</p>
+        </div>
+
+        <div className="review-actions">
+          <button>Edit</button>
+          <button className="delete">Delete</button>
+        </div>
+      </div>
+
+      <p className="review-title">Excellent sound quality!</p>
+      <p className="review-content">
+        These headphones exceeded my expectations. The noise cancellation is superb and the battery life is impressive.
+      </p>
+      <span className="review-date">Reviewed on February 15, 2026</span>
     </div>
     </div>
            )}
