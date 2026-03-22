@@ -231,6 +231,27 @@ app.get("/products", async (req, res) => {
   }
 });
 
+// Get previous orders
+app.get("/my-orders", auth, async (req, res) => {
+  try {
+    const userId = req.user.customer_id;
+
+    const result = await pool.query(
+      `SELECT order_id, order_date, total_amount, status
+       FROM orders
+       WHERE customer_id = $1
+       ORDER BY order_date DESC`,
+      [userId]
+    );
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    res.status(500).json({ message: "Failed to fetch orders" });
+  }
+});
+
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
