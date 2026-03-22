@@ -18,6 +18,31 @@ function Registration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isLogin) {
+      const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
+      const locationRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+      if (!ukPhoneRegex.test(phonenumber)) {
+        setMessage("Phone number must be a valid UK mobile number, e.g. 07123456789 or +447123456789");
+        return;
+      }
+
+      if (!locationRegex.test(location)) {
+        setMessage("Location must be in the format Country, City e.g. Germany, Berlin");
+        return;
+      }
+
+      if (password.length < 8) {
+        setMessage("Password must be at least 8 characters long");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setMessage("Passwords do not match");
+        return;
+      }
+    }
+
     const endpoint = isLogin
       ? `${API_BASE_URL}/login`
       : `${API_BASE_URL}/signup`;
@@ -49,6 +74,7 @@ function Registration() {
           setConfirmPassword("");
           setPhonenumber("");
           setLocation("");
+          setMessage("Account created successfully. Please log in.");
         }
       }
     } catch (err) {
@@ -104,7 +130,9 @@ function Registration() {
                     name="phonenumber"
                     value={phonenumber}
                     onChange={(e) => setPhonenumber(e.target.value)}
-                    placeholder="📞 Enter Your Phone Number"
+                    placeholder="📞 Enter a UK number e.g. 07123456789"
+                    pattern="^(?:\+44|0)7\d{9}$"
+                    title="Enter a valid UK mobile number, e.g. 07123456789 or +447123456789"
                     required
                   />
 
@@ -114,7 +142,9 @@ function Registration() {
                     name="location"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="📍 Enter Your Location"
+                    placeholder="📍 Enter location as Country, City e.g. Germany, Berlin"
+                    pattern="^[A-Za-z\s]+,\s[A-Za-z\s]+$"
+                    title="Enter location in the format Country, City e.g. Germany, Berlin"
                     required
                   />
                 </>
@@ -127,6 +157,8 @@ function Registration() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="🔐 Enter Your Password"
+                minLength="8"
+                title="Password must be at least 8 characters long"
                 required
               />
 
@@ -139,8 +171,18 @@ function Registration() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="🔐 Confirm Password"
+                    minLength="8"
                     required
                   />
+                </>
+              )}
+
+              {!isLogin && (
+                <>
+                  <small>Please enter location as: Country, City</small>
+                  <small>Example: Germany, Berlin</small>
+                  <small>Please enter a valid UK mobile number only</small>
+                  <small>Password must be at least 8 characters long</small>
                 </>
               )}
 
