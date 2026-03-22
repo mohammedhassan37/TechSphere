@@ -25,10 +25,12 @@ import ProductDetails from "./Pages/ProductPage.jsx";
 function App() {
   return (
     <BrowserRouter>
+    <div className="app"> 
       <Header />
+      <main className="main-content">  
 
       <Routes>
-  <Route path="/" element={<><Carousel /><FP /> <WhyChooseUs /></>} />
+  <Route path="/" element={<><Carousel /><FP /></>} />
   <Route path="/about" element={<About />} />
   <Route path="/contact" element={<Contact />} />
   <Route path="/headphones" element={<Headphones />} />
@@ -43,7 +45,10 @@ function App() {
   <Route path="/product/:id" element={<ProductDetails />} />
   <Route path="/accountdetails" element={<AccountDetails />} />
 </Routes>
+</main> 
+<WhyChooseUs /> 
 <Footer />
+</div> 
     </BrowserRouter>
   );
 }
