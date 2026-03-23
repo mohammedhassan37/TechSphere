@@ -4,6 +4,13 @@ import '../styles/AccountDetails.css'
 function AccountDetails(){
     const [email, setEmail] = useState("john.doe@example.com");
     const [activeTab, setActiveTab] = useState("settings");
+    const [showForm, setShowForm] = useState(false);
+    const [userData, setUserData] = useState({
+      name: "John Doe",
+      email: "john.doe@example.com",
+      location: "San Francisco, CA"
+    });
+    
     return(
         <>
             <div className="AccountDetailsIntro">
@@ -12,22 +19,41 @@ function AccountDetails(){
             </div>
             <div className="AccountDetailsMain">
                 <div className="AccountDetailsMainInfo">
+                {showForm ? (
+                  <div className="edit-profile-form">
+                    <input type="text" placeholder="Name"  value={userData.name} 
+                    onChange={(e) => setUserData({ ...userData, name: e.target.value })}/>
 
-    <div className="profile-info">
-      <div className="profile-name-row">
-        <h3>John Doe</h3>
-        <span className="verified">Verified</span>
-      </div>
+                    <input type="email" placeholder="Email" value={userData.email} 
+                    onChange={(e) => setUserData({ ...userData, email: e.target.value })}/>
 
-      <p className="profile-email">john.doe@example.com</p>
+                    <input type="text" placeholder="Location" value={userData.location}
+                    onChange={(e) => setUserData({ ...userData, location: e.target.value })}/>
 
-      <div className="profile-meta">
-        <span>📍 San Francisco, CA</span>
-        <span>📅 Joined March 2026</span>
-      </div>
-    </div>
+                    <div className="form-button">
+                      <button onClick={() => setShowForm(false)}>
+                        Save Changes
+                      </button>
+
+                    </div>
+                  </div>
+                ) :(
+                  <div className="profile-info">
+                    <div className="profile-name-row">
+                      <h3>{userData.name}</h3>
+                      <span className="verified">Verified</span>
+                    </div>
+
+                    <p className="profile-email">{userData.email}</p>
+
+                    <div className="profile-meta">
+                      <span>📍 {userData.location}</span>
+                      <span>📅 Joined March 2026</span>
+                    </div>
+                  </div>
+                )}  
                 </div>
-                <div className="AccountDetailsEdit">
+                <div className="AccountDetailsEdit" onClick={() => setShowForm(true)}>
                     ⚙️ Edit Profile
                 </div>
             </div>
