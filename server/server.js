@@ -23,6 +23,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:5174",
   "https://techsphere-8ec2.onrender.com",
 ];
 
@@ -45,18 +46,67 @@ app.use(cookieParser());
 // SIGNUP
 app.post("/signup", async (req, res) => {
   try {
-    const { email, password, confirmPassword } = req.body;
+    const {
+      email,
+      password,
+      confirmPassword,
+      fullname,
+      phonenumber,
+      location,
+    } = req.body;
 
-    if (!email || !password || !confirmPassword) {
+    if (
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !fullname ||
+      !phonenumber ||
+      !location
+    ) {
       return res
         .status(400)
         .json({ success: false, message: "Fields cannot be empty" });
     }
 
+    const nameRegex = /^[A-Za-z\s]{2,}$/;
+    const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
+    const locationRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+    if (!nameRegex.test(fullname)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Full name must contain only letters and be at least 2 characters",
+      });
+    }
+
+    if (!ukPhoneRegex.test(phonenumber)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Phone number must be a valid UK mobile number, e.g. 07123456789 or +447123456789",
+      });
+    }
+
+    if (!locationRegex.test(location)) {
+      return res.status(400).json({
+        success: false,
+        message: "Location must be in the format Country, City",
+      });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters long",
+      });
+    }
+
     if (password !== confirmPassword) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Passwords do not match" });
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
     }
 
     const existingUser = await pool.query(
@@ -65,26 +115,31 @@ app.post("/signup", async (req, res) => {
     );
 
     if (existingUser.rows.length > 0) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Email already registered." });
+      return res.status(400).json({
+        success: false,
+        message: "Email already registered.",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await pool.query(
-      "INSERT INTO customers (customer_email, customer_password) VALUES ($1, $2)",
-      [email, hashedPassword]
+      `INSERT INTO customers 
+        (customer_email, customer_password, customer_name, customer_phone, customer_location) 
+        VALUES ($1, $2, $3, $4, $5)`,
+      [email, hashedPassword, fullname, phonenumber, location]
     );
 
-    return res
-      .status(201)
-      .json({ success: true, message: "Email has been registered." });
+    return res.status(201).json({
+      success: true,
+      message: "Account has been registered successfully.",
+    });
   } catch (err) {
     console.error(err);
-    return res
-      .status(500)
-      .json({ success: false, message: "Server error" });
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 
@@ -230,6 +285,33 @@ app.get("/products", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+// Get previous orders
+app.get("/my-orders", auth, async (req, res) => {
+  try {
+    console.log("Decoded user:", req.user);
+
+    const userId = req.user.customer_id;
+
+    if (!userId) {
+      return res.status(400).json({ message: "Customer ID missing from token" });
+    }
+
+    const result = await pool.query(
+      `SELECT order_id, order_date, total_amount, status
+       FROM orders
+       WHERE customer_id = $1
+       ORDER BY order_date DESC`,
+      [userId]
+    );
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);

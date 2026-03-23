@@ -109,3 +109,15 @@
     .FormContainerLogin input { font-size: 18px; }
     .submitBtn { font-size: 20px; }
 }
+
+.field-error {
+  display: block;
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.FormContainerLogin input{
+    color: rgb(171, 171, 171);
+}
