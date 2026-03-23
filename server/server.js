@@ -1,3 +1,5 @@
+
+
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -511,9 +513,96 @@ app.delete("/delete-account", auth, async (req, res) => {
   }
 });
 
+
+app.get("/admin/customers", auth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT 
+        c.customer_id,
+        c.customer_name,
+        c.customer_email,
+        c.customer_phone,
+        c.customer_location,
+        COUNT(o.order_id) AS total_orders,
+        COALESCE(SUM(o.total_amount), 0) AS total_spent
+       FROM customers c
+       LEFT JOIN orders o ON c.customer_id = o.customer_id
+       GROUP BY 
+        c.customer_id,
+        c.customer_name,
+        c.customer_email,
+        c.customer_phone,
+        c.customer_location
+       ORDER BY c.customer_id ASC`
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching customers:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.delete("/admin/customers/:id", auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await pool.query("DELETE FROM customers WHERE customer_id = $1", [id]);
+
+    res.json({
+      success: true,
+      message: "Customer deleted successfully",
+    });
+  } catch (err) {
+    console.error("Error deleting customer:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.put("/admin/customers/:id", auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { fullName, email, phoneNum, location } = req.body;
+
+    const result = await pool.query(
+      `UPDATE customers
+       SET customer_name = $1,
+           customer_email = $2,
+           customer_phone = $3,
+           customer_location = $4
+       WHERE customer_id = $5
+       RETURNING customer_id, customer_name, customer_email, customer_phone, customer_location`,
+      [fullName, email, phoneNum, location, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Customer not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Customer updated successfully",
+      customer: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Error updating customer:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+app.get("/test-admin-route", (req, res) => {
+  res.json({ message: "admin route works" });
+});
 
 if (isProduction) {
   app.use(express.static(path.join(__dirname, "../client/dist")));
