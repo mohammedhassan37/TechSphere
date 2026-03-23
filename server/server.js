@@ -596,6 +596,107 @@ app.put("/admin/customers/:id", auth, async (req, res) => {
   }
 });
 
+app.get("/admin/orders", async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT
+        o.order_id,
+        o.order_code,
+        c.customer_name AS customer,
+        COALESCE(SUM(oi.quantity), 0) AS items,
+        o.total_amount,
+        o.created_at,
+        o.status
+      FROM orders o
+      JOIN customers c ON o.customer_id = c.customer_id
+      LEFT JOIN order_item oi ON o.order_id = oi.order_id
+      GROUP BY 
+        o.order_id, 
+        o.order_code, 
+        c.customer_name, 
+        o.total_amount, 
+        o.created_at, 
+        o.status
+      ORDER BY o.created_at DESC
+    `);
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+});
+
+app.put("/admin/orders/:id/status", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ["pending", "processing", "shipped", "delivered"];
+
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ error: "Invalid status" });
+    }
+
+    const result = await pool.query(
+      `
+      UPDATE orders
+      SET status = $1
+      WHERE order_id = $2
+      RETURNING *
+      `,
+      [status, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    res.json({
+      message: "Order updated successfully",
+      order: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Error updating order status:", err);
+    res.status(500).json({ error: "Failed to update order status" });
+  }
+});
+
+app.put("/admin/orders/:id/status", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ["pending", "processing", "shipped", "delivered"];
+
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ error: "Invalid status" });
+    }
+
+    const result = await pool.query(
+      `
+      UPDATE orders
+      SET status = $1
+      WHERE order_id = $2
+      RETURNING *
+      `,
+      [status, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    res.json({
+      message: "Order updated successfully",
+      order: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Error updating order status:", err);
+    res.status(500).json({ error: "Failed to update order status" });
+  }
+});
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
