@@ -7,6 +7,7 @@ function PreviousOrders() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All Orders");
   const [timeFilter, setTimeFilter] = useState("All Time");
+  const [refundingOrderId, setRefundingOrderId] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -35,11 +36,48 @@ function PreviousOrders() {
     }
   };
 
+  const handleRefund = async (orderId) => {
+    try {
+      setRefundingOrderId(orderId);
+
+      const response = await fetch(`${API_URL}/orders/${orderId}/refund`, {
+        method: "PUT",
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Refund failed");
+      }
+
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.order_id === orderId
+            ? { ...order, status: "refunding" }
+            : order
+        )
+      );
+    } catch (error) {
+      console.error("Refund error:", error);
+      alert("Could not start refund.");
+    } finally {
+      setRefundingOrderId(null);
+    }
+  };
+
   const getStatusClass = (status) => {
-    if (status === "Completed") return "completed";
-    if (status === "Pending") return "pending";
-    if (status === "Cancelled") return "cancelled";
+    if (status === "completed" || status === "delivered") return "completed";
+    if (status === "pending" || status === "processing" || status === "shipped")
+      return "pending";
+    if (status === "cancelled") return "cancelled";
+    if (status === "refunding") return "refunding";
     return "";
+  };
+
+  const formatStatus = (status) => {
+    if (!status) return "";
+    return status.charAt(0).toUpperCase() + status.slice(1);
   };
 
   const formatDate = (dateString) => {
@@ -106,9 +144,12 @@ function PreviousOrders() {
           onChange={(e) => setStatusFilter(e.target.value)}
         >
           <option>All Orders</option>
-          <option>Completed</option>
-          <option>Pending</option>
-          <option>Cancelled</option>
+          <option value="pending">Pending</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="refunding">Refunding</option>
+          <option value="cancelled">Cancelled</option>
         </select>
 
         <select
@@ -144,11 +185,23 @@ function PreviousOrders() {
                   <td>£{Number(order.total_amount).toFixed(2)}</td>
                   <td>
                     <span className={`status ${getStatusClass(order.status)}`}>
-                      {order.status}
+                      {formatStatus(order.status)}
                     </span>
                   </td>
                   <td>
-                    <button className="view-button">View</button>
+                    <button
+                      className="view-button"
+                      disabled={
+                        refundingOrderId === order.order_id ||
+                        order.status === "refunding"
+                      }
+                      onClick={() => handleRefund(order.order_id)}
+                    >
+                      {refundingOrderId === order.order_id ||
+                      order.status === "refunding"
+                        ? "Refunding..."
+                        : "Refund"}
+                    </button>
                   </td>
                 </tr>
               ))

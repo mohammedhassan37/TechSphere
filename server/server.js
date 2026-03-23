@@ -697,6 +697,35 @@ app.put("/admin/orders/:id/status", async (req, res) => {
   }
 });
 
+app.put("/orders/:id/refund", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `
+      UPDATE orders
+      SET status = 'refunding'
+      WHERE order_id = $1
+      RETURNING *
+      `,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    res.json({
+      message: "Refund initiated",
+      order: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Refund error:", err);
+    res.status(500).json({ error: "Failed to refund order" });
+  }
+});
+
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
