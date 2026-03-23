@@ -19,6 +19,7 @@ const products = [
     price: 1199.99,
     image: phone,
     specs: {
+      description: " this is the iphone 17 pro max ",
       screen: "6.9-inch OLED",
       storage: "256GB",
       camera: "48MP Triple Camera",
@@ -32,6 +33,7 @@ const products = [
     price: 1099.99,
     image: samsungGalaxy,
     specs: {
+      description: "oled screen",
       screen: "6.8-inch AMOLED",
       storage: "256GB",
       camera: "200MP Quad",
