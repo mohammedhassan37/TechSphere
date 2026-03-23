@@ -6,6 +6,7 @@ function AccountDetails(){
     const [activeTab, setActiveTab] = useState("settings");
     const [showForm, setShowForm] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState("");
 
     const [userData, setUserData] = useState({
       name: "",
@@ -59,6 +60,44 @@ function AccountDetails(){
       fetchAccountDetails();
     }, []);
 
+    const handleSaveChanges = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/account-details", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            name: userData.name,
+            email: userData.email,
+            location: userData.location,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setMessage(data.message || "Failed to update details");
+          return;
+        }
+
+        setUserData({
+          name: data.user.name || "",
+          email: data.user.email || "",
+          location: data.user.location || "",
+          joined: data.user.joined || "",
+        });
+
+        setEmail(data.user.email || "");
+        setMessage("Profile updated successfully");
+        setShowForm(false);
+      } catch (error) {
+        console.error("Error updating account details:", error);
+        setMessage("Server error");
+      }
+    };
+
     const deleteReview = (deleteReview) => {
       const updatedReviews = reviews.filter(review => review.id != deleteReview);
       setReviews(updatedReviews);
@@ -81,6 +120,44 @@ function AccountDetails(){
       setReviewForm({ title: "", content: "" });
     };
 
+    const handleEmailSave = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/account-details", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        name: userData.name,
+        email: email, // <- use the email input state
+        location: userData.location,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setMessage(data.message || "Failed to update email");
+      return;
+    }
+
+    setUserData({
+      name: data.user.name || "",
+      email: data.user.email || "",
+      location: data.user.location || "",
+      joined: data.user.joined || "",
+    });
+
+    setEmail(data.user.email || "");
+    setMessage("Email updated successfully");
+
+  } catch (error) {
+    console.error("Error updating email:", error);
+    setMessage("Server error");
+  }
+};
+
     if (loading) {
       return <p>Loading...</p>;
     }
@@ -91,6 +168,9 @@ function AccountDetails(){
                 <h1>Account Details</h1>
                 <p>Mange your profile and preferences.</p>
             </div>
+
+            {message && <p>{message}</p>}
+
             <div className="AccountDetailsMain">
                 <div className="AccountDetailsMainInfo">
                 {showForm ? (
@@ -105,7 +185,7 @@ function AccountDetails(){
                     onChange={(e) => setUserData({ ...userData, location: e.target.value })}/>
 
                     <div className="form-button">
-                      <button onClick={() => setShowForm(false)}>
+                      <button onClick={handleSaveChanges}>
                         Save Changes
                       </button>
 
@@ -170,7 +250,9 @@ function AccountDetails(){
                         className="email-input"
                       />
 
-                      <button className="edit-email-button">Save</button>
+                      <button className="edit-email-button" onClick={handleEmailSave}>
+                         Save
+                      </button>
                   </div>
 
                   <div className="AccountDetailsPassword">
