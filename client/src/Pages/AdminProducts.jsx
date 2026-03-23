@@ -47,8 +47,6 @@ import jLab from "../assets/jlab_headphones.webp";
 import marshalHead from "../assets/marshall_headphones.webp";
 import shokz from "../assets/shokz_headphones.webp";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 function AdminProducts() {
   const navigate = useNavigate();
 
@@ -128,7 +126,7 @@ function AdminProducts() {
     try {
       setError("");
 
-      const response = await fetch(`${API_BASE_URL}/products`, {
+      const response = await fetch("/products", {
         credentials: "include",
       });
 
@@ -242,17 +240,14 @@ function AdminProducts() {
       let response;
 
       if (showEditForm) {
-        response = await fetch(
-          `${API_BASE_URL}/admin/products/${editProduct.product_id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(payload),
-          }
-        );
+        response = await fetch(`/admin/products/${editProduct.product_id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(payload),
+        });
       } else {
-        response = await fetch(`${API_BASE_URL}/admin/products`, {
+        response = await fetch("/admin/products", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -275,7 +270,9 @@ function AdminProducts() {
       }
 
       setSuccessMessage(
-        showEditForm ? "Product updated successfully." : "Product added successfully."
+        showEditForm
+          ? "Product updated successfully."
+          : "Product added successfully."
       );
 
       await fetchProducts();
@@ -297,7 +294,7 @@ function AdminProducts() {
       setError("");
       setSuccessMessage("");
 
-      const response = await fetch(`${API_BASE_URL}/admin/products/${productId}`, {
+      const response = await fetch(`/admin/products/${productId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -438,69 +435,6 @@ function AdminProducts() {
                 )}
               </tbody>
             </table>
-          </div>
-
-          <div className="stock-history">
-            <h2>Recent Stock Transactions History</h2>
-            <h3>Track incoming and outgoing Transactions</h3>
-
-            <div className="stock-list">
-              <div className="stock-item">
-                <div>
-                  <p className="stock-product">iPhone 17 Pro Max</p>
-                  <p className="stock-info">Stock Added</p>
-                  <span className="stock-date">13 March 2026, 11:00 AM</span>
-                </div>
-                <div className="stock-change positive">+49</div>
-              </div>
-
-              <div className="stock-item">
-                <div>
-                  <p className="stock-product">Samsung Galaxy S25 Ultra</p>
-                  <p className="stock-info">Order Placed</p>
-                  <span className="stock-date">12 March 2026, 02:50 PM</span>
-                </div>
-                <div className="stock-change negative">-1</div>
-              </div>
-
-              <div className="stock-item">
-                <div>
-                  <p className="stock-product">Apple AirPods Max</p>
-                  <p className="stock-info">Restocked</p>
-                  <span className="stock-date">15 March 2026, 07:30 AM</span>
-                </div>
-                <div className="stock-change positive">+28</div>
-              </div>
-
-              <div className="stock-item">
-                <div>
-                  <p className="stock-product">HUAWEI Watch Fit 3</p>
-                  <p className="stock-info">Order Placed</p>
-                  <span className="stock-date">18 March 2026, 11:50 PM</span>
-                </div>
-                <div className="stock-change negative">-1</div>
-              </div>
-
-              <div className="stock-item">
-                <div>
-                  <p className="stock-product">
-                    Samsung 24 Inch Smart Full HD HDR LED TV
-                  </p>
-                  <p className="stock-info">Restocked</p>
-                  <span className="stock-date">15 March 2026, 07:30 AM</span>
-                </div>
-                <div className="stock-change positive">+15</div>
-              </div>
-
-              <div className="stock-item">
-                <div>
-                  <p className="stock-product">Reflex Active Black Smart Watch</p>
-                  <p className="stock-info">Stock Added</p>
-                  <span className="stock-date">15 March 2026, 08:30 AM</span>
-                </div>
-                <div className="stock-change positive">+20</div>
-              </div>
-            </div>
           </div>
         </>
       )}

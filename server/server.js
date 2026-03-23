@@ -876,7 +876,6 @@ app.get("/admin/inventory-alerts", auth, adminOnly, async (req, res) => {
   }
 });
 
-// ESM PATHS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

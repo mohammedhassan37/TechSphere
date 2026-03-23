@@ -66,7 +66,6 @@ function Admin() {
 
   const { outOfStockProducts, lowStockProducts } = useMemo(() => {
     const outOfStock = products.filter((p) => p.stock_status === "out");
-
     const lowStock = products.filter((p) => p.stock_status === "low");
 
     return {

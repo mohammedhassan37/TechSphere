@@ -2,8 +2,6 @@ import "../Styles/AdminOrders.css";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 function AdminOrders() {
   const navigate = useNavigate();
 
@@ -23,14 +21,14 @@ function AdminOrders() {
       setLoading(true);
       setError("");
 
-      const response = await fetch(`${API_BASE_URL}/admin/orders`, {
+      const response = await fetch("/admin/orders", {
         credentials: "include",
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to fetch orders");
+        throw new Error(data.error || data.message || "Failed to fetch orders");
       }
 
       setOrders(data);
@@ -46,29 +44,24 @@ function AdminOrders() {
     try {
       setUpdatingId(orderId);
 
-      const response = await fetch(
-        `${API_BASE_URL}/admin/orders/${orderId}/status`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ status: newStatus }),
-        }
-      );
+      const response = await fetch(`/admin/orders/${orderId}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ status: newStatus }),
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to update status");
+        throw new Error(data.error || data.message || "Failed to update status");
       }
 
       setOrders((prev) =>
         prev.map((order) =>
-          order.order_id === orderId
-            ? { ...order, status: newStatus }
-            : order
+          order.order_id === orderId ? { ...order, status: newStatus } : order
         )
       );
     } catch (err) {
@@ -81,19 +74,23 @@ function AdminOrders() {
 
   const filteredOrders = useMemo(() => {
     return orders.filter((order) => {
+      const orderCode = (order.order_code || "").toLowerCase();
+      const customer = (order.customer || "").toLowerCase();
+      const search = searchTerm.toLowerCase();
+
       const matchesSearch =
-        order.order_code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.customer.toLowerCase().includes(searchTerm.toLowerCase());
+        orderCode.includes(search) || customer.includes(search);
 
       const matchesStatus =
         statusFilter === "All Orders" ||
-        order.status.toLowerCase() === statusFilter.toLowerCase();
+        (order.status || "").toLowerCase() === statusFilter.toLowerCase();
 
       return matchesSearch && matchesStatus;
     });
   }, [orders, searchTerm, statusFilter]);
 
   function formatDate(dateString) {
+    if (!dateString) return "N/A";
     return new Date(dateString).toLocaleDateString("en-GB", {
       day: "numeric",
       month: "short",
@@ -157,7 +154,7 @@ function AdminOrders() {
                   <td>{order.customer}</td>
                   <td>{order.items} item(s)</td>
                   <td>£{Number(order.total_amount).toFixed(2)}</td>
-                  <td>{formatDate(order.created_at)}</td>
+                  <td>{formatDate(order.order_date)}</td>
                   <td>
                     <span className={`order-status ${order.status}`}>
                       {order.status}

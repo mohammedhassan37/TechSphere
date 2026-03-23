@@ -2,8 +2,6 @@ import "../Styles/AdminCustomers.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 function AdminCustomers() {
   const navigate = useNavigate();
 
@@ -18,7 +16,7 @@ function AdminCustomers() {
     phoneNum: "",
     location: "",
     totalOrders: "",
-    totalSpent: ""
+    totalSpent: "",
   });
 
   const [showForm, setShowForm] = useState(false);
@@ -30,7 +28,9 @@ function AdminCustomers() {
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/admin/customers`, {
+      setMessage("");
+
+      const response = await fetch("/admin/customers", {
         method: "GET",
         credentials: "include",
       });
@@ -58,7 +58,7 @@ function AdminCustomers() {
         phoneNum: customer.customer_phone || "",
         location: customer.customer_location || "",
         totalOrders: Number(customer.total_orders) || 0,
-        totalSpent: `£${Number(customer.total_spent).toFixed(2)}`
+        totalSpent: `£${Number(customer.total_spent).toFixed(2)}`,
       }));
 
       setCustomers(formattedCustomers);
@@ -75,11 +75,13 @@ function AdminCustomers() {
   };
 
   const deleteCustomer = async (customerId) => {
-    const confirmed = window.confirm("Are you sure you want to delete this customer?");
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this customer?"
+    );
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/admin/customers/${customerId}`, {
+      const response = await fetch(`/admin/customers/${customerId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -102,7 +104,7 @@ function AdminCustomers() {
   const updateField = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -112,7 +114,7 @@ function AdminCustomers() {
     try {
       if (editCustomerId !== null) {
         const response = await fetch(
-          `${API_BASE_URL}/admin/customers/${formData.customer_id}`,
+          `/admin/customers/${formData.customer_id}`,
           {
             method: "PUT",
             headers: {
@@ -147,7 +149,7 @@ function AdminCustomers() {
         phoneNum: "",
         location: "",
         totalOrders: "",
-        totalSpent: ""
+        totalSpent: "",
       });
 
       await fetchCustomers();
@@ -157,9 +159,10 @@ function AdminCustomers() {
     }
   };
 
-  const filteredCustomers = customers.filter((customer) =>
-    customer.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCustomers = customers.filter(
+    (customer) =>
+      customer.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      customer.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -171,9 +174,7 @@ function AdminCustomers() {
         <h1>Manage Customers</h1>
       </div>
 
-      <p className="admin-customers-info">
-        View and manage customers:
-      </p>
+      <p className="admin-customers-info">View and manage customers:</p>
 
       {message && <p>{message}</p>}
 
@@ -190,9 +191,7 @@ function AdminCustomers() {
       {showForm && (
         <div className="add-customer-card">
           <form className="customer-form" onSubmit={submitForm}>
-            <label className="customer-form-heading">
-              Edit Row
-            </label>
+            <label className="customer-form-heading">Edit Row</label>
 
             <label>Full name *</label>
             <input
@@ -266,7 +265,7 @@ function AdminCustomers() {
                     phoneNum: "",
                     location: "",
                     totalOrders: "",
-                    totalSpent: ""
+                    totalSpent: "",
                   });
                 }}
               >

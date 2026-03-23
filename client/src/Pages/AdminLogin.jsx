@@ -2,8 +2,6 @@ import "../Styles/AdminLogin.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,9 +14,7 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isLogin
-      ? `${API_BASE_URL}/login`
-      : `${API_BASE_URL}/signup`;
+    const endpoint = isLogin ? "/login" : "/signup";
 
     try {
       const res = await fetch(endpoint, {
@@ -34,6 +30,7 @@ function AdminLogin() {
       if (data.success) {
         if (isLogin) {
           navigate("/");
+          window.location.reload();
         } else {
           setIsLogin(true);
           setEmail("");
