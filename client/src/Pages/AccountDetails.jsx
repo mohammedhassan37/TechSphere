@@ -1,5 +1,5 @@
 import { useState } from "react";
-import '../Styles/accountdetails.css'
+import "../Styles/accountdetails.css";
 
 function AccountDetails(){
     const [email, setEmail] = useState("john.doe@example.com");
