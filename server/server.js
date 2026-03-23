@@ -898,6 +898,10 @@ app.get("/test-admin-route", (req, res) => {
   res.json({ message: "admin route works" });
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 if (isProduction) {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 
