@@ -25,19 +25,17 @@ function AccountDetails(){
     setReviews(updatedReviews);
     };
     
-
+    const [reviewForm, setReviewForm] = useState({ title: "", content: "" });   
     const [writeReviewForm, setWriteReviewForm] = useState({ product: "", title: "", content: "", stars: 5 });
     const [showWriteReviewForm, setShowWriteReviewForm] = useState(false);
-
     const [editReviewId, setEditReviewId] = useState(null);
-    const [reviewForm, setReviewForm] = useState({ title: "", content: "" });
 
     const startEditReview = (review) => {
       setEditReviewId(review.id);
       setReviewForm({ title: review.title, content: review.content });
     };
 
-    const saveReview = () => {
+    const saveReviewEdit = () => {
       setReviews(reviews.map(r =>
       r.id === editReviewId ? { ...r, ...reviewForm } : r));
       setEditReviewId(null);
@@ -194,7 +192,7 @@ function AccountDetails(){
                     onChange={(e) => setReviewForm({ ...reviewForm, content: e.target.value })}/>
 
                   <div className="form-buttons">
-                    <button className="edit-button" onClick={saveReview}>Save</button>
+                    <button className="edit-button" onClick={saveReviewEdit}>Save</button>
                     <button className="delete-button" onClick={() => setEditReviewId(null)}>Cancel</button>
                   </div>
                 </div>
