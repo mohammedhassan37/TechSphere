@@ -1,0 +1,166 @@
+.admin-customers {
+  max-width: 1300px;
+  margin: auto;
+  padding: 40px;
+}
+.admin-customers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.admin-customers-header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+.admin-customers-info {
+  color: #008cff;
+  margin-bottom: 25px;
+}
+
+.add-customer {
+  background: #008cff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-customer:hover {
+  background: #222;
+}
+
+.customers-container {
+  background: rgb(211, 224, 228);
+  border: 1px solid rgb(211, 224, 228);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.customers-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #333;
+}
+
+.customers-table td:last-child {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  color: #333;
+}
+
+.customers-table th {
+  text-align: left;
+  padding: 14px;
+  font-weight: bold;
+  background: rgb(68, 146, 240);
+  color: white;
+  font-weight: 500;
+}
+
+.customers-table td {
+  padding: 14px;
+  border-top: 1px solid #eee;
+}
+
+.edit-button, .delete-button, .form-confirm-button, .form-cancel-button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  font-weight: bold;
+
+}
+
+.edit-button {
+  background: #ffffff;
+
+}
+
+.delete-button {
+  background: #ff0000;
+  color: #ffffff;
+
+}
+
+.form-confirm-button {
+  background: #ffffff;
+}
+
+.form-cancel-button {
+  background: #ff0000;
+  color: #ffffff;
+}
+
+.customers-features {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.customers-features .search {
+  flex: 1;
+  min-width: 250px;
+  padding: 15px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #f1f5f9;
+  font-size: 15px;
+  outline: none;
+}
+
+.customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.customer-form label {
+  font-weight: bold;
+}
+
+.customer-form input {
+  height: 40px;
+  font-size: 20px;
+  border-radius: 16px;
+  border: none;
+}
+
+.form-button {
+  display: flex;
+  gap: 700px;
+}
+
+.add-customer-card {
+  background: #f3f3f3;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+  max-width: 900px;
+}
+
+.customer-form-heading {
+  font-size: 30px;
+}
+
+.form-submit-button {
+  background: #008cff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.form-cancel-button {
+  background: #ff0000;
+  color: #ffffff;
+  font-weight: bold;
+}

@@ -40,3 +40,84 @@
     font-weight: bold;
     margin-bottom: 15px;
 }
+
+
+/* FILTER DROPDOWN */
+
+/* WRAPPER */
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* BUTTON */
+.filter-toggle {
+    background: #ffffff;
+    color: #242424;
+    padding: 10px 18px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filter-toggle:hover {
+    background: #f7f7f7;
+}
+
+/* PANEL */
+.filter-panel {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: #ffffff;
+    color: #242424;
+    padding: 20px;
+    border-radius: 15px;
+    width: 280px;
+    display: none;
+    z-index: 1000;
+
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eeeeee;
+}
+
+/* SHOW ON HOVER */
+.filter-dropdown:hover .filter-panel {
+    display: block;
+}
+
+/* TITLE */
+.filter-panel h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #242424;
+}
+
+/* SECTIONS */
+.filter-section {
+    margin-bottom: 20px;
+}
+
+/* LABELS */
+.filter-section label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* SELECT */
+.filter-section select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+}
+
+/* SLIDER */
+.filter-section input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+}

@@ -1,207 +1,261 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import pkg from 'pg';
-import cookieParser from 'cookie-parser';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import pkg from "pg";
+import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-
 
 dotenv.config();
 const { Pool } = pkg;
 
 console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
-
-// Database
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false } 
+  ssl: { rejectUnauthorized: false },
 });
 
 const app = express();
+const isProduction = process.env.NODE_ENV === "production";
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://techsphere-8ec2.onrender.com",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = [
-  'http://localhost:5173',               // local dev
-  'https://techsphere-8ec2.onrender.com' // deployed frontend
-];
-
-app.use(cors({
-    origin:allowedOrigins,
-    credentials: true
-}));
-
-//SIGNUP
-app.post('/signup', async (req, res) => {
+// SIGNUP
+app.post("/signup", async (req, res) => {
   try {
-    const { email, password, confirmPassword } = req.body;
+    const {
+      email,
+      password,
+      confirmPassword,
+      fullname,
+      phonenumber,
+      location,
+    } = req.body;
 
-    if (!email || !password || !confirmPassword) {
-        return res
+    if (
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !fullname ||
+      !phonenumber ||
+      !location
+    ) {
+      return res
         .status(400)
         .json({ success: false, message: "Fields cannot be empty" });
     }
 
-    if (password !== confirmPassword) {
-        return res
-        .status(400)
-        .json({ success: false, message: "Passwords do not match" });
+    const nameRegex = /^[A-Za-z\s]{2,}$/;
+    const ukPhoneRegex = /^(?:\+44|0)7\d{9}$/;
+    const locationRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+    if (!nameRegex.test(fullname)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Full name must contain only letters and be at least 2 characters",
+      });
     }
 
-    // Check if user exists
+    if (!ukPhoneRegex.test(phonenumber)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Phone number must be a valid UK mobile number, e.g. 07123456789 or +447123456789",
+      });
+    }
+
+    if (!locationRegex.test(location)) {
+      return res.status(400).json({
+        success: false,
+        message: "Location must be in the format Country, City",
+      });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters long",
+      });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
+    }
+
     const existingUser = await pool.query(
       "SELECT * FROM customers WHERE customer_email = $1",
-        [email]
+      [email]
     );
 
     if (existingUser.rows.length > 0) {
-        return res
-        .status(400)
-        .json({ success: false, message: "Email already registered." });
+      return res.status(400).json({
+        success: false,
+        message: "Email already registered.",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert user
     await pool.query(
-        "INSERT INTO customers (customer_email, customer_password) VALUES ($1, $2)",
-        [email, hashedPassword]
+      `INSERT INTO customers 
+        (customer_email, customer_password, customer_name, customer_phone, customer_location) 
+        VALUES ($1, $2, $3, $4, $5)`,
+      [email, hashedPassword, fullname, phonenumber, location]
     );
 
-    return res
-        .status(201)
-        .json({ success: true, message: "Email has been registered." });
-    } catch (err) {
+    return res.status(201).json({
+      success: true,
+      message: "Account has been registered successfully.",
+    });
+  } catch (err) {
     console.error(err);
-    return res
-        .status(500)
-        .json({ success: false, message: "Server error" });
-    }
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
 });
 
 // LOGIN
-app.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res
-                .status(400)
-                .json({ success: false, message: "Fields cannot be empty" });
-        }
-
-        // Correct PostgreSQL query + correct table name + correct variable structure
-        const existingUser = await pool.query(
-            "SELECT * FROM customers WHERE customer_email = $1",
-            [email]
-        );
-
-        if (existingUser.rows.length === 0) {
-            return res
-                .status(400)
-                .json({ success: false, message: "User not found" });
-        }
-
-        const user = existingUser.rows[0];
-
-        // Correct password comparison
-        const isMatch = await bcrypt.compare(password, user.customer_password);
-
-        if (!isMatch) {
-            return res
-                .status(400)
-                .json({ success: false, message: "Invalid credentials" });
-        }
-
-
-
-        const token = jwt.sign(
-            {customer_id: user.customer_id, email: user.customer_email},
-            process.env.JWT_SECRET,
-            {expiresIn: "7d"}
-        );
-
-        res.cookie("auth_token", token,{
-            httpOnly:true,
-            secure:true,
-            sameSite:"none",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
-
-
-        return res.status(200).json({
-            success: true,
-            message: "Login successful",
-            user: { id: user.customer_id, email: user.customer_email }
-        });
-    } catch (err) {
-        console.error(err);
-        return res
-            .status(500)
-            .json({ success: false, message: "Server error" });
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Fields cannot be empty" });
     }
+
+    const existingUser = await pool.query(
+      "SELECT * FROM customers WHERE customer_email = $1",
+      [email]
+    );
+
+    if (existingUser.rows.length === 0) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+
+    const user = existingUser.rows[0];
+    const isMatch = await bcrypt.compare(password, user.customer_password);
+
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      { customer_id: user.customer_id, email: user.customer_email },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
+      user: { id: user.customer_id, email: user.customer_email },
+    });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ success: false, message: "Server error" });
+  }
 });
 
 function auth(req, res, next) {
-    const token = req.cookies.auth_token; // ADDED (read JWT cookie)
+  const token = req.cookies.auth_token;
 
-    if (!token)
-        return res.status(401).json({ success: false, message: "Not logged in" });
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Not logged in" });
+  }
 
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET); // ADDED
-        req.user = decoded; // ADDED
-        next();
-    } catch (err) {
-        return res.status(401).json({ success: false, message: "Invalid token" });
-    }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ success: false, message: "Invalid token" });
+  }
 }
 
-//Logout 
+// LOGOUT
 app.post("/logout", (req, res) => {
-    res.clearCookie("auth_token", { // ADDED
-        httpOnly: true,
-        secure: true,
-        sameSite: "none"
-    });
+  res.clearCookie("auth_token", {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+  });
 
-    return res.json({ success: true, message: "Logged out" });
+  return res.json({ success: true, message: "Logged out" });
 });
 
+// CONTACT FORM
+app.post("/contact", async (req, res) => {
+  try {
+    const { name, EmailAddress, Inquiry } = req.body;
 
-// Contact Form 
-
-app.post('/contact', async (req, res) => {
-    try {
-        const { name, EmailAddress, Inquiry } = req.body;
-
-        if (!name || !EmailAddress || !Inquiry) {
-            return res.status(400).json({ success: false, message: "Fields cannot be empty" });
-        }
-
-        // FIXED — previously inserted into wrong table
-        await pool.query(
-            "INSERT INTO customer_text (customer_name, customer_email, customer_text) VALUES ($1, $2, $3)",
-            [name, EmailAddress, Inquiry]
-        );
-
-        return res.status(201).json({
-            success: true,
-            message: "Message received!"
-        });
-
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ success: false, message: "Server error" });
+    if (!name || !EmailAddress || !Inquiry) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Fields cannot be empty" });
     }
+
+    await pool.query(
+      "INSERT INTO customer_text (customer_name, customer_email, customer_text) VALUES ($1, $2, $3)",
+      [name, EmailAddress, Inquiry]
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "Message received!",
+    });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ success: false, message: "Server error" });
+  }
 });
 
-// Product Search
-
+// PRODUCT SEARCH
 app.get("/search", async (req, res) => {
     const { q } = req.query;
     try {
@@ -211,74 +265,71 @@ app.get("/search", async (req, res) => {
             [`%${q}%`]
         );
 
-        res.json(result.rows);
-
-    } catch(err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
-    }
-});
-
-
-// Previous Orders (logged-in user)
-app.get("/my-orders", auth, async (req, res) => {
   try {
-    const customerId = req.user.customer_id;
-
-
-    const ordersRes = await pool.query(
-      `SELECT order_id, total_amount, status, created_at
-       FROM orders
-       WHERE customer_id = $1
-       ORDER BY created_at DESC`,
-      [customerId]
+    const result = await pool.query(
+      `SELECT * FROM products 
+       WHERE LOWER(product_name) LIKE LOWER($1)`,
+      [`%${q}%`]
     );
 
-    const orders = ordersRes.rows;
-
-    if (orders.length === 0) {
-      return res.json({ success: true, orders: [] });
-    }
-
-    const orderIds = orders.map(o => o.order_id);
-
-    const itemsRes = await pool.query(
-      `SELECT order_id, product_name, unit_price, quantity
-       FROM order_items
-       WHERE order_id = ANY($1::int[])
-       ORDER BY order_id DESC`,
-      [orderIds]
-    );
-
-    const itemsByOrder = {};
-    for (const item of itemsRes.rows) {
-      (itemsByOrder[item.order_id] ||= []).push(item);
-    }
-
-    return res.json({
-      success: true,
-      orders: orders.map(o => ({
-        ...o,
-        items: itemsByOrder[o.order_id] || []
-      }))
-    });
+    res.json(result.rows);
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 });
+
+// GET PRODUCTS
+app.get("/products", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM products ORDER BY product_id ASC"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Get previous orders
+app.get("/my-orders", auth, async (req, res) => {
+  try {
+    console.log("Decoded user:", req.user);
+
+    const userId = req.user.customer_id;
+
+    if (!userId) {
+      return res.status(400).json({ message: "Customer ID missing from token" });
+    }
+
+    const result = await pool.query(
+      `SELECT order_id, order_date, total_amount, status
+       FROM orders
+       WHERE customer_id = $1
+       ORDER BY order_date DESC`,
+      [userId]
+    );
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve React static files
-app.use(express.static(path.join(__dirname, "../client/dist")));
+if (isProduction) {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// Catch-all route for React (must come after API routes)
-app.use((req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
+  });
+}
 
 // Start
 const PORT = process.env.PORT || 5000;
