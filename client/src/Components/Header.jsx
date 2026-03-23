@@ -1,25 +1,21 @@
-import '../Styles/Header.css';
-import { Link, useNavigate } from "react-router-dom";
-import basket from '../assets/basket.png';
-import logo from '../assets/logo.png';
-import sun from '../assets/sun.svg';
-import moon from '../assets/moon.svg';
-import zoomOut from '../assets/zoom-out.svg';
-import zoomIn from '../assets/zoom-in.svg';
-import logodarkmode from '../assets/logodarkmode.png';
-import { useState, useEffect } from 'react';
+    import "../Styles/Header.css";
+    import { Link, useNavigate, useLocation } from "react-router-dom";
+    import logo from "../assets/logo.png";
+    import logodarkmode from "../assets/logodarkmode.png";
+    import { useState, useEffect } from "react";
 
-function Header() {
+    function Header() {
     const [mode, setMode] = useState("light");
     const [zoom, setZoom] = useState(1);
     const [query, setQuery] = useState("");
-    const [showSearch, setShowSearch] = useState(false);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const ChangeMode = () => {
-        setMode(prev => (prev === "light" ? "dark" : "light"));
+        setMode((prev) => (prev === "light" ? "dark" : "light"));
     };
 
     useEffect(() => {
@@ -30,91 +26,158 @@ function Header() {
         document.body.style.zoom = zoom;
     }, [zoom]);
 
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/account-details", {
+            method: "GET",
+            credentials: "include",
+            });
+
+            if (!response.ok) {
+            setIsLoggedIn(false);
+            setIsAdmin(false);
+            return;
+            }
+
+            const data = await response.json();
+            setIsLoggedIn(true);
+            setIsAdmin(data.user.isAdmin || false);
+        } catch (error) {
+            console.error("Error checking login status:", error);
+            setIsLoggedIn(false);
+            setIsAdmin(false);
+        }
+        };
+
+        checkLoginStatus();
+    }, [location.pathname]);
+
     const handleSearchKeyPress = (e) => {
         if (e.key === "Enter") {
-            navigate(`/search?q=${query}`);
+        navigate(`/search?q=${query}`);
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+        const response = await fetch("http://localhost:5000/logout", {
+            method: "POST",
+            credentials: "include",
+        });
+
+        if (!response.ok) {
+            return;
+        }
+
+        setIsLoggedIn(false);
+        setIsAdmin(false);
+        navigate("/");
+        window.location.reload();
+        } catch (error) {
+        console.error("Error logging out:", error);
         }
     };
 
     return (
         <>
-            <div className="nav-container">
-                <header>
-                    <nav>
-                            <Link to="/" className="logo">
-                            <img
-                                src={mode === "light" ? logo : logodarkmode}
-                                alt="logo"
-                                style={{ height: "40px", width: "40px", cursor: "pointer" }}
-                            />
-                            </Link>
+        <div className="nav-container">
+            <header>
+            <nav>
+                <Link to="/" className="logo">
+                <img
+                    src={mode === "light" ? logo : logodarkmode}
+                    alt="logo"
+                    style={{ height: "40px", width: "40px", cursor: "pointer" }}
+                />
+                </Link>
 
-                        <div className="nav-links">
-                            <Link to="/phone" className="nav-link">Phones</Link>
-                            <Link to="/Tablets" className="nav-link">Tablets</Link>
-                            <Link to="/Headphones" className="nav-link">Headphones</Link>
-                            <Link to="/TV" className="nav-link">TVs</Link>
-                            <Link to="/Smartwatch" className="nav-link">Watches</Link>
-                            <Link to="/About" className="nav-link">About</Link>
-                            <Link to="/Contact" className="nav-link">Contact</Link>
-                        </div>
+                <div className="nav-links">
+                <Link to="/phone" className="nav-link">Phones</Link>
+                <Link to="/Tablets" className="nav-link">Tablets</Link>
+                <Link to="/Headphones" className="nav-link">Headphones</Link>
+                <Link to="/TV" className="nav-link">TVs</Link>
+                <Link to="/Smartwatch" className="nav-link">Watches</Link>
+                <Link to="/About" className="nav-link">About</Link>
+                <Link to="/Contact" className="nav-link">Contact</Link>
+                </div>
 
-                        <div className="search-wrapper">
-                         <i className="fa-solid fa-magnifying-glass search-icon"></i>
+                <div className="search-wrapper">
+                <i className="fa-solid fa-magnifying-glass search-icon"></i>
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search TechSphere...."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleSearchKeyPress}
+                />
+                </div>
 
-                            <input
-                                type="text"
-                                className="search-input"
-                                placeholder="Search TechSphere...."
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                onKeyDown={handleSearchKeyPress}
-                            />
-                            </div>
+                <div className="account-dropdown">
+                <i className="fa-solid fa-user"></i>
 
-                           <div className="account-dropdown">
-                              <i className="fa-solid fa-user"></i>
+                <div className="account-menu">
+                    {!isLoggedIn && <Link to="/registration">Register</Link>}
+                    
+                    {isLoggedIn && (
+                    <>
+                        <Link to="/orders">Previous Orders</Link>
+                        <Link to="/accountdetails">Account Details</Link>
+                        {isAdmin && <Link to="/admin">Admin Hub</Link>}
+                        <button
+                        onClick={handleLogout}
+                        className="logout-button"
+                        style={{
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: "10px",
+                            textAlign: "left",
+                            width: "100%",
+                            color: "inherit",
+                            font: "inherit",
+                        }}
+                        >
+                        Log out
+                        </button>
+                    </>
+                    )}
 
-                              <div className="account-menu">
-                              <Link to="/registration">Register</Link>
-                              <Link to="/orders">Previous Orders</Link>
-                              <Link to="/accountdetails">Account Details</Link>
-                              <Link to="/admin">Admin Hub</Link>
-                            </div>
-                           </div>
+                    
+                </div>
+                </div>
 
-                            <Link to="/Basket" className="basket">
-                                    <i className ="fa-solid fa-cart-shopping"></i>
-                            </Link>
-                        
-                                <div className="light-dark-mode" onClick={ChangeMode}>
-                                {mode === "light" ? (
-                                    <i className="fa-solid fa-sun"></i>
-                                    
-                                ) : (
-                                    <i className="fa-solid fa-moon"></i>
-                                )}
-                                </div>
+                <Link to="/Basket" className="basket">
+                <i className="fa-solid fa-cart-shopping"></i>
+                </Link>
 
-                                 <div className="zoom-options">
-                                <i
-                                    className="fa-solid fa-magnifying-glass-minus zoom-option"
-                                    onClick={() => setZoom(zoom - 0.1)}
-                                    title="Zoom out"
-                                ></i>
+                <div className="light-dark-mode" onClick={ChangeMode}>
+                {mode === "light" ? (
+                    <i className="fa-solid fa-sun"></i>
+                ) : (
+                    <i className="fa-solid fa-moon"></i>
+                )}
+                </div>
 
-                                <i
-                                    className="fa-solid fa-magnifying-glass-plus zoom-option"
-                                    onClick={() => setZoom(zoom + 0.1)}
-                                    title="Zoom in"
-                                ></i>
-                                </div>
+                <div className="zoom-options">
+                <i
+                    className="fa-solid fa-magnifying-glass-minus zoom-option"
+                    onClick={() => setZoom(zoom - 0.1)}
+                    title="Zoom out"
+                ></i>
 
-                    </nav>
-                </header>
-            </div>
+                <i
+                    className="fa-solid fa-magnifying-glass-plus zoom-option"
+                    onClick={() => setZoom(zoom + 0.1)}
+                    title="Zoom in"
+                ></i>
+                </div>
+            </nav>
+            </header>
+        </div>
         </>
     );
-}
+    }
 
-export default Header;
+    export default Header;

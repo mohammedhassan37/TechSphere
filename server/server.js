@@ -447,7 +447,8 @@ app.get("/account-details", auth, async (req, res) => {
         customer_name,
         customer_email,
         customer_location,
-        created_at
+        created_at,
+        is_admin
        FROM customers
        WHERE customer_id = $1`,
       [req.user.customer_id]
@@ -469,6 +470,7 @@ app.get("/account-details", auth, async (req, res) => {
         email: user.customer_email,
         location: user.customer_location,
         joined: user.created_at,
+        isAdmin: user.is_admin || false,
       },
     });
   } catch (err) {
