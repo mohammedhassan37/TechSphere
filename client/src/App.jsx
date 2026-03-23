@@ -31,9 +31,12 @@ import ChatBot from "./Components/ChatBot.jsx";
 function App() {
   return (
     <BrowserRouter>
+    <div className="app"> 
       <Header />
+      <main className="main-content">  
 
       <Routes>
+<<<<<<< HEAD
         <Route path="/" element={<><Carousel /><FP /><ShopByCategory /> <ChatBot /> <WhyChooseUs /></>} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
@@ -57,6 +60,27 @@ function App() {
       </Routes>
 
       <Footer />
+=======
+  <Route path="/" element={<><Carousel /><FP /></>} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/headphones" element={<Headphones />} />
+  <Route path="/phone" element={<Phone />} />
+  <Route path="/smartwatch" element={<Smartwatch />} />
+  <Route path="/tablets" element={<Tablets />} />
+  <Route path="/tv" element={<TV />} />
+  <Route path="/basket" element={<Basket />} />
+  <Route path="/checkout" element={<Checkout />} />
+  <Route path="/registration" element={<Registration />} />
+  <Route path="/search" element={<SearchPage />} />
+  <Route path="/product/:id" element={<ProductDetails />} />
+  <Route path="/accountdetails" element={<AccountDetails />} />
+</Routes>
+</main> 
+<WhyChooseUs /> 
+<Footer />
+</div> 
+>>>>>>> FooterUpdated
     </BrowserRouter>
   );
 }
