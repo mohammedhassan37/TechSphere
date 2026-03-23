@@ -257,7 +257,13 @@ app.post("/contact", async (req, res) => {
 
 // PRODUCT SEARCH
 app.get("/search", async (req, res) => {
-  const { q } = req.query;
+    const { q } = req.query;
+    try {
+        const result = await pool.query(
+            `SELECT * FROM products 
+            WHERE LOWER(product_name) LIKE LOWER($1)`,
+            [`%${q}%`]
+        );
 
   try {
     const result = await pool.query(
