@@ -5,6 +5,13 @@ function ManageRevenue() {
   return (
     <div className="manage-revenue">
       <div className="revenue-header">
+        <button
+          className="back-button"
+          onClick={() => window.history.back()}
+        >
+          ← Back
+        </button>
+
         <h1>Manage Revenue</h1>
       </div>
 
