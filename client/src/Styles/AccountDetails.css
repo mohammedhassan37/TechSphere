@@ -322,3 +322,20 @@ margin-left: 10%;
   font-size: 12px;
   color: #888;
 }
+
+.write-review-form{
+  background: #f3f3f3;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-review-form {
+  display: flex;
+  flex-direction: column;
+}
