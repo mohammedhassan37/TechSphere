@@ -312,6 +312,45 @@ app.get("/my-orders", auth, async (req, res) => {
   }
 });
 
+app.get("/account-details", auth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT 
+        customer_name,
+        customer_email,
+        customer_location,
+        created_at
+       FROM customers
+       WHERE customer_id = $1`,
+      [req.user.customer_id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const user = result.rows[0];
+
+    return res.json({
+      success: true,
+      user: {
+        name: user.customer_name,
+        email: user.customer_email,
+        location: user.customer_location,
+        joined: user.created_at,
+      },
+    });
+  } catch (err) {
+    console.error("Error fetching account details:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
