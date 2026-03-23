@@ -47,9 +47,10 @@ import jLab from "../assets/jlab_headphones.webp";
 import marshalHead from "../assets/marshall_headphones.webp";
 import shokz from "../assets/shokz_headphones.webp";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 function AdminProducts() {
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const emptyProduct = {
     product_id: "",
@@ -126,7 +127,8 @@ function AdminProducts() {
   const fetchProducts = async () => {
     try {
       setError("");
-      const response = await fetch(`${API_URL}/products`, {
+
+      const response = await fetch(`${API_BASE_URL}/products`, {
         credentials: "include",
       });
 
@@ -219,8 +221,6 @@ function AdminProducts() {
       setError("");
       setSuccessMessage("");
 
-      
-
       if (
         !editProduct.product_name.trim() ||
         !editProduct.product_price ||
@@ -243,7 +243,7 @@ function AdminProducts() {
 
       if (showEditForm) {
         response = await fetch(
-          `${API_URL}/admin/products/${editProduct.product_id}`,
+          `${API_BASE_URL}/admin/products/${editProduct.product_id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -252,7 +252,7 @@ function AdminProducts() {
           }
         );
       } else {
-        response = await fetch(`${API_URL}/admin/products`, {
+        response = await fetch(`${API_BASE_URL}/admin/products`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -260,19 +260,19 @@ function AdminProducts() {
         });
       }
 
-     const contentType = response.headers.get("content-type");
-let data;
+      const contentType = response.headers.get("content-type");
+      let data;
 
-if (contentType && contentType.includes("application/json")) {
-  data = await response.json();
-} else {
-  const text = await response.text();
-  throw new Error(text || `Request failed with status ${response.status}`);
-}
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error(text || `Request failed with status ${response.status}`);
+      }
 
-if (!response.ok) {
-  throw new Error(data.message || "Request failed.");
-}
+      if (!response.ok) {
+        throw new Error(data.message || "Request failed.");
+      }
 
       setSuccessMessage(
         showEditForm ? "Product updated successfully." : "Product added successfully."
@@ -297,7 +297,7 @@ if (!response.ok) {
       setError("");
       setSuccessMessage("");
 
-      const response = await fetch(`${API_URL}/admin/products/${productId}`, {
+      const response = await fetch(`${API_BASE_URL}/admin/products/${productId}`, {
         method: "DELETE",
         credentials: "include",
       });

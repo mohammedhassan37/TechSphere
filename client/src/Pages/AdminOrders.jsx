@@ -2,6 +2,8 @@ import "../Styles/AdminOrders.css";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 function AdminOrders() {
   const navigate = useNavigate();
 
@@ -21,7 +23,10 @@ function AdminOrders() {
       setLoading(true);
       setError("");
 
-      const response = await fetch("http://localhost:5000/admin/orders");
+      const response = await fetch(`${API_BASE_URL}/admin/orders`, {
+        credentials: "include",
+      });
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -42,12 +47,13 @@ function AdminOrders() {
       setUpdatingId(orderId);
 
       const response = await fetch(
-        `http://localhost:5000/admin/orders/${orderId}/status`,
+        `${API_BASE_URL}/admin/orders/${orderId}/status`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ status: newStatus }),
         }
       );

@@ -1,100 +1,62 @@
 import { useEffect, useState } from "react";
 import "../Styles/AccountDetails.css";
 
-function AccountDetails(){
-    const [email, setEmail] = useState("john.doe@example.com");
-    const [activeTab, setActiveTab] = useState("settings");
-    const [showForm, setShowForm] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [message, setMessage] = useState("");
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-    const [passwordForm, setPasswordForm] = useState({
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
+function AccountDetails() {
+  const [email, setEmail] = useState("john.doe@example.com");
+  const [activeTab, setActiveTab] = useState("settings");
+  const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
-    const [userData, setUserData] = useState({
-      name: "",
-      email: "",
-      location: "",
-      joined: ""
-    });
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-    const [reviews, setReviews] = useState([
-      {
-        id: 1,
-        product: "Premium Wireless Headphones",
-        stars: 5,
-        title: "Excellent sound quality!",
-        content: "These headphones exceeded my expectations...",
-        date: "February 15, 2026"
-      },
-    ]);
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    location: "",
+    joined: "",
+  });
 
-    const [reviewForm, setReviewForm] = useState({ title: "", content: "" });
-    const [writeReviewForm, setWriteReviewForm] = useState({
-      product: "",
-      title: "",
-      content: "",
-      stars: 5
-    });
-    const [showWriteReviewForm, setShowWriteReviewForm] = useState(false);
-    const [editReviewId, setEditReviewId] = useState(null);
+  const [reviews, setReviews] = useState([
+    {
+      id: 1,
+      product: "Premium Wireless Headphones",
+      stars: 5,
+      title: "Excellent sound quality!",
+      content: "These headphones exceeded my expectations...",
+      date: "February 15, 2026",
+    },
+  ]);
 
-    useEffect(() => {
-      const fetchAccountDetails = async () => {
-        try {
-          const response = await fetch("http://localhost:5000/account-details", {
-            method: "GET",
-            credentials: "include",
-          });
+  const [reviewForm, setReviewForm] = useState({ title: "", content: "" });
+  const [writeReviewForm, setWriteReviewForm] = useState({
+    product: "",
+    title: "",
+    content: "",
+    stars: 5,
+  });
+  const [showWriteReviewForm, setShowWriteReviewForm] = useState(false);
+  const [editReviewId, setEditReviewId] = useState(null);
 
-          const data = await response.json();
+  useEffect(() => {
+    const fetchAccountDetails = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/account-details`, {
+          method: "GET",
+          credentials: "include",
+        });
 
-          if (!response.ok) {
-            console.error(data.message);
-            setLoading(false);
-            return;
-          }
+        const data = await response.json();
 
-          setUserData({
-            name: data.user.name || "",
-            email: data.user.email || "",
-            location: data.user.location || "",
-            joined: data.user.joined || "",
-          });
-
-          setEmail(data.user.email || "");
-        } catch (error) {
-          console.error("Error fetching account details:", error);
-        } finally {
+        if (!response.ok) {
+          console.error(data.message);
           setLoading(false);
-        }
-      };
-
-      fetchAccountDetails();
-    }, []);
-
-    const handleSaveChanges = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/account-details", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            name: userData.name,
-            email: userData.email,
-            location: userData.location,
-          }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          setMessage(data.message || "Failed to update details");
           return;
         }
 
@@ -106,432 +68,525 @@ function AccountDetails(){
         });
 
         setEmail(data.user.email || "");
-        setMessage("Profile updated successfully");
-        setShowForm(false);
       } catch (error) {
-        console.error("Error updating account details:", error);
-        setMessage("Server error");
+        console.error("Error fetching account details:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    const handleEmailSave = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/account-details", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            name: userData.name,
-            email: email,
-            location: userData.location,
-          }),
-        });
+    fetchAccountDetails();
+  }, []);
 
-        const data = await response.json();
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/account-details`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          name: userData.name,
+          email: userData.email,
+          location: userData.location,
+        }),
+      });
 
-        if (!response.ok) {
-          setMessage(data.message || "Failed to update email");
-          return;
-        }
+      const data = await response.json();
 
-        setUserData({
-          name: data.user.name || "",
-          email: data.user.email || "",
-          location: data.user.location || "",
-          joined: data.user.joined || "",
-        });
-
-        setEmail(data.user.email || "");
-        setMessage("Email updated successfully");
-      } catch (error) {
-        console.error("Error updating email:", error);
-        setMessage("Server error");
-      }
-    };
-
-    const handlePasswordChange = async () => {
-      if (passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()) {
-        setMessage("Passwords do not match");
+      if (!response.ok) {
+        setMessage(data.message || "Failed to update details");
         return;
       }
 
-      try {
-        const response = await fetch("http://localhost:5000/change-password", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            currentPassword: passwordForm.currentPassword.trim(),
-            newPassword: passwordForm.newPassword.trim(),
-            confirmPassword: passwordForm.confirmPassword.trim(),
-          }),
-        });
+      setUserData({
+        name: data.user.name || "",
+        email: data.user.email || "",
+        location: data.user.location || "",
+        joined: data.user.joined || "",
+      });
 
-        const data = await response.json();
+      setEmail(data.user.email || "");
+      setMessage("Profile updated successfully");
+      setShowForm(false);
+    } catch (error) {
+      console.error("Error updating account details:", error);
+      setMessage("Server error");
+    }
+  };
 
-        if (!response.ok) {
-          setMessage(data.message || "Failed to update password");
-          return;
-        }
+  const handleEmailSave = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/account-details`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          name: userData.name,
+          email: email,
+          location: userData.location,
+        }),
+      });
 
-        setMessage("Password updated successfully");
+      const data = await response.json();
 
-        setPasswordForm({
-          currentPassword: "",
-          newPassword: "",
-          confirmPassword: "",
-        });
-      } catch (error) {
-        console.error("Error updating password:", error);
-        setMessage("Server error");
+      if (!response.ok) {
+        setMessage(data.message || "Failed to update email");
+        return;
       }
-    };
 
-    const handleDeleteAccount = async () => {
-  const confirmed = window.confirm(
-    "Are you sure you want to permanently delete your account?"
-  );
+      setUserData({
+        name: data.user.name || "",
+        email: data.user.email || "",
+        location: data.user.location || "",
+        joined: data.user.joined || "",
+      });
 
-  if (!confirmed) return;
+      setEmail(data.user.email || "");
+      setMessage("Email updated successfully");
+    } catch (error) {
+      console.error("Error updating email:", error);
+      setMessage("Server error");
+    }
+  };
 
-  try {
-    const response = await fetch("http://localhost:5000/delete-account", {
-      method: "DELETE",
-      credentials: "include",
-    });
-
-    const contentType = response.headers.get("content-type") || "";
-
-    if (!contentType.includes("application/json")) {
-      const text = await response.text();
-      console.error("Non-JSON response:", text);
-      setMessage("Delete route is not being reached properly");
+  const handlePasswordChange = async () => {
+    if (passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()) {
+      setMessage("Passwords do not match");
       return;
     }
 
-    const data = await response.json();
+    try {
+      const response = await fetch(`${API_BASE_URL}/change-password`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          currentPassword: passwordForm.currentPassword.trim(),
+          newPassword: passwordForm.newPassword.trim(),
+          confirmPassword: passwordForm.confirmPassword.trim(),
+        }),
+      });
 
-    if (!response.ok) {
-      setMessage(data.message || "Failed to delete account");
-      return;
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message || "Failed to update password");
+        return;
+      }
+
+      setMessage("Password updated successfully");
+
+      setPasswordForm({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setMessage("Server error");
     }
+  };
 
-    setMessage("Account deleted successfully");
-    window.location.href = "/";
-  } catch (error) {
-    console.error("Error deleting account:", error);
-    setMessage("Server error");
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to permanently delete your account?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete-account`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      const contentType = response.headers.get("content-type") || "";
+
+      if (!contentType.includes("application/json")) {
+        const text = await response.text();
+        console.error("Non-JSON response:", text);
+        setMessage("Delete route is not being reached properly");
+        return;
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message || "Failed to delete account");
+        return;
+      }
+
+      setMessage("Account deleted successfully");
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      setMessage("Server error");
+    }
+  };
+
+  const deleteReview = (deleteReview) => {
+    const updatedReviews = reviews.filter((review) => review.id != deleteReview);
+    setReviews(updatedReviews);
+  };
+
+  const startEditReview = (review) => {
+    setEditReviewId(review.id);
+    setReviewForm({ title: review.title, content: review.content });
+  };
+
+  const saveReviewEdit = () => {
+    setReviews(
+      reviews.map((r) => (r.id === editReviewId ? { ...r, ...reviewForm } : r))
+    );
+    setEditReviewId(null);
+    setReviewForm({ title: "", content: "" });
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
   }
-};
 
-    const deleteReview = (deleteReview) => {
-      const updatedReviews = reviews.filter(review => review.id != deleteReview);
-      setReviews(updatedReviews);
-    };
+  return (
+    <>
+      <div className="AccountDetailsIntro">
+        <h1>Account Details</h1>
+        <p>Mange your profile and preferences.</p>
+      </div>
 
-    const startEditReview = (review) => {
-      setEditReviewId(review.id);
-      setReviewForm({ title: review.title, content: review.content });
-    };
+      {message && <p>{message}</p>}
 
-    const saveReviewEdit = () => {
-      setReviews(reviews.map(r =>
-        r.id === editReviewId ? { ...r, ...reviewForm } : r
-      ));
-      setEditReviewId(null);
-      setReviewForm({ title: "", content: "" });
-    };
+      <div className="AccountDetailsMain">
+        <div className="AccountDetailsMainInfo">
+          {showForm ? (
+            <div className="edit-profile-form">
+              <input
+                type="text"
+                placeholder="Name"
+                value={userData.name}
+                onChange={(e) =>
+                  setUserData({ ...userData, name: e.target.value })
+                }
+              />
 
-    if (loading) {
-      return <p>Loading...</p>;
-    }
+              <input
+                type="email"
+                placeholder="Email"
+                value={userData.email}
+                onChange={(e) =>
+                  setUserData({ ...userData, email: e.target.value })
+                }
+              />
 
-    return(
+              <input
+                type="text"
+                placeholder="Location"
+                value={userData.location}
+                onChange={(e) =>
+                  setUserData({ ...userData, location: e.target.value })
+                }
+              />
+
+              <div className="form-button">
+                <button onClick={handleSaveChanges}>Save Changes</button>
+              </div>
+            </div>
+          ) : (
+            <div className="profile-info">
+              <div className="profile-name-row">
+                <h3>{userData.name}</h3>
+                <span className="verified">Verified</span>
+              </div>
+
+              <p className="profile-email">{userData.email}</p>
+
+              <div className="profile-meta">
+                <span>📍 {userData.location}</span>
+                <span>
+                  📅 Joined{" "}
+                  {userData.joined
+                    ? new Date(userData.joined).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : "N/A"}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="AccountDetailsEdit" onClick={() => setShowForm(true)}>
+          ⚙️ Edit Profile
+        </div>
+      </div>
+
+      <div className="AccountDetailsSelections">
+        <div
+          className={`tab ${activeTab === "settings" ? "active" : ""}`}
+          onClick={() => setActiveTab("settings")}
+        >
+          Settings
+        </div>
+
+        <div
+          className={`tab ${activeTab === "reviews" ? "active" : ""}`}
+          onClick={() => setActiveTab("reviews")}
+        >
+          My Reviews
+        </div>
+      </div>
+
+      {activeTab === "settings" && (
         <>
-            <div className="AccountDetailsIntro">
-                <h1>Account Details</h1>
-                <p>Mange your profile and preferences.</p>
+          <div className="AccountDetailsEmail">
+            <p>✉️</p>
+            <p>Email Address</p>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="email-input"
+            />
+
+            <button className="edit-email-button" onClick={handleEmailSave}>
+              Save
+            </button>
+          </div>
+
+          <div className="AccountDetailsPassword">
+            <p>🔑</p>
+            <p>Security</p>
+
+            <input
+              type="password"
+              placeholder="Current password"
+              value={passwordForm.currentPassword}
+              onChange={(e) =>
+                setPasswordForm({
+                  ...passwordForm,
+                  currentPassword: e.target.value,
+                })
+              }
+            />
+
+            <input
+              type="password"
+              placeholder="New password"
+              value={passwordForm.newPassword}
+              onChange={(e) =>
+                setPasswordForm({
+                  ...passwordForm,
+                  newPassword: e.target.value,
+                })
+              }
+            />
+
+            <input
+              type="password"
+              placeholder="Confirm new password"
+              value={passwordForm.confirmPassword}
+              onChange={(e) =>
+                setPasswordForm({
+                  ...passwordForm,
+                  confirmPassword: e.target.value,
+                })
+              }
+            />
+
+            <button onClick={handlePasswordChange}>Change Password</button>
+          </div>
+
+          <div className="AccountDetailsDeleteAccount">
+            <div className="danger-zone">
+              <p>Danger Zone</p>
+              <p>Permanently delete your account.</p>
             </div>
+            <button className="delete-button" onClick={handleDeleteAccount}>
+              Delete Account
+            </button>
+          </div>
+        </>
+      )}
 
-            {message && <p>{message}</p>}
+      {showWriteReviewForm && (
+        <div className="write-review-form">
+          <label>Product Name:</label>
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={writeReviewForm.product}
+            onChange={(e) =>
+              setWriteReviewForm({
+                ...writeReviewForm,
+                product: e.target.value,
+              })
+            }
+          />
 
-            <div className="AccountDetailsMain">
-                <div className="AccountDetailsMainInfo">
-                {showForm ? (
-                  <div className="edit-profile-form">
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      value={userData.name}
-                      onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-                    />
+          <label>Title:</label>
+          <input
+            type="text"
+            placeholder="Review Title"
+            value={writeReviewForm.title}
+            onChange={(e) =>
+              setWriteReviewForm({
+                ...writeReviewForm,
+                title: e.target.value,
+              })
+            }
+          />
 
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      value={userData.email}
-                      onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-                    />
+          <label>Write a description:</label>
+          <textarea
+            placeholder="Review Description"
+            value={writeReviewForm.content}
+            onChange={(e) =>
+              setWriteReviewForm({
+                ...writeReviewForm,
+                content: e.target.value,
+              })
+            }
+          />
 
-                    <input
-                      type="text"
-                      placeholder="Location"
-                      value={userData.location}
-                      onChange={(e) => setUserData({ ...userData, location: e.target.value })}
-                    />
+          <label>How many stars would you give it? 1-5</label>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value={writeReviewForm.stars}
+            onChange={(e) =>
+              setWriteReviewForm({
+                ...writeReviewForm,
+                stars: parseInt(e.target.value),
+              })
+            }
+          />
 
-                    <div className="form-button">
-                      <button onClick={handleSaveChanges}>
-                        Save Changes
-                      </button>
-                    </div>
-                  </div>
-                ) :(
-                  <div className="profile-info">
-                    <div className="profile-name-row">
-                      <h3>{userData.name}</h3>
-                      <span className="verified">Verified</span>
-                    </div>
+          <div className="form-buttons">
+            <button
+              onClick={() => {
+                setReviews([
+                  ...reviews,
+                  {
+                    id: 2,
+                    ...writeReviewForm,
+                    date: new Date().toLocaleDateString("en-GB", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    }),
+                  },
+                ]);
+                setShowWriteReviewForm(false);
+                setWriteReviewForm({
+                  product: "",
+                  title: "",
+                  content: "",
+                  stars: 5,
+                });
+              }}
+            >
+              Submit
+            </button>
 
-                    <p className="profile-email">{userData.email}</p>
+            <button onClick={() => setShowWriteReviewForm(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
 
-                    <div className="profile-meta">
-                      <span>📍 {userData.location}</span>
-                      <span>
-                        📅 Joined{" "}
-                        {userData.joined
-                          ? new Date(userData.joined).toLocaleDateString("en-GB", {
-                              day: "numeric",
-                              month: "long",
-                              year: "numeric",
-                            })
-                          : "N/A"}
-                      </span>
-                    </div>
-                  </div>
-                )}
-                </div>
-                <div className="AccountDetailsEdit" onClick={() => setShowForm(true)}>
-                    ⚙️ Edit Profile
-                </div>
+      {activeTab === "reviews" && (
+        <div className="reviews-section">
+          <div className="reviews-header">
+            <div>
+              <h2>My Reviews</h2>
+              <p>View and manage your product reviews</p>
             </div>
+            <button
+              className="write-review"
+              onClick={() => setShowWriteReviewForm(true)}
+            >
+              Write a Review
+            </button>
+          </div>
 
-            <div className="AccountDetailsSelections">
-                <div
-                  className={`tab ${activeTab === "settings" ? "active" : ""}`}
-                  onClick={() => setActiveTab("settings")}
-                >
-                  Settings
-                </div>
+          {reviews.map((review) => (
+            <div key={review.id} className="review-card">
+              {editReviewId === review.id ? (
+                <div className="edit-review-form">
+                  <label>Review Title:</label>
+                  <input
+                    type="text"
+                    placeholder="Review Title"
+                    value={reviewForm.title}
+                    onChange={(e) =>
+                      setReviewForm({ ...reviewForm, title: e.target.value })
+                    }
+                  />
 
-                <div
-                  className={`tab ${activeTab === "reviews" ? "active" : ""}`}
-                  onClick={() => setActiveTab("reviews")}
-                >
-                  My Reviews
-                </div>
-            </div>
+                  <label>Review description:</label>
+                  <textarea
+                    placeholder="Review description"
+                    value={reviewForm.content}
+                    onChange={(e) =>
+                      setReviewForm({ ...reviewForm, content: e.target.value })
+                    }
+                  />
 
-            {activeTab === "settings" && (
-                <>
-                  <div className="AccountDetailsEmail">
-                      <p>✉️</p>
-                      <p>Email Address</p>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        className="email-input"
-                      />
-
-                      <button className="edit-email-button" onClick={handleEmailSave}>
-                         Save
-                      </button>
-                  </div>
-
-                  <div className="AccountDetailsPassword">
-                    <p>🔑</p>
-                    <p>Security</p>
-
-                    <input
-                      type="password"
-                      placeholder="Current password"
-                      value={passwordForm.currentPassword}
-                      onChange={(e) =>
-                        setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
-                      }
-                    />
-
-                    <input
-                      type="password"
-                      placeholder="New password"
-                      value={passwordForm.newPassword}
-                      onChange={(e) =>
-                        setPasswordForm({ ...passwordForm, newPassword: e.target.value })
-                      }
-                    />
-
-                    <input
-                      type="password"
-                      placeholder="Confirm new password"
-                      value={passwordForm.confirmPassword}
-                      onChange={(e) =>
-                        setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })
-                      }
-                    />
-
-                    <button onClick={handlePasswordChange}>
-                      Change Password
+                  <div className="form-buttons">
+                    <button className="edit-button" onClick={saveReviewEdit}>
+                      Save
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => setEditReviewId(null)}
+                    >
+                      Cancel
                     </button>
                   </div>
-
-                  <div className="AccountDetailsDeleteAccount">
-                      <div className="danger-zone">
-                        <p>Danger Zone</p>
-                        <p>Permanently delete your account.</p>
-                      </div>
-                      <button className="delete-button" onClick={handleDeleteAccount}>
-                        Delete Account
+                </div>
+              ) : (
+                <>
+                  <div className="review-top">
+                    <div>
+                      <h4>
+                        {review.product} <span className="tag">Product</span>
+                      </h4>
+                      <p className="stars">{"⭐".repeat(review.stars)}</p>
+                    </div>
+                    <div className="review-actions">
+                      <button
+                        className="edit-button"
+                        onClick={() => startEditReview(review)}
+                      >
+                        Edit
                       </button>
+                      <button
+                        className="delete"
+                        onClick={() => deleteReview(review.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
+                  <p className="review-title">{review.title}</p>
+                  <p className="review-content">{review.content}</p>
+                  <span className="review-date">Reviewed on {review.date}</span>
                 </>
-            )}
-
-            {showWriteReviewForm && (
-              <div className="write-review-form">
-                <label>Product Name:</label>
-                <input
-                  type="text"
-                  placeholder="Product Name"
-                  value={writeReviewForm.product}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, product: e.target.value })}
-                />
-
-                <label>Title:</label>
-                <input
-                  type="text"
-                  placeholder="Review Title"
-                  value={writeReviewForm.title}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, title: e.target.value })}
-                />
-
-                <label>Write a description:</label>
-                <textarea
-                  placeholder="Review Description"
-                  value={writeReviewForm.content}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, content: e.target.value })}
-                />
-
-                <label>How many stars would you give it? 1-5</label>
-                <input
-                  type="number"
-                  min="1"
-                  max="5"
-                  value={writeReviewForm.stars}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, stars: parseInt(e.target.value) })}
-                />
-
-                <div className="form-buttons">
-                  <button
-                    onClick={() => {
-                      setReviews([
-                        ...reviews,
-                        {
-                          id: 2,
-                          ...writeReviewForm,
-                          date: new Date().toLocaleDateString("en-GB", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric"
-                          })
-                        }
-                      ]);
-                      setShowWriteReviewForm(false);
-                      setWriteReviewForm({ product: "", title: "", content: "", stars: 5 });
-                    }}
-                  >
-                    Submit
-                  </button>
-
-                  <button onClick={() => setShowWriteReviewForm(false)}>
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {activeTab === "reviews" && (
-              <div className="reviews-section">
-                <div className="reviews-header">
-                  <div>
-                    <h2>My Reviews</h2>
-                    <p>View and manage your product reviews</p>
-                  </div>
-                  <button className="write-review" onClick={() => setShowWriteReviewForm(true)}>
-                    Write a Review
-                  </button>
-                </div>
-
-                {reviews.map((review) => (
-                  <div key={review.id} className="review-card">
-                    {editReviewId === review.id ? (
-                      <div className="edit-review-form">
-                        <label>Review Title:</label>
-                        <input
-                          type="text"
-                          placeholder="Review Title"
-                          value={reviewForm.title}
-                          onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}
-                        />
-
-                        <label>Review description:</label>
-                        <textarea
-                          placeholder="Review description"
-                          value={reviewForm.content}
-                          onChange={(e) => setReviewForm({ ...reviewForm, content: e.target.value })}
-                        />
-
-                        <div className="form-buttons">
-                          <button className="edit-button" onClick={saveReviewEdit}>
-                            Save
-                          </button>
-                          <button className="delete-button" onClick={() => setEditReviewId(null)}>
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="review-top">
-                          <div>
-                            <h4>{review.product} <span className="tag">Product</span></h4>
-                            <p className="stars">{"⭐".repeat(review.stars)}</p>
-                          </div>
-                          <div className="review-actions">
-                            <button className="edit-button" onClick={() => startEditReview(review)}>
-                              Edit
-                            </button>
-                            <button className="delete" onClick={() => deleteReview(review.id)}>
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                        <p className="review-title">{review.title}</p>
-                        <p className="review-content">{review.content}</p>
-                        <span className="review-date">Reviewed on {review.date}</span>
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-        </>
-    );
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
 }
 
 export default AccountDetails;

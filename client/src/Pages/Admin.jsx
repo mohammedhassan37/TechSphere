@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import "../Styles/Admin.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 function Admin() {
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
@@ -12,7 +13,7 @@ function Admin() {
   const stats = [
     { title: "Manage Inventory", label: "Total Products", value: 40, icon: "📦", path: "/admin/total-products" },
     { title: "Manage Customers", label: "Total Customers", value: 6, icon: "👥", path: "/admin/total-customers" },
-    { title: "Manage Orders", label: "Pending Orders", value: 1, icon: "🛒", path: "/admin/pending-orders" },
+    { title: "Manage Orders", label: "Pending Orders", value: 10, icon: "🛒", path: "/admin/pending-orders" },
     { title: "Manage Revenue", label: "Total Revenue", value: "£70016.00", icon: "📈", path: "/admin/total-revenue" }
   ];
 
@@ -24,7 +25,7 @@ function Admin() {
     try {
       setError("");
 
-      const response = await fetch(`${API_URL}/products`, {
+      const response = await fetch(`${API_BASE_URL}/products`, {
         credentials: "include",
       });
 
@@ -34,7 +35,7 @@ function Admin() {
         throw new Error(data.message || "Failed to fetch products");
       }
 
-      console.log("PRODUCTS:", data); // debugging
+      console.log("PRODUCTS:", data);
 
       setProducts(data);
     } catch (err) {
@@ -43,7 +44,6 @@ function Admin() {
     }
   };
 
-  // ✅ Use stock_status from your DB (BEST approach)
   const { outOfStockProducts, lowStockProducts } = useMemo(() => {
     const outOfStock = products.filter(
       (p) => p.stock_status === "Out of Stock"
@@ -100,7 +100,6 @@ function Admin() {
               </p>
             )}
 
-          {/* 🔴 OUT OF STOCK */}
           {!error && outOfStockProducts.length > 0 && (
             <div className="alert-group">
               <p className="alert-title">
@@ -118,7 +117,6 @@ function Admin() {
             </div>
           )}
 
-          {/* 🟡 LOW / RUNNING OUT */}
           {!error && lowStockProducts.length > 0 && (
             <div className="alert-group">
               <p className="alert-title">

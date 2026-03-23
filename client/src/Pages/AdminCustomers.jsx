@@ -2,6 +2,8 @@ import "../Styles/AdminCustomers.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 function AdminCustomers() {
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ function AdminCustomers() {
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch("http://localhost:5000/admin/customers", {
+      const response = await fetch(`${API_BASE_URL}/admin/customers`, {
         method: "GET",
         credentials: "include",
       });
@@ -77,7 +79,7 @@ function AdminCustomers() {
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/admin/customers/${customerId}`, {
+      const response = await fetch(`${API_BASE_URL}/admin/customers/${customerId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -110,7 +112,7 @@ function AdminCustomers() {
     try {
       if (editCustomerId !== null) {
         const response = await fetch(
-          `http://localhost:5000/admin/customers/${formData.customer_id}`,
+          `${API_BASE_URL}/admin/customers/${formData.customer_id}`,
           {
             method: "PUT",
             headers: {
