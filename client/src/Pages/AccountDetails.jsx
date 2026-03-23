@@ -7,6 +7,11 @@ function AccountDetails(){
     const [showForm, setShowForm] = useState(false);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
+    const [passwordForm, setPasswordForm] = useState({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    });
 
     const [userData, setUserData] = useState({
       name: "",
@@ -158,6 +163,46 @@ function AccountDetails(){
   }
 };
 
+const handlePasswordChange = async () => {
+  if (passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()) {
+    setMessage("Passwords do not match");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/change-password", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        currentPassword: passwordForm.currentPassword.trim(),
+        newPassword: passwordForm.newPassword.trim(),
+        confirmPassword: passwordForm.confirmPassword.trim(),
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setMessage(data.message || "Failed to update password");
+      return;
+    }
+
+    setMessage("Password updated successfully");
+
+    setPasswordForm({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    });
+  } catch (error) {
+    console.error("Error updating password:", error);
+    setMessage("Server error");
+  }
+};
+
     if (loading) {
       return <p>Loading...</p>;
     }
@@ -256,9 +301,39 @@ function AccountDetails(){
                   </div>
 
                   <div className="AccountDetailsPassword">
-                      <p>🔑</p>
-                      <p>Security</p>
-                      <button>Change password</button>
+                    <p>🔑</p>
+                    <p>Security</p>
+
+                    <input
+                      type="password"
+                      placeholder="Current password"
+                      value={passwordForm.currentPassword}
+                      onChange={(e) =>
+                        setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
+                      }
+                    />
+
+                    <input
+                      type="password"
+                      placeholder="New password"
+                      value={passwordForm.newPassword}
+                      onChange={(e) =>
+                        setPasswordForm({ ...passwordForm, newPassword: e.target.value })
+                      }
+                    />
+
+                    <input
+                      type="password"
+                      placeholder="Confirm new password"
+                      value={passwordForm.confirmPassword}
+                      onChange={(e) =>
+                        setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })
+                      }
+                    />
+
+                    <button onClick={handlePasswordChange}>
+                      Change Password
+                    </button>
                   </div>
 
                   <div className="AccountDetailsDeleteAccount">

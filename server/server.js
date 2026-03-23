@@ -366,6 +366,79 @@ app.put("/account-details", auth, async (req, res) => {
   }
 });
 
+app.put("/change-password", auth, async (req, res) => {
+  try {
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    const current = currentPassword?.trim();
+    const next = newPassword?.trim();
+    const confirm = confirmPassword?.trim();
+
+    if (!current || !next || !confirm) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    if (next.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "New password must be at least 8 characters",
+      });
+    }
+
+    if (next !== confirm) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
+    }
+
+    const userResult = await pool.query(
+      "SELECT customer_password FROM customers WHERE customer_id = $1",
+      [req.user.customer_id]
+    );
+
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const user = userResult.rows[0];
+
+    const isMatch = await bcrypt.compare(current, user.customer_password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Current password is incorrect",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(next, 10);
+
+    await pool.query(
+      `UPDATE customers 
+       SET customer_password = $1 
+       WHERE customer_id = $2`,
+      [hashedPassword, req.user.customer_id]
+    );
+
+    return res.json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (err) {
+    console.error("Password update error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
