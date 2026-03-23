@@ -605,7 +605,7 @@ app.get("/admin/orders", async (req, res) => {
         c.customer_name AS customer,
         COALESCE(SUM(oi.quantity), 0) AS items,
         o.total_amount,
-        o.created_at,
+        o.order_date,
         o.status
       FROM orders o
       JOIN customers c ON o.customer_id = c.customer_id
@@ -615,9 +615,9 @@ app.get("/admin/orders", async (req, res) => {
         o.order_code, 
         c.customer_name, 
         o.total_amount, 
-        o.created_at, 
+        o.order_date,
         o.status
-      ORDER BY o.created_at DESC
+      ORDER BY  o.order_date DESC
     `);
 
     res.json(result.rows);
