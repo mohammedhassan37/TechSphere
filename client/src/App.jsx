@@ -35,7 +35,7 @@ function App() {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<><Carousel /><FP /><ShopByCategory /></>} />
+            <Route path="/" element={<><Carousel /><FP /><ShopByCategory /><WhyChooseUs /></>} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/headphones" element={<Headphones />} />
@@ -55,10 +55,11 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/accountdetails" element={<AccountDetails />} />
             <Route path="/orders" element={<PreviousOrders />} />
+            
           </Routes>
         </main>
 
-        <WhyChooseUs />
+        
         <Footer />
         <ChatBot />
       </div>

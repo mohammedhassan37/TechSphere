@@ -32,6 +32,7 @@ const products = [
     price: 1099.99,
     image: samsungGalaxy,
     specs: {
+      description: "oled screen",
       screen: "6.8-inch AMOLED",
       storage: "256GB",
       camera: "200MP Quad",

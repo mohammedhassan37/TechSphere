@@ -4,6 +4,7 @@
     width: 100%;
     max-width: 380px;
     padding: 0 15px;
+    color: black;
 }
 
 .LoginFormIntroduction{
@@ -35,7 +36,7 @@
     width:100%;
     border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 0 0 1px rgb(226, 226, 226);
+    box-shadow: 0 4px 20px rgb(55, 0, 255);
 }
 
 .FormContainerElements{
@@ -58,6 +59,7 @@
     font-weight: bold;
     font-size: 18px;
     white-space: nowrap;
+    color: rgb(55, 0, 255);
 }
 
 .FormContainerLogin{
@@ -70,6 +72,7 @@
     height: 45px;
     padding-left: 10px;
     font-size: 20px;
+    
 }
 
 .submitBtn{

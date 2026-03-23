@@ -312,6 +312,60 @@ app.get("/my-orders", auth, async (req, res) => {
   }
 });
 
+app.put("/account-details", auth, async (req, res) => {
+  try {
+    const { name, email, location } = req.body;
+
+    if (!name || !email || !location) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, email and location are required",
+      });
+    }
+
+    const existingEmail = await pool.query(
+      `SELECT customer_id 
+       FROM customers 
+       WHERE customer_email = $1 AND customer_id != $2`,
+      [email, req.user.customer_id]
+    );
+
+    if (existingEmail.rows.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Email already in use",
+      });
+    }
+
+    const result = await pool.query(
+      `UPDATE customers
+       SET customer_name = $1,
+           customer_email = $2,
+           customer_location = $3
+       WHERE customer_id = $4
+       RETURNING customer_name, customer_email, customer_location, created_at`,
+      [name, email, location, req.user.customer_id]
+    );
+
+    return res.json({
+      success: true,
+      message: "Account details updated successfully",
+      user: {
+        name: result.rows[0].customer_name,
+        email: result.rows[0].customer_email,
+        location: result.rows[0].customer_location,
+        joined: result.rows[0].created_at,
+      },
+    });
+  } catch (err) {
+    console.error("Error updating account details:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
