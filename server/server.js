@@ -278,12 +278,22 @@ app.get("/search", async (req, res) => {
 // GET PRODUCTS
 app.get("/products", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT * FROM products ORDER BY product_id ASC"
-    );
+    const result = await pool.query(`
+      SELECT 
+        product_id,
+        product_name,
+        product_price,
+        product_type,
+        product_quantity,
+        product_img,
+        stock_status
+      FROM products
+      ORDER BY product_id ASC
+    `);
+
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
+    console.error("Fetch products error:", err);
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -725,6 +735,136 @@ app.put("/orders/:id/refund", async (req, res) => {
   }
 });
 
+// ADD PRODUCT
+app.post("/admin/products", async (req, res) => {
+  try {
+    const {
+      product_type,
+      product_name,
+      product_quantity,
+      product_img,
+      product_price,
+    } = req.body;
+
+    if (
+      !product_type ||
+      !product_name ||
+      product_quantity === undefined ||
+      product_price === undefined
+    ) {
+      return res.status(400).json({ message: "Missing required fields." });
+    }
+
+    const result = await pool.query(
+      `
+      INSERT INTO products (
+        product_type,
+        product_name,
+        product_quantity,
+        product_img,
+        product_price
+      )
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *
+      `,
+      [
+        product_type,
+        product_name,
+        Number(product_quantity),
+        product_img || null,
+        Number(product_price),
+      ]
+    );
+
+    res.status(201).json({
+      message: "Product added successfully.",
+      product: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Add product error FULL:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// UPDATE PRODUCT
+app.put("/admin/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const {
+      product_type,
+      product_name,
+      product_quantity,
+      product_img,
+      product_price,
+    } = req.body;
+
+    if (
+      !product_type ||
+      !product_name ||
+      product_quantity === undefined ||
+      product_price === undefined
+    ) {
+      return res.status(400).json({ message: "Missing required fields." });
+    }
+
+    const result = await pool.query(
+      `
+      UPDATE products
+      SET product_type = $1,
+          product_name = $2,
+          product_quantity = $3,
+          product_img = $4,
+          product_price = $5
+      WHERE product_id = $6
+      RETURNING *
+      `,
+      [
+        product_type,
+        product_name,
+        Number(product_quantity),
+        product_img || null,
+        Number(product_price),
+        id,
+      ]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Product not found." });
+    }
+
+    res.json({
+      message: "Product updated successfully.",
+      product: result.rows[0],
+    });
+  } catch (err) {
+    console.error("Update product error FULL:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// DELETE PRODUCT
+app.delete("/admin/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `DELETE FROM products
+       WHERE product_id = $1
+       RETURNING *`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Product not found." });
+    }
+
+    res.json({ message: "Product deleted successfully." });
+  } catch (err) {
+    console.error("Delete product error:", err);
+    res.status(500).json({ message: "Server error while deleting product." });
+  }
+});
 
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
