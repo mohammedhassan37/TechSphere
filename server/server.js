@@ -440,6 +440,75 @@ app.put("/change-password", auth, async (req, res) => {
   }
 });
 
+app.get("/account-details", auth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT 
+        customer_name,
+        customer_email,
+        customer_location,
+        created_at
+       FROM customers
+       WHERE customer_id = $1`,
+      [req.user.customer_id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const user = result.rows[0];
+
+    return res.json({
+      success: true,
+      user: {
+        name: user.customer_name,
+        email: user.customer_email,
+        location: user.customer_location,
+        joined: user.created_at,
+      },
+    });
+  } catch (err) {
+    console.error("Error fetching account details:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+app.delete("/delete-account", auth, async (req, res) => {
+  try {
+    console.log("DELETE /delete-account hit");
+    console.log("Logged in user:", req.user);
+
+    await pool.query(
+      "DELETE FROM customers WHERE customer_id = $1",
+      [req.user.customer_id]
+    );
+
+    res.clearCookie("auth_token", {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+    });
+
+    return res.json({
+      success: true,
+      message: "Account deleted successfully",
+    });
+  } catch (err) {
+    console.error("Delete account error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -447,7 +516,7 @@ const __dirname = path.dirname(__filename);
 if (isProduction) {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  app.use((req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist/index.html"));
   });
 }

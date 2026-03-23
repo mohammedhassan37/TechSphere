@@ -7,6 +7,7 @@ function AccountDetails(){
     const [showForm, setShowForm] = useState(false);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
+
     const [passwordForm, setPasswordForm] = useState({
       currentPassword: "",
       newPassword: "",
@@ -30,6 +31,16 @@ function AccountDetails(){
         date: "February 15, 2026"
       },
     ]);
+
+    const [reviewForm, setReviewForm] = useState({ title: "", content: "" });
+    const [writeReviewForm, setWriteReviewForm] = useState({
+      product: "",
+      title: "",
+      content: "",
+      stars: 5
+    });
+    const [showWriteReviewForm, setShowWriteReviewForm] = useState(false);
+    const [editReviewId, setEditReviewId] = useState(null);
 
     useEffect(() => {
       const fetchAccountDetails = async () => {
@@ -103,15 +114,124 @@ function AccountDetails(){
       }
     };
 
+    const handleEmailSave = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/account-details", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            name: userData.name,
+            email: email,
+            location: userData.location,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setMessage(data.message || "Failed to update email");
+          return;
+        }
+
+        setUserData({
+          name: data.user.name || "",
+          email: data.user.email || "",
+          location: data.user.location || "",
+          joined: data.user.joined || "",
+        });
+
+        setEmail(data.user.email || "");
+        setMessage("Email updated successfully");
+      } catch (error) {
+        console.error("Error updating email:", error);
+        setMessage("Server error");
+      }
+    };
+
+    const handlePasswordChange = async () => {
+      if (passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()) {
+        setMessage("Passwords do not match");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:5000/change-password", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            currentPassword: passwordForm.currentPassword.trim(),
+            newPassword: passwordForm.newPassword.trim(),
+            confirmPassword: passwordForm.confirmPassword.trim(),
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setMessage(data.message || "Failed to update password");
+          return;
+        }
+
+        setMessage("Password updated successfully");
+
+        setPasswordForm({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+      } catch (error) {
+        console.error("Error updating password:", error);
+        setMessage("Server error");
+      }
+    };
+
+    const handleDeleteAccount = async () => {
+  const confirmed = window.confirm(
+    "Are you sure you want to permanently delete your account?"
+  );
+
+  if (!confirmed) return;
+
+  try {
+    const response = await fetch("http://localhost:5000/delete-account", {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const contentType = response.headers.get("content-type") || "";
+
+    if (!contentType.includes("application/json")) {
+      const text = await response.text();
+      console.error("Non-JSON response:", text);
+      setMessage("Delete route is not being reached properly");
+      return;
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setMessage(data.message || "Failed to delete account");
+      return;
+    }
+
+    setMessage("Account deleted successfully");
+    window.location.href = "/";
+  } catch (error) {
+    console.error("Error deleting account:", error);
+    setMessage("Server error");
+  }
+};
+
     const deleteReview = (deleteReview) => {
       const updatedReviews = reviews.filter(review => review.id != deleteReview);
       setReviews(updatedReviews);
     };
-    
-    const [reviewForm, setReviewForm] = useState({ title: "", content: "" });   
-    const [writeReviewForm, setWriteReviewForm] = useState({ product: "", title: "", content: "", stars: 5 });
-    const [showWriteReviewForm, setShowWriteReviewForm] = useState(false);
-    const [editReviewId, setEditReviewId] = useState(null);
 
     const startEditReview = (review) => {
       setEditReviewId(review.id);
@@ -120,93 +240,16 @@ function AccountDetails(){
 
     const saveReviewEdit = () => {
       setReviews(reviews.map(r =>
-      r.id === editReviewId ? { ...r, ...reviewForm } : r));
+        r.id === editReviewId ? { ...r, ...reviewForm } : r
+      ));
       setEditReviewId(null);
       setReviewForm({ title: "", content: "" });
     };
 
-    const handleEmailSave = async () => {
-  try {
-    const response = await fetch("http://localhost:5000/account-details", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        name: userData.name,
-        email: email, // <- use the email input state
-        location: userData.location,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      setMessage(data.message || "Failed to update email");
-      return;
-    }
-
-    setUserData({
-      name: data.user.name || "",
-      email: data.user.email || "",
-      location: data.user.location || "",
-      joined: data.user.joined || "",
-    });
-
-    setEmail(data.user.email || "");
-    setMessage("Email updated successfully");
-
-  } catch (error) {
-    console.error("Error updating email:", error);
-    setMessage("Server error");
-  }
-};
-
-const handlePasswordChange = async () => {
-  if (passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()) {
-    setMessage("Passwords do not match");
-    return;
-  }
-
-  try {
-    const response = await fetch("http://localhost:5000/change-password", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        currentPassword: passwordForm.currentPassword.trim(),
-        newPassword: passwordForm.newPassword.trim(),
-        confirmPassword: passwordForm.confirmPassword.trim(),
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      setMessage(data.message || "Failed to update password");
-      return;
-    }
-
-    setMessage("Password updated successfully");
-
-    setPasswordForm({
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
-  } catch (error) {
-    console.error("Error updating password:", error);
-    setMessage("Server error");
-  }
-};
-
     if (loading) {
       return <p>Loading...</p>;
     }
-    
+
     return(
         <>
             <div className="AccountDetailsIntro">
@@ -220,20 +263,31 @@ const handlePasswordChange = async () => {
                 <div className="AccountDetailsMainInfo">
                 {showForm ? (
                   <div className="edit-profile-form">
-                    <input type="text" placeholder="Name"  value={userData.name} 
-                    onChange={(e) => setUserData({ ...userData, name: e.target.value })}/>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={userData.name}
+                      onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+                    />
 
-                    <input type="email" placeholder="Email" value={userData.email} 
-                    onChange={(e) => setUserData({ ...userData, email: e.target.value })}/>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={userData.email}
+                      onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                    />
 
-                    <input type="text" placeholder="Location" value={userData.location}
-                    onChange={(e) => setUserData({ ...userData, location: e.target.value })}/>
+                    <input
+                      type="text"
+                      placeholder="Location"
+                      value={userData.location}
+                      onChange={(e) => setUserData({ ...userData, location: e.target.value })}
+                    />
 
                     <div className="form-button">
                       <button onClick={handleSaveChanges}>
                         Save Changes
                       </button>
-
                     </div>
                   </div>
                 ) :(
@@ -259,14 +313,14 @@ const handlePasswordChange = async () => {
                       </span>
                     </div>
                   </div>
-                )}  
+                )}
                 </div>
                 <div className="AccountDetailsEdit" onClick={() => setShowForm(true)}>
                     ⚙️ Edit Profile
                 </div>
             </div>
 
-            <div className="AccountDetailsSelections" >
+            <div className="AccountDetailsSelections">
                 <div
                   className={`tab ${activeTab === "settings" ? "active" : ""}`}
                   onClick={() => setActiveTab("settings")}
@@ -341,7 +395,9 @@ const handlePasswordChange = async () => {
                         <p>Danger Zone</p>
                         <p>Permanently delete your account.</p>
                       </div>
-                      <button className="delete-button">Delete Account</button>
+                      <button className="delete-button" onClick={handleDeleteAccount}>
+                        Delete Account
+                      </button>
                   </div>
                 </>
             )}
@@ -349,31 +405,58 @@ const handlePasswordChange = async () => {
             {showWriteReviewForm && (
               <div className="write-review-form">
                 <label>Product Name:</label>
-                <input type="text" placeholder="Product Name" value={writeReviewForm.product}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, product: e.target.value })}/>
+                <input
+                  type="text"
+                  placeholder="Product Name"
+                  value={writeReviewForm.product}
+                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, product: e.target.value })}
+                />
 
                 <label>Title:</label>
-                <input type="text" placeholder="Review Title" value={writeReviewForm.title}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, title: e.target.value })} />
+                <input
+                  type="text"
+                  placeholder="Review Title"
+                  value={writeReviewForm.title}
+                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, title: e.target.value })}
+                />
 
                 <label>Write a description:</label>
-                <textarea placeholder="Review Description" value={writeReviewForm.content}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, content: e.target.value })}/>
+                <textarea
+                  placeholder="Review Description"
+                  value={writeReviewForm.content}
+                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, content: e.target.value })}
+                />
 
                 <label>How many stars would you give it? 1-5</label>
-                <input type="number" min="1" max="5" value={writeReviewForm.stars}
-                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, stars: parseInt(e.target.value) })}/>
-                  
+                <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  value={writeReviewForm.stars}
+                  onChange={(e) => setWriteReviewForm({ ...writeReviewForm, stars: parseInt(e.target.value) })}
+                />
+
                 <div className="form-buttons">
-                  <button onClick={() => {
-                    setReviews([...reviews, {
-                      id: 2,
-                      ...writeReviewForm,
-                      date: new Date().toLocaleDateString("en-GB", { month: "long", day: "numeric", year: "numeric" })
-                    }]);
-                    setShowWriteReviewForm(false);
-                    setWriteReviewForm({ product: "", title: "", content: "", stars: 5 });
-                  }}>Submit</button>
+                  <button
+                    onClick={() => {
+                      setReviews([
+                        ...reviews,
+                        {
+                          id: 2,
+                          ...writeReviewForm,
+                          date: new Date().toLocaleDateString("en-GB", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric"
+                          })
+                        }
+                      ]);
+                      setShowWriteReviewForm(false);
+                      setWriteReviewForm({ product: "", title: "", content: "", stars: 5 });
+                    }}
+                  >
+                    Submit
+                  </button>
 
                   <button onClick={() => setShowWriteReviewForm(false)}>
                     Cancel
@@ -389,7 +472,9 @@ const handlePasswordChange = async () => {
                     <h2>My Reviews</h2>
                     <p>View and manage your product reviews</p>
                   </div>
-                  <button className="write-review" onClick={() => setShowWriteReviewForm(true)}>Write a Review</button>
+                  <button className="write-review" onClick={() => setShowWriteReviewForm(true)}>
+                    Write a Review
+                  </button>
                 </div>
 
                 {reviews.map((review) => (
@@ -397,16 +482,27 @@ const handlePasswordChange = async () => {
                     {editReviewId === review.id ? (
                       <div className="edit-review-form">
                         <label>Review Title:</label>
-                        <input type="text" placeholder="Review Title" value={reviewForm.title}
-                        onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}/>
+                        <input
+                          type="text"
+                          placeholder="Review Title"
+                          value={reviewForm.title}
+                          onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}
+                        />
 
                         <label>Review description:</label>
-                        <textarea placeholder="Review description" value={reviewForm.content}
-                          onChange={(e) => setReviewForm({ ...reviewForm, content: e.target.value })}/>
+                        <textarea
+                          placeholder="Review description"
+                          value={reviewForm.content}
+                          onChange={(e) => setReviewForm({ ...reviewForm, content: e.target.value })}
+                        />
 
                         <div className="form-buttons">
-                          <button className="edit-button" onClick={saveReviewEdit}>Save</button>
-                          <button className="delete-button" onClick={() => setEditReviewId(null)}>Cancel</button>
+                          <button className="edit-button" onClick={saveReviewEdit}>
+                            Save
+                          </button>
+                          <button className="delete-button" onClick={() => setEditReviewId(null)}>
+                            Cancel
+                          </button>
                         </div>
                       </div>
                     ) : (
@@ -417,8 +513,12 @@ const handlePasswordChange = async () => {
                             <p className="stars">{"⭐".repeat(review.stars)}</p>
                           </div>
                           <div className="review-actions">
-                            <button className="edit-button" onClick={() => startEditReview(review)}>Edit</button>
-                            <button className="delete" onClick={() => deleteReview(review.id)}>Delete</button>
+                            <button className="edit-button" onClick={() => startEditReview(review)}>
+                              Edit
+                            </button>
+                            <button className="delete" onClick={() => deleteReview(review.id)}>
+                              Delete
+                            </button>
                           </div>
                         </div>
                         <p className="review-title">{review.title}</p>
