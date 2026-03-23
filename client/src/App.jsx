@@ -36,7 +36,7 @@ function App() {
 
         <main className="main-content">  
           <Routes>
-            <Route path="/" element={<><Carousel /><FP /></>} />
+            <Route path="/" element={<><Carousel /><FP /><ShopByCategory /></>} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/headphones" element={<Headphones />} />
@@ -47,6 +47,15 @@ function App() {
             <Route path="/basket" element={<Basket />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/registration" element={<Registration />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="//admin/total-products" element={<AdminProducts />} />
+            <Route path="/admin/pending-orders" element={<AdminOrders />} />
+            <Route path="/admin/total-revenue" element={<ManageRevenue />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/admin/total-customers" element={<AdminCustomers />} />
+            <Route path="/accountdetails" element={<AccountDetails />} />
+            <Route path="/orders" element={<PreviousOrders />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/accountdetails" element={<AccountDetails />} />
