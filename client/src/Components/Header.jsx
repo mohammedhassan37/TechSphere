@@ -79,6 +79,7 @@ function Header() {
                               <Link to="/registration">Register</Link>
                               <Link to="/orders">Previous Orders</Link>
                               <Link to="/accountdetails">Account Details</Link>
+                              <Link to="/admin">Admin hub</Link>
                             </div>
                            </div>
 
