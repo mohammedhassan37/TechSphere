@@ -17,14 +17,14 @@ import AccountDetails from "./Pages/AccountDetails.jsx";
 import PreviousOrders from "./Pages/PreviousOrder.jsx";
 import Carousel from "./Components/Carousel.jsx";
 import Header from "./Components/Header.jsx";
-import FP from "./components/featured_product.jsx";
+import FP from "./Components/featured_product.jsx";
 import ProductDetails from "./Pages/ProductPage.jsx";
 import Admin from "./Pages/Admin.jsx";
 import AdminProducts from "./Pages/AdminProducts.jsx";
 import AdminCustomers from "./Pages/AdminCustomers.jsx";
 import AdminOrders from "./Pages/AdminOrders.jsx";
 import ManageRevenue from "./Pages/AdminRevenue.jsx";
-import ShopByCategory from "./components/ShopByCategory.jsx";
+import ShopByCategory from "./Components/ShopByCategory.jsx";
 import ChatBot from "./Pages/ChatBot.jsx";
 
 function App() {
@@ -35,7 +35,17 @@ function App() {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<><Carousel /><FP /><ShopByCategory /><WhyChooseUs /></>} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Carousel />
+                  <FP />
+                  <ShopByCategory />
+                  <WhyChooseUs />
+                </>
+              }
+            />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/headphones" element={<Headphones />} />
@@ -55,11 +65,9 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/account-details" element={<AccountDetails />} />
             <Route path="/orders" element={<PreviousOrders />} />
-            
           </Routes>
         </main>
 
-        
         <Footer />
         <ChatBot />
       </div>

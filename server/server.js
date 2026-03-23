@@ -1,5 +1,3 @@
-
-
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -41,9 +39,48 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(cookieParser());
+
+function auth(req, res, next) {
+  const token = req.cookies.auth_token;
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Not logged in" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ success: false, message: "Invalid token" });
+  }
+}
+
+async function adminOnly(req, res, next) {
+  try {
+    const result = await pool.query(
+      "SELECT is_admin FROM customers WHERE customer_id = $1",
+      [req.user.customer_id]
+    );
+
+    if (result.rows.length === 0 || !result.rows[0].is_admin) {
+      return res.status(403).json({
+        success: false,
+        message: "Admin access required",
+      });
+    }
+
+    next();
+  } catch (err) {
+    console.error("Admin check error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+}
 
 // SIGNUP
 app.post("/signup", async (req, res) => {
@@ -202,22 +239,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-function auth(req, res, next) {
-  const token = req.cookies.auth_token;
-
-  if (!token) {
-    return res.status(401).json({ success: false, message: "Not logged in" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    return res.status(401).json({ success: false, message: "Invalid token" });
-  }
-}
-
 // LOGOUT
 app.post("/logout", (req, res) => {
   res.clearCookie("auth_token", {
@@ -298,11 +319,9 @@ app.get("/products", async (req, res) => {
   }
 });
 
-// Get previous orders
+// PREVIOUS ORDERS
 app.get("/my-orders", auth, async (req, res) => {
   try {
-    console.log("Decoded user:", req.user);
-
     const userId = req.user.customer_id;
 
     if (!userId) {
@@ -324,6 +343,7 @@ app.get("/my-orders", auth, async (req, res) => {
   }
 });
 
+// UPDATE ACCOUNT DETAILS
 app.put("/account-details", auth, async (req, res) => {
   try {
     const { name, email, location } = req.body;
@@ -378,6 +398,7 @@ app.put("/account-details", auth, async (req, res) => {
   }
 });
 
+// CHANGE PASSWORD
 app.put("/change-password", auth, async (req, res) => {
   try {
     const { currentPassword, newPassword, confirmPassword } = req.body;
@@ -420,7 +441,6 @@ app.put("/change-password", auth, async (req, res) => {
     }
 
     const user = userResult.rows[0];
-
     const isMatch = await bcrypt.compare(current, user.customer_password);
 
     if (!isMatch) {
@@ -452,6 +472,7 @@ app.put("/change-password", auth, async (req, res) => {
   }
 });
 
+// GET ACCOUNT DETAILS
 app.get("/account-details", auth, async (req, res) => {
   try {
     const result = await pool.query(
@@ -494,11 +515,9 @@ app.get("/account-details", auth, async (req, res) => {
   }
 });
 
+// DELETE ACCOUNT
 app.delete("/delete-account", auth, async (req, res) => {
   try {
-    console.log("DELETE /delete-account hit");
-    console.log("Logged in user:", req.user);
-
     await pool.query(
       "DELETE FROM customers WHERE customer_id = $1",
       [req.user.customer_id]
@@ -523,8 +542,8 @@ app.delete("/delete-account", auth, async (req, res) => {
   }
 });
 
-
-app.get("/admin/customers", auth, async (req, res) => {
+// ADMIN CUSTOMERS
+app.get("/admin/customers", auth, adminOnly, async (req, res) => {
   try {
     const result = await pool.query(
       `SELECT 
@@ -553,7 +572,7 @@ app.get("/admin/customers", auth, async (req, res) => {
   }
 });
 
-app.delete("/admin/customers/:id", auth, async (req, res) => {
+app.delete("/admin/customers/:id", auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -569,7 +588,7 @@ app.delete("/admin/customers/:id", auth, async (req, res) => {
   }
 });
 
-app.put("/admin/customers/:id", auth, async (req, res) => {
+app.put("/admin/customers/:id", auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
     const { fullName, email, phoneNum, location } = req.body;
@@ -606,7 +625,8 @@ app.put("/admin/customers/:id", auth, async (req, res) => {
   }
 });
 
-app.get("/admin/orders", async (req, res) => {
+// ADMIN ORDERS
+app.get("/admin/orders", auth, adminOnly, async (req, res) => {
   try {
     const result = await pool.query(`
       SELECT
@@ -627,7 +647,7 @@ app.get("/admin/orders", async (req, res) => {
         o.total_amount, 
         o.order_date,
         o.status
-      ORDER BY  o.order_date DESC
+      ORDER BY o.order_date DESC
     `);
 
     res.json(result.rows);
@@ -637,7 +657,7 @@ app.get("/admin/orders", async (req, res) => {
   }
 });
 
-app.put("/admin/orders/:id/status", async (req, res) => {
+app.put("/admin/orders/:id/status", auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -672,42 +692,7 @@ app.put("/admin/orders/:id/status", async (req, res) => {
   }
 });
 
-app.put("/admin/orders/:id/status", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { status } = req.body;
-
-    const validStatuses = ["pending", "processing", "shipped", "delivered"];
-
-    if (!validStatuses.includes(status)) {
-      return res.status(400).json({ error: "Invalid status" });
-    }
-
-    const result = await pool.query(
-      `
-      UPDATE orders
-      SET status = $1
-      WHERE order_id = $2
-      RETURNING *
-      `,
-      [status, id]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: "Order not found" });
-    }
-
-    res.json({
-      message: "Order updated successfully",
-      order: result.rows[0],
-    });
-  } catch (err) {
-    console.error("Error updating order status:", err);
-    res.status(500).json({ error: "Failed to update order status" });
-  }
-});
-
-app.put("/orders/:id/refund", async (req, res) => {
+app.put("/orders/:id/refund", auth, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -735,8 +720,8 @@ app.put("/orders/:id/refund", async (req, res) => {
   }
 });
 
-// ADD PRODUCT
-app.post("/admin/products", async (req, res) => {
+// ADMIN PRODUCTS
+app.post("/admin/products", auth, adminOnly, async (req, res) => {
   try {
     const {
       product_type,
@@ -786,8 +771,7 @@ app.post("/admin/products", async (req, res) => {
   }
 });
 
-// UPDATE PRODUCT
-app.put("/admin/products/:id", async (req, res) => {
+app.put("/admin/products/:id", auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -843,8 +827,7 @@ app.put("/admin/products/:id", async (req, res) => {
   }
 });
 
-// DELETE PRODUCT
-app.delete("/admin/products/:id", async (req, res) => {
+app.delete("/admin/products/:id", auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -866,11 +849,12 @@ app.delete("/admin/products/:id", async (req, res) => {
   }
 });
 
-app.get("/admin/inventory-alerts", async (req, res) => {
+app.get("/admin/inventory-alerts", auth, adminOnly, async (req, res) => {
   try {
     const LOW_STOCK_THRESHOLD = 10;
 
-    const result = await pool.query(`
+    const result = await pool.query(
+      `
       SELECT 
         product_id,
         product_name,
@@ -881,7 +865,9 @@ app.get("/admin/inventory-alerts", async (req, res) => {
           ELSE 'ok'
         END AS stock_status
       FROM products
-    `, [LOW_STOCK_THRESHOLD]);
+    `,
+      [LOW_STOCK_THRESHOLD]
+    );
 
     res.json(result.rows);
   } catch (err) {
@@ -890,7 +876,7 @@ app.get("/admin/inventory-alerts", async (req, res) => {
   }
 });
 
-// Get __dirname in ESM
+// ESM PATHS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -910,6 +896,5 @@ if (isProduction) {
   });
 }
 
-// Start
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server running on ${PORT}`));

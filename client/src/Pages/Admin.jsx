@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import "../Styles/Admin.css";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 function Admin() {
   const navigate = useNavigate();
 
@@ -11,10 +9,34 @@ function Admin() {
   const [error, setError] = useState("");
 
   const stats = [
-    { title: "Manage Inventory", label: "Total Products", value: 40, icon: "📦", path: "/admin/total-products" },
-    { title: "Manage Customers", label: "Total Customers", value: 6, icon: "👥", path: "/admin/total-customers" },
-    { title: "Manage Orders", label: "Pending Orders", value: 10, icon: "🛒", path: "/admin/pending-orders" },
-    { title: "Manage Revenue", label: "Total Revenue", value: "£70016.00", icon: "📈", path: "/admin/total-revenue" }
+    {
+      title: "Manage Inventory",
+      label: "Total Products",
+      value: 40,
+      icon: "📦",
+      path: "/admin/total-products",
+    },
+    {
+      title: "Manage Customers",
+      label: "Total Customers",
+      value: 6,
+      icon: "👥",
+      path: "/admin/total-customers",
+    },
+    {
+      title: "Manage Orders",
+      label: "Pending Orders",
+      value: 10,
+      icon: "🛒",
+      path: "/admin/pending-orders",
+    },
+    {
+      title: "Manage Revenue",
+      label: "Total Revenue",
+      value: "£70016.00",
+      icon: "📈",
+      path: "/admin/total-revenue",
+    },
   ];
 
   useEffect(() => {
@@ -25,7 +47,7 @@ function Admin() {
     try {
       setError("");
 
-      const response = await fetch(`${API_BASE_URL}/products`, {
+      const response = await fetch("/admin/inventory-alerts", {
         credentials: "include",
       });
 
@@ -35,8 +57,6 @@ function Admin() {
         throw new Error(data.message || "Failed to fetch products");
       }
 
-      console.log("PRODUCTS:", data);
-
       setProducts(data);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -45,15 +65,9 @@ function Admin() {
   };
 
   const { outOfStockProducts, lowStockProducts } = useMemo(() => {
-    const outOfStock = products.filter(
-      (p) => p.stock_status === "Out of Stock"
-    );
+    const outOfStock = products.filter((p) => p.stock_status === "out");
 
-    const lowStock = products.filter(
-      (p) =>
-        p.stock_status === "Low Stock" ||
-        p.stock_status === "Running Out"
-    );
+    const lowStock = products.filter((p) => p.stock_status === "low");
 
     return {
       outOfStockProducts: outOfStock,
@@ -64,9 +78,7 @@ function Admin() {
   return (
     <div className="admin-dashboard">
       <h1 className="dashboard-title">Dashboard</h1>
-      <p className="dashboard-info">
-        Overview of your e-commerce operations
-      </p>
+      <p className="dashboard-info">Overview of your e-commerce operations</p>
 
       <div className="dashboard-statistics">
         {stats.map((stat) => (
@@ -109,9 +121,7 @@ function Admin() {
               {outOfStockProducts.map((product) => (
                 <div className="alert-item" key={product.product_id}>
                   <span>{product.product_name}</span>
-                  <span className="alert danger">
-                    Currently unavailable
-                  </span>
+                  <span className="alert danger">Currently unavailable</span>
                 </div>
               ))}
             </div>

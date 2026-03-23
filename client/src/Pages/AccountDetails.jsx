@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "../Styles/AccountDetails.css";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 function AccountDetails() {
   const [email, setEmail] = useState("john.doe@example.com");
   const [activeTab, setActiveTab] = useState("settings");
@@ -47,7 +45,7 @@ function AccountDetails() {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/account-details`, {
+        const response = await fetch("/account-details", {
           method: "GET",
           credentials: "include",
         });
@@ -80,7 +78,7 @@ function AccountDetails() {
 
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/account-details`, {
+      const response = await fetch("/account-details", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +116,7 @@ function AccountDetails() {
 
   const handleEmailSave = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/account-details`, {
+      const response = await fetch("/account-details", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -154,13 +152,15 @@ function AccountDetails() {
   };
 
   const handlePasswordChange = async () => {
-    if (passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()) {
+    if (
+      passwordForm.newPassword.trim() !== passwordForm.confirmPassword.trim()
+    ) {
       setMessage("Passwords do not match");
       return;
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/change-password`, {
+      const response = await fetch("/change-password", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -201,7 +201,7 @@ function AccountDetails() {
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/delete-account`, {
+      const response = await fetch("/delete-account", {
         method: "DELETE",
         credentials: "include",
       });
@@ -497,7 +497,9 @@ function AccountDetails() {
               Submit
             </button>
 
-            <button onClick={() => setShowWriteReviewForm(false)}>Cancel</button>
+            <button onClick={() => setShowWriteReviewForm(false)}>
+              Cancel
+            </button>
           </div>
         </div>
       )}
