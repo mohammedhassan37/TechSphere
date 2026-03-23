@@ -866,6 +866,30 @@ app.delete("/admin/products/:id", async (req, res) => {
   }
 });
 
+app.get("/admin/inventory-alerts", async (req, res) => {
+  try {
+    const LOW_STOCK_THRESHOLD = 10;
+
+    const result = await pool.query(`
+      SELECT 
+        product_id,
+        product_name,
+        product_quantity,
+        CASE
+          WHEN product_quantity = 0 THEN 'out'
+          WHEN product_quantity <= $1 THEN 'low'
+          ELSE 'ok'
+        END AS stock_status
+      FROM products
+    `, [LOW_STOCK_THRESHOLD]);
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // Get __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
